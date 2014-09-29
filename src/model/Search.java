@@ -11,7 +11,7 @@ public class Search extends AbstractModel {
 	Twitter twitter = TwitterFactory.getSingleton();
 	
 	@Override
-	public QueryResult getTweets( String searchQuery ) {
+	public void search( String searchQuery ) {
 		Query query = new Query( searchQuery );
 		QueryResult result = null;
 		
@@ -22,7 +22,6 @@ public class Search extends AbstractModel {
 			e.printStackTrace();
 		}
 		
-		return result;
+		notifyObserver( result );
 	}
-
 }

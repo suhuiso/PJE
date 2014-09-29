@@ -10,19 +10,15 @@ public abstract class AbstractModel implements Observable {
 	
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 		
-	public abstract QueryResult getTweets ( String searchQuery );
+	public abstract void search ( String searchQuery );
 	
 	public void addObserver ( Observer obs ) {
 		this.listObserver.add( obs );
 	}
 	
-	public void notifyObserver( String str ) {
-		if ( str.matches( "^0[0-9]+" ) ) {
-			str = str.substring( 1, str.length() );
-		}
-		
+	public void notifyObserver( QueryResult result ) {
 		for ( Observer obs : listObserver ) {
-			obs.update( str );
+			obs.update( result );
 		}
 	}
 	
