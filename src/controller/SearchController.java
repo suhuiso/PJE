@@ -11,6 +11,8 @@ public class SearchController extends AbstractController {
 	@Override
 	void control() {
 		// TODO Validation du champ de recherche
+		
+		this.model.search( this.query );
 	}
 
 }
