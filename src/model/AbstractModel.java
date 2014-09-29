@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import observer.Observable;
 import observer.Observer;
+import twitter4j.QueryResult;
 
 public abstract class AbstractModel implements Observable {
 	
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
 		
-	public abstract void getTweets ( String searchQuery );
+	public abstract QueryResult getTweets ( String searchQuery );
 	
 	public void addObserver ( Observer obs ) {
 		this.listObserver.add( obs );
