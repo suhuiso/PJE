@@ -2,6 +2,7 @@ package model;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -20,6 +21,11 @@ public class Search extends AbstractModel {
 		} catch ( TwitterException e ) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		// Debug
+		for ( Status status : result.getTweets() ) {
+			System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
 		}
 		
 		notifyObserver( result );
