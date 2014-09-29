@@ -18,7 +18,7 @@ public class SearchView extends JFrame implements Observer {
 	
 	private JPanel container = new JPanel();
 	
-	private JTextField searchField = new JTextField();
+	private JTextField searchField = new JTextField( "Test" );
 	private JButton searchButton = new JButton( "Search" );
 	private JLabel searchResults = new JLabel();
 	
