@@ -14,6 +14,7 @@ import observer.Observer;
 import twitter4j.QueryResult;
 import twitter4j.Status;
 
+@SuppressWarnings ( "serial" )
 public class SearchView extends JFrame implements Observer {
 	
 	private JPanel container = new JPanel();
@@ -30,7 +31,7 @@ public class SearchView extends JFrame implements Observer {
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setLocationRelativeTo( null );
 		this.setResizable( true );
-		initComposant();
+		this.initComposant();
 		this.controller = controller;
 		this.setContentPane( container );
 		this.setVisible( true );
@@ -40,15 +41,15 @@ public class SearchView extends JFrame implements Observer {
 		SearchButtonListener searchButtonListener = new SearchButtonListener();
 		this.searchButton.addActionListener( searchButtonListener );
 		
-		container.add( this.searchField );
-		container.add( this.searchButton );
-		container.add( this.searchResults );
+		this.container.add( this.searchField );
+		this.container.add( this.searchButton );
+		this.container.add( this.searchResults );
 	}   
 
 	class SearchButtonListener implements ActionListener {
 		public void actionPerformed( ActionEvent e ) {
 			System.out.println( "SearchButton click received" );
-			controller.setQuery( searchField.getText() );
+			SearchView.this.controller.setQuery( searchField.getText() );
 		}
 	}
 	
@@ -61,7 +62,7 @@ public class SearchView extends JFrame implements Observer {
 			tweets += tweet;
 		}
 		
-		searchResults.setText( "<html>" + tweets + "</html>" );
+		SearchView.this.searchResults.setText( "<html>" + tweets + "</html>" );
 	}
 
 }
