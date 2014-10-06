@@ -2,6 +2,9 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,9 +24,12 @@ public class SearchView extends JFrame implements Observer {
 	
 	private JTextField searchField = new JTextField( 20 );
 	private JButton searchButton = new JButton( "Search" );
+	private JButton saveButton = new JButton( "Save" );
 	private JLabel searchResults = new JLabel();
 	
 	private AbstractController controller;
+	
+	private QueryResult lastQueryResult;
 	
 	public SearchView ( AbstractController controller ) {
 		this.setSize( 800, 400 );
@@ -33,6 +39,7 @@ public class SearchView extends JFrame implements Observer {
 		this.setResizable( true );
 		this.initComposant();
 		this.controller = controller;
+		this.lastQueryResult = null;
 		this.setContentPane( container );
 		this.setVisible( true );
 	}
@@ -40,9 +47,12 @@ public class SearchView extends JFrame implements Observer {
 	private void initComposant() {		
 		SearchButtonListener searchButtonListener = new SearchButtonListener();
 		this.searchButton.addActionListener( searchButtonListener );
+		SaveButtonListener saveButtonListener = new SaveButtonListener();
+		this.saveButton.addActionListener( saveButtonListener );
 		
 		this.container.add( this.searchField );
 		this.container.add( this.searchButton );
+		this.container.add( this.saveButton );
 		this.container.add( this.searchResults );
 	}   
 
@@ -52,9 +62,33 @@ public class SearchView extends JFrame implements Observer {
 			SearchView.this.controller.setQuery( searchField.getText() );
 		}
 	}
+
+	class SaveButtonListener implements ActionListener {
+		public void actionPerformed( ActionEvent e ) {
+			System.out.println( "SaveButton click received" );
+			
+			try {
+				BufferedWriter out = new BufferedWriter( new FileWriter( "tweetPool.csv", true ) );
+				
+				for ( Status status : SearchView.this.lastQueryResult.getTweets() ) {
+					String content = status.getText().replace( '"', ' ' );
+					
+					String tweet = status.getId() + "," + status.getUser().getScreenName() + "," + "\"" + content + "\"" + "," + status.getCreatedAt() + "," + SearchView.this.lastQueryResult.getQuery();
+					out.write( tweet );
+					out.newLine();
+				}
+				
+				out.close();
+			} catch ( IOException e1 ) {
+				e1.printStackTrace();
+			}
+		}
+	}
 	
 	@Override
-	public void update(QueryResult result) {
+	public void update( QueryResult result ) {
+		this.lastQueryResult = result;
+		
 		String tweets = "";
 		
 		for ( Status status : result.getTweets() ) {
