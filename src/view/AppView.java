@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.AbstractController;
+import controller.AppController;
 import twitter4j.QueryResult;
 import twitter4j.Status;
 
@@ -28,11 +28,11 @@ public class AppView extends JFrame implements Observer {
 
 	private JLabel searchResults = new JLabel();
 
-	private AbstractController controller;
+	private AppController controller;
 
 	private QueryResult lastQueryResult;
 
-	public AppView ( AbstractController controller ) {
+	public AppView ( AppController controller ) {
 		this.setSize( 800, 400 );
 		this.setTitle( "PJE Twitter" );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
