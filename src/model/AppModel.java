@@ -5,7 +5,7 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-public class Search extends AbstractModel {
+public class AppModel extends AbstractModel {
 	
 	@Override
 	public void search( String searchQuery ) {

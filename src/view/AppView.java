@@ -19,7 +19,7 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 
 @SuppressWarnings ( "serial" )
-public class SearchView extends JFrame implements Observer {
+public class AppView extends JFrame implements Observer {
 
 	private JPanel container = new JPanel();
 
@@ -35,7 +35,7 @@ public class SearchView extends JFrame implements Observer {
 
 	private QueryResult lastQueryResult;
 
-	public SearchView ( AbstractController controller ) {
+	public AppView ( AbstractController controller ) {
 		this.setSize( 800, 400 );
 		this.setTitle( "PJE Twitter" );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -64,7 +64,7 @@ public class SearchView extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SearchButton click received" );
-			SearchView.this.controller.setQuery( searchField.getText() );
+			AppView.this.controller.setQuery( searchField.getText() );
 		}
 	}
 
@@ -76,13 +76,13 @@ public class SearchView extends JFrame implements Observer {
 			try {
 				BufferedWriter out = new BufferedWriter( new FileWriter( "tweetPool.csv", true ) );
 
-				for ( Status status : SearchView.this.lastQueryResult.getTweets() ) {
+				for ( Status status : AppView.this.lastQueryResult.getTweets() ) {
 					String content = status.getText().replace( '"', ' ' );
 
 					String tweet =
 					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
 					                + content + "\"" + ";" + status.getCreatedAt() + ";"
-					                + SearchView.this.lastQueryResult.getQuery();
+					                + AppView.this.lastQueryResult.getQuery();
 					out.write( tweet );
 					out.newLine();
 				}
@@ -108,7 +108,7 @@ public class SearchView extends JFrame implements Observer {
 			tweets += tweet;
 		}
 
-		SearchView.this.searchResults.setText( "<html>" + tweets + "</html>" );
+		AppView.this.searchResults.setText( "<html>" + tweets + "</html>" );
 	}
 
 }

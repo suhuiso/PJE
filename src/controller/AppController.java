@@ -2,9 +2,9 @@ package controller;
 
 import model.AbstractModel;
 
-public class SearchController extends AbstractController {
+public class AppController extends AbstractController {
 
-	public SearchController (AbstractModel model) {
+	public AppController (AbstractModel model) {
 		super( model );
 	}
 
