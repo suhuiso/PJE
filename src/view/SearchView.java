@@ -80,8 +80,8 @@ public class SearchView extends JFrame implements Observer {
 					String content = status.getText().replace( '"', ' ' );
 
 					String tweet =
-					        status.getId() + "," + status.getUser().getScreenName() + "," + "\""
-					                + content + "\"" + "," + status.getCreatedAt() + ","
+					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
+					                + content + "\"" + ";" + status.getCreatedAt() + ";"
 					                + SearchView.this.lastQueryResult.getQuery();
 					out.write( tweet );
 					out.newLine();
@@ -97,7 +97,7 @@ public class SearchView extends JFrame implements Observer {
 	@Override
 	public void update ( Observable o, Object arg ) {
 		QueryResult qr = ( QueryResult ) arg;
-		
+
 		this.lastQueryResult = qr;
 
 		String tweets = "";
