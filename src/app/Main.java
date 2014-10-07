@@ -7,7 +7,7 @@ import controller.*;
 public class Main {
 	
 	public static void main(String[] args) {
-		AbstractModel search = new AppModel();
+		AppModel search = new AppModel();
 		AppController controller = new AppController( search );
 		AppView searchView = new AppView( controller );
 		

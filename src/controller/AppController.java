@@ -1,17 +1,17 @@
 package controller;
 
+import model.AppModel;
 import twitter4j.QueryResult;
-import model.AbstractModel;
 
 public class AppController {
 
-	protected AbstractModel model;
+	protected AppModel model;
 
-	public AppController ( AbstractModel model ) {
+	public AppController ( AppModel model ) {
 		this.model = model;
 	}
-	
-	private String control (String query) {
+
+	private String control ( String query ) {
 		// TODO Validation du champ de recherche
 		return query;
 	}
