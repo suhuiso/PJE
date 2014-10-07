@@ -31,4 +31,8 @@ public class AppModel extends AbstractModel {
 	@Override
     public void save ( QueryResult result ) {
     }
+	
+	private String replaceUsername( String s ) {
+		return s.replaceAll( "@[A-Za-z0-9_-]+", "@" );
+	}
 }
