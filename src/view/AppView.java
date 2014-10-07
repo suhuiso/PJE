@@ -2,9 +2,6 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -72,25 +69,7 @@ public class AppView extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SaveButton click received" );
-
-			try {
-				BufferedWriter out = new BufferedWriter( new FileWriter( "tweetPool.csv", true ) );
-
-				for ( Status status : AppView.this.lastQueryResult.getTweets() ) {
-					String content = status.getText().replace( '"', ' ' );
-
-					String tweet =
-					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
-					                + content + "\"" + ";" + status.getCreatedAt() + ";"
-					                + AppView.this.lastQueryResult.getQuery();
-					out.write( tweet );
-					out.newLine();
-				}
-
-				out.close();
-			} catch ( IOException e1 ) {
-				e1.printStackTrace();
-			}
+			AppView.this.controller.saveRequest( lastQueryResult );
 		}
 	}
 

@@ -1,5 +1,6 @@
 package controller;
 
+import twitter4j.QueryResult;
 import model.AbstractModel;
 
 public abstract class AbstractController {
@@ -16,5 +17,10 @@ public abstract class AbstractController {
 		this.control();
 	}
 	
+	public void saveRequest ( QueryResult result ) {
+		this.model.save( result );
+	}
+	
 	abstract void control();
+	
 }
