@@ -8,7 +8,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		AbstractModel search = new AppModel();
-		AbstractController controller = new AppController( search );
+		AppController controller = new AppController( search );
 		AppView searchView = new AppView( controller );
 		
 		search.addObserver( searchView );
