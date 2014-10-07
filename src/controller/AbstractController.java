@@ -13,7 +13,7 @@ public abstract class AbstractController {
 
 	public void setQuery ( String query ){
 		this.query = query;
-		control();
+		this.control();
 	}
 	
 	abstract void control();

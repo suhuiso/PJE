@@ -24,6 +24,11 @@ public class Search extends AbstractModel {
 			System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
 		}
 		
-		notifyObserver( result );
+		this.setChanged();
+		this.notifyObservers( result );
 	}
+
+	@Override
+    public void save ( QueryResult result ) {
+    }
 }
