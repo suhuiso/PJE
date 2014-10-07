@@ -73,7 +73,7 @@ public class SearchView extends JFrame implements Observer {
 				for ( Status status : SearchView.this.lastQueryResult.getTweets() ) {
 					String content = status.getText().replace( '"', ' ' );
 					
-					String tweet = status.getId() + "," + status.getUser().getScreenName() + "," + "\"" + content + "\"" + "," + status.getCreatedAt() + "," + SearchView.this.lastQueryResult.getQuery();
+					String tweet = status.getId() + ";" + status.getUser().getScreenName() + ";" + "\"" + content + "\"" + ";" + status.getCreatedAt() + ";" + SearchView.this.lastQueryResult.getQuery();
 					out.write( tweet );
 					out.newLine();
 				}
