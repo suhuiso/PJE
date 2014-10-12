@@ -45,7 +45,7 @@ public class AppModel extends Observable {
 
 	public void save ( QueryResult result ) {
 		try {
-			BufferedWriter out = new BufferedWriter( new FileWriter( "tweetPool.csv", true ) );
+			BufferedWriter out = new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
 
 			for ( Status status : result.getTweets() ) {
 				String content = status.getText().replace( '"', ' ' ).replace( '\n', ' ' );
