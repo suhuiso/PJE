@@ -21,7 +21,7 @@ public class TweetPool {
 
 		try {
 			BufferedReader br = new BufferedReader( new FileReader( path ) );
-			String line;
+			String line = "";
 
 			while ( ( line = br.readLine() ) != null ) {
 				String[] elem = line.split( ";" );
