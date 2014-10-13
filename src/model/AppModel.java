@@ -93,7 +93,7 @@ public class AppModel extends Observable {
 	}
 
 	private String deleteHttpUrl ( String s ) {
-		return s.replaceAll( "http://[^\\s]+", "" );
+		return s.replaceAll( "http[s]?://[^\\s]+", "" );
 	}
 
 	private String deleteRT ( String s ) {
