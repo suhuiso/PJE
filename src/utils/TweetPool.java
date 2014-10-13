@@ -10,17 +10,36 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 /**
- * // TODO
- * // SINGLETON
+ * Pool of tweets reprsenting tweets that are already saved and tweets that going to be saved.
+ * 
+ * @author Quentin Baert & Thomas Bernard
  */
 public class TweetPool {
 
+	////////////
+	// FILEDS //
+	////////////
+
+	/**
+	 * Hash map to save tweets.
+	 */
 	private HashMap< Long, Tweet > tweetPool;
 
+	/////////////
+	// METHODS //
+	/////////////
+
+	/**
+	 * Constroctor of a TweetPool.
+	 * 
+	 * @param path
+	 *            path of the CSV file where tweets has been previously saved.
+	 */
 	public TweetPool ( String path ) {
 		this.tweetPool = new HashMap< Long, Tweet >();
 		File file = new File( path );
-
+		
+		// If a file already exists, it is open to fill the map
 		if ( file.exists() && !file.isDirectory() ) {
 			try {
 				BufferedReader br = new BufferedReader( new FileReader( path ) );
