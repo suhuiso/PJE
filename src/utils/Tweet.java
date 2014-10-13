@@ -9,9 +9,9 @@ import java.util.Date;
  */
 public class Tweet {
 
-	// //////////
+	////////////
 	// FIELDS //
-	// //////////
+	////////////
 
 	/**
 	 * Unique identifier of a tweet.
@@ -38,9 +38,9 @@ public class Tweet {
 	 */
 	private String request;
 
-	// ///////////
+	/////////////
 	// METHODS //
-	// ///////////
+	/////////////
 
 	/**
 	 * Constructor of a Tweet.
