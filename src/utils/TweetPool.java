@@ -76,4 +76,15 @@ public class TweetPool {
 		}
 	}
 
+	/**
+	 * Tells if the TweetPool contains an id as key.
+	 * 
+	 * @param id
+	 *            id to know if it is contained in the hash map
+	 * @return true if id is a key in the has map, false otherwise
+	 */
+	public boolean containsKey ( long id ) {
+		return this.tweetPool.containsKey( id );
+	}
+
 }
