@@ -13,16 +13,45 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import utils.TweetPool;
 
+/**
+ * Model of the application. Handles the data.
+ * 
+ * @author Quentin Baert & Thomas Bernard
+ */
 public class AppModel extends Observable {
-	
+
+	////////////
+	// FILEDS //
+	////////////
+
+	/**
+	 * Singleton representing the Twitter API.
+	 */
 	private final Twitter TWITTER = TwitterFactory.getSingleton();
-	
+
+	/**
+	 * TweetPool of the model.
+	 */
 	private TweetPool tweetPool;
-	
+
+	/////////////
+	// METHODS //
+	/////////////
+
+	/**
+	 * Constructor of a AppModel. The model of the application building a tweet pool with a file
+	 * named "tweetPool.csv".
+	 */
 	public AppModel () {
-		this.tweetPool = new TweetPool("resources/tweetPool.csv");
+		this.tweetPool = new TweetPool( "resources/tweetPool.csv" );
 	}
 
+	/**
+	 * Makes a research in the Twitter API.
+	 * 
+	 * @param searchQuery
+	 *            string representing the query
+	 */
 	public void search ( String searchQuery ) {
 		Query query = new Query( searchQuery );
 		QueryResult result = null;
@@ -43,9 +72,16 @@ public class AppModel extends Observable {
 		this.notifyObservers( result );
 	}
 
+	/**
+	 * Saves the results of a query in a file named "tweetPool.csv".
+	 * 
+	 * @param result
+	 *            result of a query previously made
+	 */
 	public void save ( QueryResult result ) {
 		try {
-			BufferedWriter out = new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
+			BufferedWriter out =
+			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
 
 			for ( Status status : result.getTweets() ) {
 				String content = status.getText().replace( '"', ' ' ).replace( '\n', ' ' );
@@ -64,7 +100,7 @@ public class AppModel extends Observable {
 		}
 	}
 
-	private String replaceUsername( String s ) {
+	private String replaceUsername ( String s ) {
 		return s.replaceAll( "@[A-Za-z0-9_-]+", "@" );
 	}
 }
