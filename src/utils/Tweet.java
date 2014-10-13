@@ -2,6 +2,8 @@ package utils;
 
 import java.util.Date;
 
+import twitter4j.Status;
+
 /**
  * Class reprsenting a tweet as we want to save it.
  * 
@@ -34,9 +36,9 @@ public class Tweet {
 	private Date date;
 
 	/**
-	 * Request with which the tweet was obtained.
+	 * Query with which the tweet was obtained.
 	 */
-	private String request;
+	private String query;
 
 	/**
 	 * Feeling of the tweet.
@@ -62,15 +64,36 @@ public class Tweet {
 	 *            message of the tweet
 	 * @param date
 	 *            date when the tweet was sent
-	 * @param request
-	 *            request with which the tweet was obtained
+	 * @param query
+	 *            query with which the tweet was obtained
+	 * @param feeling
+	 *            feeling of the tweet
 	 */
-	public Tweet ( Long id, String twittos, String msg, Date date, String request, int feeling ) {
+	public Tweet ( Long id, String twittos, String msg, Date date, String query, int feeling ) {
 		this.id = id;
 		this.twittos = twittos;
 		this.msg = msg;
 		this.date = date;
-		this.request = request;
+		this.query = query;
+		this.feeling = feeling;
+	}
+
+	/**
+	 * Constructor of a Tweet since a Status object.
+	 * 
+	 * @param status
+	 *            status in which build the tweet
+	 * @param query
+	 *            query with which the tweet was obtained
+	 * @param feeling
+	 *            feeling of the tweet
+	 */
+	public Tweet ( Status status, String query, int feeling ) {
+		this.id = status.getId();
+		this.twittos = status.getUser().toString();
+		this.msg = status.getText();
+		this.date = status.getCreatedAt();
+		this.query = query;
 		this.feeling = feeling;
 	}
 
@@ -111,14 +134,14 @@ public class Tweet {
 	}
 
 	/**
-	 * Gives the request with which the tweet was obtained.
+	 * Gives the query with which the tweet was obtained.
 	 * 
-	 * @return request with which the tweet was obtained
+	 * @return query with which the tweet was obtained
 	 */
-	public String getRequest () {
-		return this.request;
+	public String getQuery () {
+		return this.query;
 	}
-	
+
 	/**
 	 * Gives the feeling of the tweet.
 	 * 
