@@ -117,9 +117,11 @@ public class AppModel extends Observable {
 
 			for ( Status status : result.getTweets() ) {
 				String content = this.cleanText( status.getText() );
-				
+				long id = status.getId();
+
 				// A tweet is saved only if it is not only composed of whitespaces
-				if ( !content.trim().isEmpty() ) {
+				// A tweet is saved only if it is not already saved 
+				if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey(id) ) ) {
 					String tweet =
 					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
 					                + content + "\"" + ";" + status.getCreatedAt() + ";"
