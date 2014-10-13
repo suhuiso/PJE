@@ -38,6 +38,15 @@ public class Tweet {
 	 */
 	private String request;
 
+	/**
+	 * Feeling of the tweet.
+	 * -1 for untreated tweet,
+	 * 0 for negative tweet,
+	 * 2 for neutral tweet,
+	 * 4 for positive tweet
+	 */
+	private int feeling;
+
 	/////////////
 	// METHODS //
 	/////////////
@@ -56,12 +65,13 @@ public class Tweet {
 	 * @param request
 	 *            request with which the tweet was obtained
 	 */
-	public Tweet ( Long id, String twittos, String msg, Date date, String request ) {
+	public Tweet ( Long id, String twittos, String msg, Date date, String request, int feeling ) {
 		this.id = id;
 		this.twittos = twittos;
 		this.msg = msg;
 		this.date = date;
 		this.request = request;
+		this.feeling = feeling;
 	}
 
 	/**
@@ -107,6 +117,15 @@ public class Tweet {
 	 */
 	public String getRequest () {
 		return this.request;
+	}
+	
+	/**
+	 * Gives the feeling of the tweet.
+	 * 
+	 * @return feeling of the tweet
+	 */
+	public int getFeeling () {
+		return this.feeling;
 	}
 
 	/**

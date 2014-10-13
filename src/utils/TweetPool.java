@@ -38,7 +38,7 @@ public class TweetPool {
 	public TweetPool ( String path ) {
 		this.tweetPool = new HashMap< Long, Tweet >();
 		File file = new File( path );
-		
+
 		// If a file already exists, it is open to fill the map
 		if ( file.exists() && !file.isDirectory() ) {
 			try {
