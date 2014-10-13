@@ -9,11 +9,19 @@ import twitter4j.QueryResult;
  * @author Quentin Baert & Thomas Bernard
  */
 public class AppController {
+	
+	////////////
+	// FILEDS //
+	////////////
 
 	/**
-	 * Model linked with the controller
+	 * Model linked with the controller.
 	 */
 	protected AppModel model;
+	
+	/////////////
+	// METHODS //
+	/////////////
 
 	/**
 	 * Constructor of a AppController.
