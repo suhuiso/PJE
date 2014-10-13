@@ -62,8 +62,8 @@ public class AppController {
 	 * @param result
 	 *            results of a query previously made
 	 */
-	public void saveRequest ( QueryResult result ) {
-		this.model.save( result );
+	public void unpolarizedSaveRequest ( QueryResult result ) {
+		this.model.unpolarizedSave( result );
 	}
 
 }

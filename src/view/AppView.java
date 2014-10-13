@@ -69,7 +69,7 @@ public class AppView extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SaveButton click received" );
-			AppView.this.controller.saveRequest( lastQueryResult );
+			AppView.this.controller.unpolarizedSaveRequest( lastQueryResult );
 		}
 	}
 
