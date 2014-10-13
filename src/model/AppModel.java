@@ -72,6 +72,38 @@ public class AppModel extends Observable {
 		this.notifyObservers( result );
 	}
 
+	/*
+	 * Cleaning tweet messages methods
+	 */
+
+	private String deleteDoubleQuotes ( String s ) {
+		return s.replace( '"', ' ' );
+	}
+
+	private String deleteNewLineChar ( String s ) {
+		return s.replace( '\n', ' ' );
+	}
+
+	private String deleteUsername ( String s ) {
+		return s.replaceAll( "@[A-Za-z0-9_-]+", "" );
+	}
+
+	private String deleteHashtag ( String s ) {
+		return s.replaceAll( "#[A-Za-z0-9_-]+", "" );
+	}
+
+	private String deleteHttpUrl ( String s ) {
+		return s.replaceAll( "http://[^\\s]+", "" );
+	}
+
+	private String deleteRT ( String s ) {
+		return s.replaceAll( "RT\\s?\"[\\w\\s\\d]+\"", "" );
+	}
+
+	private String cleanText ( String text ) {
+		return deleteHttpUrl( deleteRT( deleteHashtag( deleteUsername( deleteNewLineChar( deleteDoubleQuotes( text ) ) ) ) ) );
+	}
+
 	/**
 	 * Saves the results of a query in a file named "tweetPool.csv".
 	 * 
@@ -84,7 +116,7 @@ public class AppModel extends Observable {
 			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
 
 			for ( Status status : result.getTweets() ) {
-				String content = status.getText().replace( '"', ' ' ).replace( '\n', ' ' );
+				String content = this.cleanText( status.getText() );
 
 				String tweet =
 				        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
@@ -100,7 +132,4 @@ public class AppModel extends Observable {
 		}
 	}
 
-	private String replaceUsername ( String s ) {
-		return s.replaceAll( "@[A-Za-z0-9_-]+", "@" );
-	}
 }
