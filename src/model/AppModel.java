@@ -117,13 +117,16 @@ public class AppModel extends Observable {
 
 			for ( Status status : result.getTweets() ) {
 				String content = this.cleanText( status.getText() );
-
-				String tweet =
-				        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
-				                + content + "\"" + ";" + status.getCreatedAt() + ";"
-				                + result.getQuery() + ";" + "-1";
-				out.write( tweet );
-				out.newLine();
+				
+				// A tweet is saved only if it is not only composed of whitespaces
+				if ( !content.trim().isEmpty() ) {
+					String tweet =
+					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
+					                + content + "\"" + ";" + status.getCreatedAt() + ";"
+					                + result.getQuery() + ";" + "-1";
+					out.write( tweet );
+					out.newLine();
+				}
 			}
 
 			out.close();
