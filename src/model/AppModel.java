@@ -78,7 +78,7 @@ public class AppModel extends Observable {
 	 * @param result
 	 *            result of a query previously made
 	 */
-	public void save ( QueryResult result ) {
+	public void unpolarizedSave ( QueryResult result ) {
 		try {
 			BufferedWriter out =
 			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
@@ -89,7 +89,7 @@ public class AppModel extends Observable {
 				String tweet =
 				        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
 				                + content + "\"" + ";" + status.getCreatedAt() + ";"
-				                + result.getQuery();
+				                + result.getQuery() + ";" + "-1";
 				out.write( tweet );
 				out.newLine();
 			}
