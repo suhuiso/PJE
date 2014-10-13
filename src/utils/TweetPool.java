@@ -53,7 +53,8 @@ public class TweetPool {
 
 					Tweet tweet =
 					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ],
-					                formatter.parse( elem[ 3 ] ), elem[ 4 ] );
+					                formatter.parse( elem[ 3 ] ), elem[ 4 ],
+					                Integer.parseInt( elem[ 5 ] ) );
 
 					this.tweetPool.put( tweet.getId(), tweet );
 				}
