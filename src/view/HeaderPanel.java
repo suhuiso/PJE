@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
  * 
  * @author Quentin Baert & Thomas Bernard
  */
+@SuppressWarnings("serial")
 public class HeaderPanel extends JPanel {
 
 	/////////////
