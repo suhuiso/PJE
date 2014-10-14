@@ -12,3 +12,4 @@ hs_err_pid*
 /bin/
 
 twitter4j.properties
+.DS_Store
