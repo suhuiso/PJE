@@ -80,6 +80,10 @@ public class AppModel extends Observable {
 		return s.replace( '"', ' ' );
 	}
 
+	private String deleteComa ( String s ) {
+		return s.replace( ',', ' ' );
+	}
+
 	private String deleteNewLineChar ( String s ) {
 		return s.replace( '\n', ' ' );
 	}
@@ -101,7 +105,7 @@ public class AppModel extends Observable {
 	}
 
 	private String cleanText ( String text ) {
-		return deleteHttpUrl( deleteRT( deleteHashtag( deleteUsername( deleteNewLineChar( deleteDoubleQuotes( text ) ) ) ) ) );
+		return deleteHttpUrl( deleteRT( deleteHashtag( deleteUsername( deleteNewLineChar( deleteComa( deleteDoubleQuotes( text ) ) ) ) ) ) );
 	}
 
 	/**
