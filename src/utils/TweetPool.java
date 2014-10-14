@@ -30,10 +30,10 @@ public class TweetPool {
 	/////////////
 
 	/**
-	 * Constroctor of a TweetPool.
+	 * Constructor of a TweetPool.
 	 * 
 	 * @param path
-	 *            path of the CSV file where tweets has been previously saved.
+	 *            path of the CSV file where tweets has been previously saved
 	 */
 	public TweetPool ( String path ) {
 		this.tweetPool = new HashMap< Long, Tweet >();
