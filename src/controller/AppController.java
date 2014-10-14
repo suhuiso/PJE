@@ -41,8 +41,8 @@ public class AppController {
 	 * @return a query based on the parameters withtout illegal characters
 	 */
 	private String control ( String query ) {
-		// TODO Validation du champ de recherche
-		return query;
+		// Coma are not allowed in query
+		return query.replace( ',', ' ' );
 	}
 
 	/**
