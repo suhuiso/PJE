@@ -16,7 +16,7 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 
 @SuppressWarnings ( "serial" )
-public class AppView extends JFrame implements Observer {
+public class AppViewTmp extends JFrame implements Observer {
 
 	private JPanel container = new JPanel();
 
@@ -32,7 +32,7 @@ public class AppView extends JFrame implements Observer {
 
 	private QueryResult lastQueryResult;
 
-	public AppView ( AppController controller ) {
+	public AppViewTmp ( AppController controller ) {
 		this.setSize( 800, 400 );
 		this.setTitle( "PJE Twitter" );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -61,7 +61,7 @@ public class AppView extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SearchButton click received" );
-			AppView.this.controller.setQuery( searchField.getText() );
+			AppViewTmp.this.controller.setQuery( searchField.getText() );
 		}
 	}
 
@@ -69,7 +69,7 @@ public class AppView extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SaveButton click received" );
-			AppView.this.controller.unpolarizedSaveRequest( lastQueryResult );
+			AppViewTmp.this.controller.unpolarizedSaveRequest( lastQueryResult );
 		}
 	}
 
@@ -87,7 +87,7 @@ public class AppView extends JFrame implements Observer {
 			tweets += tweet;
 		}
 
-		AppView.this.searchResults.setText( "<html>" + tweets + "</html>" );
+		AppViewTmp.this.searchResults.setText( "<html>" + tweets + "</html>" );
 	}
 
 }
