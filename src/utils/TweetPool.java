@@ -37,6 +37,16 @@ public class TweetPool {
 	 */
 	public TweetPool ( String path ) {
 		this.tweetPool = new HashMap< Long, Tweet >();
+		this.readCSV( path );
+	}
+
+	/**
+	 * Reads a CSV file and fill the tweet pool with.
+	 * 
+	 * @param path
+	 *            path of the CSV file where tweets has been previously saved
+	 */
+	public void readCSV ( String path ) {
 		File file = new File( path );
 
 		// If a file already exists, it is open to fill the map
