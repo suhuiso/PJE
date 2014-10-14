@@ -126,11 +126,19 @@ public class AppModel extends Observable {
 
 				// A tweet is saved only if it is not only composed of whitespaces
 				// A tweet is saved only if it is not already saved 
-				if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey(id) ) ) {
+				if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
 					String tweet =
-					        status.getId() + ";" + status.getUser().getScreenName() + ";" + "\""
-					                + content + "\"" + ";" + status.getCreatedAt() + ";"
-					                + result.getQuery() + ";" + "-1";
+					        status.getId()
+					                + ","
+					                + status.getUser().getScreenName()
+					                + ","
+					                + "\""
+					                + content
+					                + "\""
+					                + ","
+					                + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(
+					                        status.getCreatedAt() ) + "," + result.getQuery() + ","
+					                + "-1";
 					out.write( tweet );
 					out.newLine();
 				}

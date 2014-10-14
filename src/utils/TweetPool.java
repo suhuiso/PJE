@@ -46,10 +46,7 @@ public class TweetPool {
 				String line = "";
 
 				while ( ( line = br.readLine() ) != null ) {
-					String[] elem = line.split( ";" );
-					// NOT SURE
-					SimpleDateFormat formatter =
-					        new SimpleDateFormat( "EEEE, MMM dd, yyyy HH:mm:ss a" );
+					String[] elem = line.split( "," );
 
 					Tweet tweet =
 					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ],
