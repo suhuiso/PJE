@@ -38,7 +38,7 @@ public class LogoPanel extends JPanel {
 
 		try {
 			/* Access to the file containing the image */
-			image = ImageIO.read( new File( "search.png" ) );
+			image = ImageIO.read( new File( "logo.png" ) );
 		} catch ( IOException e ) {
 			/* File can't be loaded */
 			System.err.println( "ERROR: Fail to load search.png file" );
