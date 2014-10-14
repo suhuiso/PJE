@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 /**
@@ -53,7 +53,7 @@ public class TweetPool {
 
 					Tweet tweet =
 					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ],
-					                formatter.parse( elem[ 3 ] ), elem[ 4 ],
+					                DateFormat.getDateInstance( DateFormat.MEDIUM ).parse( elem[ 3 ] ), elem[ 4 ],
 					                Integer.parseInt( elem[ 5 ] ) );
 
 					this.tweetPool.put( tweet.getId(), tweet );
@@ -81,7 +81,7 @@ public class TweetPool {
 	 * 
 	 * @param id
 	 *            id to know if it is contained in the hash map
-	 * @return true if id is a key in the has map, false otherwise
+	 * @return true if id is a key in the hash map, false otherwise
 	 */
 	public boolean containsKey ( long id ) {
 		return this.tweetPool.containsKey( id );
