@@ -118,7 +118,7 @@ public class AppModel extends Observable {
 	public void unpolarizedSave ( QueryResult result ) {
 		try {
 			BufferedWriter out =
-			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", true ) );
+			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", false ) );
 
 			for ( Status status : result.getTweets() ) {
 				String content = this.cleanText( status.getText() );
