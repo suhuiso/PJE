@@ -129,5 +129,12 @@ public class AppModel extends Observable {
 			}
 		}
 	}
+	
+	/**
+	 * Saves the tweet pool of the model in a CSV file.
+	 */
+	public void closingWindowSave () {
+		this.tweetPool.writeCSV( "resources/tweetPool.csv" );
+	}
 
 }
