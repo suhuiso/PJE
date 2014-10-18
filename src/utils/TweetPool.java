@@ -1,9 +1,11 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -81,6 +83,33 @@ public class TweetPool {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public void writeCSV ( String path ) {
+		try {
+			BufferedWriter out = new BufferedWriter( new FileWriter( path, false ) );
+
+			for ( Tweet tweet : this.tweetPool.values() ) {
+				String tweetText =
+				        tweet.getId()
+				                + ","
+				                + tweet.getTwittos()
+				                + ","
+				                + "\""
+				                + tweet.getMsg()
+				                + "\""
+				                + ","
+				                + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(
+				                        tweet.getDate() ) + "," + tweet.getQuery() + ","
+				                + tweet.getFeeling();
+				out.write( tweetText );
+				out.newLine();
+			}
+
+			out.close();
+		} catch ( IOException e1 ) {
+			e1.printStackTrace();
 		}
 	}
 
