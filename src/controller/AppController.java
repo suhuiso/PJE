@@ -65,5 +65,9 @@ public class AppController {
 	public void unpolarizedSaveRequest ( QueryResult result ) {
 		this.model.unpolarizedSave( result );
 	}
+	
+	public void closingWindowSaveRequest () {
+		this.model.closingWindowSave();
+	}
 
 }
