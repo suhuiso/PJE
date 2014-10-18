@@ -33,7 +33,6 @@ public class MessageCleaner {
 		System.out.println( this.getClass().getName() );
 
 		for ( Method m : this.getClass().getMethods() ) {
-			System.out.println( m.getName() );
 			if ( m.getName().startsWith( "delete" ) ) {
 				this.methods.add( m );
 			}
@@ -140,9 +139,7 @@ public class MessageCleaner {
 
 		for ( Method m : this.methods ) {
 			try {
-				System.out.println( "AVANT : " + s );
 				s = ( String ) m.invoke( this, s );
-				System.out.println( "APRES : " + s );
 			} catch ( Exception e ) {
 				e.printStackTrace();
 			}
