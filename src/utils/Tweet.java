@@ -152,6 +152,28 @@ public class Tweet {
 	}
 
 	/**
+	 * Set the message of the tweet.
+	 * 
+	 * @param newMsg
+	 *            new message of the tweet
+	 */
+	public void setMsg ( String newMsg ) {
+		this.msg = newMsg;
+	}
+
+	/**
+	 * Returns a descritpion of the tweet.
+	 * 
+	 * @return descritpion of the tweet
+	 */
+	public String toString () {
+		return "----------\n" + "id : " + this.getId() + "\n" + "twittos : " + this.getTwittos()
+		        + "\n" + "message : " + this.getMsg() + "\n" + "date : " + this.getDate() + "\n"
+		        + "query : " + this.getQuery() + "\n" + "feeling : " + this.getFeeling() + "\n"
+		        + "----------\n";
+	}
+
+	/**
 	 * Gives the hash code of a tweet. A tweet is uniquely identify with its identifier.
 	 */
 	@Override
