@@ -1,9 +1,5 @@
 package model;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -12,6 +8,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import utils.Tweet;
 import utils.TweetPool;
 
 /**
@@ -116,37 +113,20 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void unpolarizedSave ( QueryResult result ) {
-		try {
-			BufferedWriter out =
-			        new BufferedWriter( new FileWriter( "resources/tweetPool.csv", false ) );
+		for ( Status status : result.getTweets() ) {
+			// Tweet created from status
+			Tweet tweet = new Tweet( status, result.getQuery(), -1 );
+			// Cleaning tweet message
+			tweet.setMsg( this.cleanText( tweet.getMsg() ) );
+			
+			String content = tweet.getMsg();
+			Long id = tweet.getId();
 
-			for ( Status status : result.getTweets() ) {
-				String content = this.cleanText( status.getText() );
-				long id = status.getId();
-
-				// A tweet is saved only if it is not only composed of whitespaces
-				// A tweet is saved only if it is not already saved 
-				if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
-					String tweet =
-					        status.getId()
-					                + ","
-					                + status.getUser().getScreenName()
-					                + ","
-					                + "\""
-					                + content
-					                + "\""
-					                + ","
-					                + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(
-					                        status.getCreatedAt() ) + "," + result.getQuery() + ","
-					                + "-1";
-					out.write( tweet );
-					out.newLine();
-				}
+			// A tweet is saved if it is not only composed of whitespaces
+			// A tweet is saved if it is not already saved 
+			if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
+				this.tweetPool.put( id, tweet );
 			}
-
-			out.close();
-		} catch ( IOException e1 ) {
-			e1.printStackTrace();
 		}
 	}
 
