@@ -30,8 +30,6 @@ public class MessageCleaner {
 	private MessageCleaner () {
 		this.methods = new ArrayList< Method >();
 
-		System.out.println( this.getClass().getName() );
-
 		for ( Method m : this.getClass().getMethods() ) {
 			if ( m.getName().startsWith( "delete" ) ) {
 				this.methods.add( m );
@@ -134,8 +132,6 @@ public class MessageCleaner {
 	 */
 	public String cleanText ( String text ) {
 		String s = text;
-
-		System.out.println( this.methods.size() );
 
 		for ( Method m : this.methods ) {
 			try {
