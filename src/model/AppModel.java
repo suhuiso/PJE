@@ -8,6 +8,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
 
@@ -70,42 +71,6 @@ public class AppModel extends Observable {
 		this.notifyObservers( result );
 	}
 
-	/*
-	 * Cleaning tweet messages methods
-	 */
-
-	private String deleteDoubleQuotes ( String s ) {
-		return s.replace( '"', ' ' );
-	}
-
-	private String deleteComa ( String s ) {
-		return s.replace( ',', ' ' );
-	}
-
-	private String deleteNewLineChar ( String s ) {
-		return s.replace( '\n', ' ' );
-	}
-
-	private String deleteUsername ( String s ) {
-		return s.replaceAll( "@[A-Za-z0-9_-]+", "" );
-	}
-
-	private String deleteHashtag ( String s ) {
-		return s.replaceAll( "#[A-Za-z0-9_-]+", "" );
-	}
-
-	private String deleteHttpUrl ( String s ) {
-		return s.replaceAll( "http[s]?://[^\\s]+", "" );
-	}
-
-	private String deleteRT ( String s ) {
-		return s.replaceAll( "RT\\s?\"[\\w\\s\\d]+\"", "" );
-	}
-
-	private String cleanText ( String text ) {
-		return deleteHttpUrl( deleteRT( deleteHashtag( deleteUsername( deleteNewLineChar( deleteComa( deleteDoubleQuotes( text ) ) ) ) ) ) );
-	}
-
 	/**
 	 * Saves the results of a query in a file named "tweetPool.csv".
 	 * 
@@ -113,11 +78,13 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void unpolarizedSave ( QueryResult result ) {
+		MessageCleaner msgCleaner = MessageCleaner.getInstance();
+		
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
 			Tweet tweet = new Tweet( status, result.getQuery(), -1 );
 			// Cleaning tweet message
-			tweet.setMsg( this.cleanText( tweet.getMsg() ) );
+			tweet.setMsg( msgCleaner.cleanText( tweet.getMsg() ) );
 			
 			String content = tweet.getMsg();
 			Long id = tweet.getId();
