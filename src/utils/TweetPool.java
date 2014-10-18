@@ -124,4 +124,16 @@ public class TweetPool {
 		return this.tweetPool.containsKey( id );
 	}
 
+	/**
+	 * Put a couple (key, value) in the tweet pool.
+	 * 
+	 * @param key
+	 *            id of the tweet to add
+	 * @param value
+	 *            tweet to add
+	 */
+	public void put ( Long key, Tweet value ) {
+		this.tweetPool.put( key, value );
+	}
+
 }
