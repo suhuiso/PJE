@@ -95,7 +95,7 @@ public class MessageCleaner {
 	 * 
 	 * @param s
 	 *            string in which remove hashtags
-	 * @return s whithout hashtags
+	 * @return s without hashtags
 	 */
 	public String deleteHashtag ( String s ) {
 		return s.replaceAll( "#[A-Za-z0-9_-]+", "" );
@@ -106,7 +106,7 @@ public class MessageCleaner {
 	 * 
 	 * @param s
 	 *            string in which remove urls
-	 * @return s whithout urls
+	 * @return s without urls
 	 */
 	public String deleteHttpUrl ( String s ) {
 		return s.replaceAll( "http[s]?://[^\\s]+", "" );
@@ -117,10 +117,21 @@ public class MessageCleaner {
 	 * 
 	 * @param s
 	 *            string in which remove RT
-	 * @return s whithout RT
+	 * @return s without RT
 	 */
 	public String deleteRT ( String s ) {
 		return s.replaceAll( "RT\\s?\"[\\w\\s\\d]+\"", "" );
+	}
+
+	/**
+	 * Removes numbers from a message.
+	 * 
+	 * @param s
+	 *            string in which remove numbers
+	 * @return s with "X" instead of numbers
+	 */
+	public String deleteNumbers ( String s ) {
+		return s.replaceAll( "[0-9]+", "X" );
 	}
 
 	/**
