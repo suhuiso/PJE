@@ -157,8 +157,8 @@ public class Tweet {
 	 * @param newMsg
 	 *            new message of the tweet
 	 */
-	public void setMsg ( String newMsg ) {
-		this.msg = newMsg;
+	public Tweet setMsg ( String newMsg ) {
+		return new Tweet( this.id, this.twittos, newMsg, this.date, this.query, this.feeling );
 	}
 
 	/**
@@ -167,8 +167,8 @@ public class Tweet {
 	 * @param newFeeling
 	 *            new feeling of the tweet
 	 */
-	public void setFeeling ( Feeling newFeeling ) {
-		this.feeling = newFeeling;
+	public Tweet setFeeling ( Feeling newFeeling ) {
+		return new Tweet( this.id, this.twittos, this.msg, this.date, this.query, newFeeling );
 	}
 
 	/**
