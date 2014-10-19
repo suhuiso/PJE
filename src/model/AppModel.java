@@ -33,6 +33,11 @@ public class AppModel extends Observable {
 	 * TweetPool of the model.
 	 */
 	private TweetPool tweetPool;
+	
+	/**
+	 * Message cleaner.
+	 */
+	private MessageCleaner msgCleaner;
 
 	/////////////
 	// METHODS //
@@ -44,6 +49,7 @@ public class AppModel extends Observable {
 	 */
 	public AppModel () {
 		this.tweetPool = new TweetPool( "resources/tweetPool.csv" );
+		this.msgCleaner = MessageCleaner.getInstance();
 	}
 
 	/**
