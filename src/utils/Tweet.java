@@ -152,13 +152,23 @@ public class Tweet {
 	}
 
 	/**
-	 * Set the message of the tweet.
+	 * Sets the message of the tweet.
 	 * 
 	 * @param newMsg
 	 *            new message of the tweet
 	 */
 	public void setMsg ( String newMsg ) {
 		this.msg = newMsg;
+	}
+
+	/**
+	 * Sets the feeling of the tweet.
+	 * 
+	 * @param newFeeling
+	 *            new feeling of the tweet
+	 */
+	public void setFeeling ( Feeling newFeeling ) {
+		this.feeling = newFeeling;
 	}
 
 	/**
