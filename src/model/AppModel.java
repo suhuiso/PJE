@@ -1,5 +1,12 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -33,7 +40,7 @@ public class AppModel extends Observable {
 	 * TweetPool of the model.
 	 */
 	private TweetPool tweetPool;
-	
+
 	/**
 	 * Message cleaner.
 	 */
@@ -99,6 +106,80 @@ public class AppModel extends Observable {
 			if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
 				this.tweetPool.put( id, tweet );
 			}
+		}
+		
+		// this.dictionaryPolarize();
+	}
+
+	// Load a file into a string
+	private String fileToString ( String path ) {
+		StringBuffer res = new StringBuffer();
+		File file = new File( path );
+
+		if ( file.exists() && !file.isDirectory() ) {
+			try {
+				BufferedReader br = new BufferedReader( new FileReader( path ) );
+				String line = "";
+
+				while ( ( line = br.readLine() ) != null ) {
+					res.append( line );
+				}
+
+				br.close();
+			} catch ( FileNotFoundException e ) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch ( IOException e ) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return res.toString();
+	}
+	
+	// Gives a feeling to a tweet using dictonaries
+	private Feeling tweetDictionaryPolarize ( Tweet tweet, String[] positiveWords, String[] negativeWords ) {
+		int cpt = 0;
+		String msg = tweet.getMsg();
+		
+		for ( String positiveWord : positiveWords ) {
+			if ( msg.contains( positiveWord ) ) {
+				cpt++;
+			}
+		}
+		
+		for ( String negativeWord : negativeWords ) {
+			if ( msg.contains( negativeWord ) ) {
+				cpt--;
+			}
+		}
+		
+		if ( cpt < 0 ) {
+			return Feeling.NEGATIVE;
+		} else if ( cpt > 0 ) {
+			return Feeling.POSITIVE;
+		} else {
+			return Feeling.NEUTRAL;
+		}
+	}
+
+	/**
+	 * Polarizes all tweets of the tweet pool based on dictonary files.
+	 */
+	public void dictionaryPolarize () {
+		String[] positiveWords = this.fileToString( "resources/positive.txt" ).split( "," );
+		String[] negativeWords = this.fileToString( "resources/negative.txt" ).split( "," );
+		List< Tweet > newTweets = new ArrayList< Tweet >();
+		
+		for ( Tweet tweet : this.tweetPool.values() ) {
+			newTweets.add( tweet.setFeeling( tweetDictionaryPolarize( tweet, positiveWords, negativeWords ) ) );
+		}
+		
+		this.tweetPool.clear();
+		
+		for ( Tweet tweet : newTweets ) {
+			this.tweetPool.put( tweet.getId(), tweet );
 		}
 	}
 
