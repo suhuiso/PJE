@@ -154,4 +154,15 @@ public class MessageCleaner {
 
 		return s;
 	}
+
+	/**
+	 * Cleans a tweet message using all previous methods.
+	 * 
+	 * @param tweet
+	 *            tweet to clean
+	 * @return cleaning tweet
+	 */
+	public Tweet cleanTweet ( Tweet tweet ) {
+		return tweet.setMsg( this.cleanText( tweet.getMsg() ) );
+	}
 }
