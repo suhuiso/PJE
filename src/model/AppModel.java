@@ -85,13 +85,11 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void unpolarizedSave ( QueryResult result ) {
-		MessageCleaner msgCleaner = MessageCleaner.getInstance();
-
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
 			Tweet tweet = new Tweet( status, result.getQuery(), Feeling.UNPOLARIZED );
 			// Cleaning tweet message
-			tweet.setMsg( msgCleaner.cleanText( tweet.getMsg() ) );
+			tweet = this.msgCleaner.cleanTweet( tweet );
 
 			String content = tweet.getMsg();
 			Long id = tweet.getId();
