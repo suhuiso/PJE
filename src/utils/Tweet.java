@@ -47,7 +47,7 @@ public class Tweet {
 	 * 2 for neutral tweet,
 	 * 4 for positive tweet
 	 */
-	private int feeling;
+	private Feeling feeling;
 
 	/////////////
 	// METHODS //
@@ -69,7 +69,7 @@ public class Tweet {
 	 * @param feeling
 	 *            feeling of the tweet
 	 */
-	public Tweet ( Long id, String twittos, String msg, Date date, String query, int feeling ) {
+	public Tweet ( Long id, String twittos, String msg, Date date, String query, Feeling feeling ) {
 		this.id = id;
 		this.twittos = twittos;
 		this.msg = msg;
@@ -88,7 +88,7 @@ public class Tweet {
 	 * @param feeling
 	 *            feeling of the tweet
 	 */
-	public Tweet ( Status status, String query, int feeling ) {
+	public Tweet ( Status status, String query, Feeling feeling ) {
 		this.id = status.getId();
 		this.twittos = status.getUser().getName();
 		this.msg = status.getText();
@@ -147,7 +147,7 @@ public class Tweet {
 	 * 
 	 * @return feeling of the tweet
 	 */
-	public int getFeeling () {
+	public Feeling getFeeling () {
 		return this.feeling;
 	}
 

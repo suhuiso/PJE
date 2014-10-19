@@ -8,6 +8,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import utils.Feeling;
 import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
@@ -79,13 +80,13 @@ public class AppModel extends Observable {
 	 */
 	public void unpolarizedSave ( QueryResult result ) {
 		MessageCleaner msgCleaner = MessageCleaner.getInstance();
-		
+
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
-			Tweet tweet = new Tweet( status, result.getQuery(), -1 );
+			Tweet tweet = new Tweet( status, result.getQuery(), Feeling.UNPOLARIZED );
 			// Cleaning tweet message
 			tweet.setMsg( msgCleaner.cleanText( tweet.getMsg() ) );
-			
+
 			String content = tweet.getMsg();
 			Long id = tweet.getId();
 
@@ -96,7 +97,7 @@ public class AppModel extends Observable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Saves the tweet pool of the model in a CSV file.
 	 */
