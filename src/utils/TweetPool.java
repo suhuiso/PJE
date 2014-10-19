@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -125,7 +126,7 @@ public class TweetPool {
 	}
 
 	/**
-	 * Put a couple (key, value) in the tweet pool.
+	 * Puts a couple (key, value) in the tweet pool.
 	 * 
 	 * @param key
 	 *            id of the tweet to add
@@ -134,6 +135,32 @@ public class TweetPool {
 	 */
 	public void put ( Long key, Tweet value ) {
 		this.tweetPool.put( key, value );
+	}
+
+	/**
+	 * Removes a couple (key, value) in the tweet pool.
+	 * 
+	 * @param key
+	 *            id of the tweet to remove
+	 */
+	public void remove ( Long key ) {
+		this.tweetPool.remove( key );
+	}
+	
+	/**
+	 * Clears the tweet pool.
+	 */
+	public void clear () {
+		this.tweetPool.clear();
+	}
+
+	/**
+	 * Gives the values contained in the tweet pool.
+	 * 
+	 * @return values contained in the tweet pool
+	 */
+	public Collection< Tweet > values () {
+		return this.tweetPool.values();
 	}
 
 }
