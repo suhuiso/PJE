@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -107,8 +105,6 @@ public class AppModel extends Observable {
 				this.tweetPool.put( id, tweet );
 			}
 		}
-		
-		// this.dictionaryPolarize();
 	}
 
 	// Load a file into a string
@@ -137,24 +133,24 @@ public class AppModel extends Observable {
 
 		return res.toString();
 	}
-	
+
 	// Gives a feeling to a tweet using dictonaries
-	private Feeling tweetDictionaryPolarize ( Tweet tweet, String[] positiveWords, String[] negativeWords ) {
+	private Feeling msgDictionaryPolarize ( String msg, String[] positiveWords,
+	        String[] negativeWords ) {
 		int cpt = 0;
-		String msg = tweet.getMsg();
-		
+
 		for ( String positiveWord : positiveWords ) {
 			if ( msg.contains( positiveWord ) ) {
 				cpt++;
 			}
 		}
-		
+
 		for ( String negativeWord : negativeWords ) {
 			if ( msg.contains( negativeWord ) ) {
 				cpt--;
 			}
 		}
-		
+
 		if ( cpt < 0 ) {
 			return Feeling.NEGATIVE;
 		} else if ( cpt > 0 ) {
@@ -164,22 +160,36 @@ public class AppModel extends Observable {
 		}
 	}
 
+	/*
+	 * ATTENTION : Répétition de code avec unpolarizedSave ici.
+	 * Pour éviter cela ?
+	 *  - Faire une méthode générique prend un objet de type FeelingAllocator en paramètre ?
+	 *  - Différencier la méthode d'attribution des sentiments dans différents objets de type FeelingAllocator ?
+	 */
+
 	/**
 	 * Polarizes all tweets of the tweet pool based on dictonary files.
 	 */
-	public void dictionaryPolarize () {
+	public void dictionaryPolarize ( QueryResult result ) {
 		String[] positiveWords = this.fileToString( "resources/positive.txt" ).split( "," );
 		String[] negativeWords = this.fileToString( "resources/negative.txt" ).split( "," );
-		List< Tweet > newTweets = new ArrayList< Tweet >();
-		
-		for ( Tweet tweet : this.tweetPool.values() ) {
-			newTweets.add( tweet.setFeeling( tweetDictionaryPolarize( tweet, positiveWords, negativeWords ) ) );
-		}
-		
-		this.tweetPool.clear();
-		
-		for ( Tweet tweet : newTweets ) {
-			this.tweetPool.put( tweet.getId(), tweet );
+
+		for ( Status status : result.getTweets() ) {
+			// Tweet created from status
+			Tweet tweet =
+			        new Tweet( status, result.getQuery(), this.msgDictionaryPolarize(
+			                status.getText(), positiveWords, negativeWords ) );
+			// Cleaning tweet message
+			tweet = this.msgCleaner.cleanTweet( tweet );
+
+			String content = tweet.getMsg();
+			Long id = tweet.getId();
+
+			// A tweet is saved if it is not only composed of whitespaces
+			// A tweet is saved if it is not already saved 
+			if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
+				this.tweetPool.put( id, tweet );
+			}
 		}
 	}
 
