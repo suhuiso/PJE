@@ -85,6 +85,7 @@ public class AppModel extends Observable {
 
 	/**
 	 * Saves the results of a query in a file named "tweetPool.csv".
+	 * The tweets which are saved are non polarized.
 	 * 
 	 * @param result
 	 *            result of a query previously made
@@ -168,7 +169,11 @@ public class AppModel extends Observable {
 	 */
 
 	/**
-	 * Polarizes all tweets of the tweet pool based on dictonary files.
+	 * Saves the results of a query in a file named "tweetPool.csv".
+	 * The tweets which are saved are polarized with a dictionnary method.
+	 * 
+	 * @param result
+	 *            result of a query previously made
 	 */
 	public void dictionaryPolarize ( QueryResult result ) {
 		String[] positiveWords = this.fileToString( "resources/positive.txt" ).split( "," );
