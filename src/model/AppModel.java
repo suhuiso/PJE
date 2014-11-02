@@ -1,10 +1,5 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -13,10 +8,12 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import utils.Feeling;
 import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
+import feeling.DefaultAssigner;
+import feeling.DictionaryAssigner;
+import feeling.FeelingAssigner;
 
 /**
  * Model of the application. Handles the data.
@@ -83,17 +80,11 @@ public class AppModel extends Observable {
 		this.notifyObservers( result );
 	}
 
-	/**
-	 * Saves the results of a query in a file named "tweetPool.csv".
-	 * The tweets which are saved are non polarized.
-	 * 
-	 * @param result
-	 *            result of a query previously made
-	 */
-	public void unpolarizedSave ( QueryResult result ) {
+	// Save the results of a query using the feeling assigner passed in parameter
+	private void save ( QueryResult result, FeelingAssigner assigner ) {
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
-			Tweet tweet = new Tweet( status, result.getQuery(), Feeling.UNPOLARIZED );
+			Tweet tweet = new Tweet( status, result.getQuery(), assigner.assigns( status.getText() ) );
 			// Cleaning tweet message
 			tweet = this.msgCleaner.cleanTweet( tweet );
 
@@ -108,65 +99,16 @@ public class AppModel extends Observable {
 		}
 	}
 
-	// Load a file into a string
-	private String fileToString ( String path ) {
-		StringBuffer res = new StringBuffer();
-		File file = new File( path );
-
-		if ( file.exists() && !file.isDirectory() ) {
-			try {
-				BufferedReader br = new BufferedReader( new FileReader( path ) );
-				String line = "";
-
-				while ( ( line = br.readLine() ) != null ) {
-					res.append( line );
-				}
-
-				br.close();
-			} catch ( FileNotFoundException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch ( IOException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		return res.toString();
-	}
-
-	// Gives a feeling to a tweet using dictonaries
-	private Feeling msgDictionaryPolarize ( String msg, String[] positiveWords,
-	        String[] negativeWords ) {
-		int cpt = 0;
-
-		for ( String positiveWord : positiveWords ) {
-			if ( msg.contains( positiveWord ) ) {
-				cpt++;
-			}
-		}
-
-		for ( String negativeWord : negativeWords ) {
-			if ( msg.contains( negativeWord ) ) {
-				cpt--;
-			}
-		}
-
-		if ( cpt < 0 ) {
-			return Feeling.NEGATIVE;
-		} else if ( cpt > 0 ) {
-			return Feeling.POSITIVE;
-		} else {
-			return Feeling.NEUTRAL;
-		}
-	}
-
-	/*
-	 * ATTENTION : Répétition de code avec unpolarizedSave ici.
-	 * Pour éviter cela ?
-	 *  - Faire une méthode générique prend un objet de type FeelingAllocator en paramètre ?
-	 *  - Différencier la méthode d'attribution des sentiments dans différents objets de type FeelingAllocator ?
+	/**
+	 * Saves the results of a query in a file named "tweetPool.csv".
+	 * The tweets which are saved are non polarized.
+	 * 
+	 * @param result
+	 *            result of a query previously made
 	 */
+	public void unpolarizedSave ( QueryResult result ) {
+		this.save( result, DefaultAssigner.getInstance() );
+	}
 
 	/**
 	 * Saves the results of a query in a file named "tweetPool.csv".
@@ -176,26 +118,7 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void dictionarySave ( QueryResult result ) {
-		String[] positiveWords = this.fileToString( "resources/positive.txt" ).split( "," );
-		String[] negativeWords = this.fileToString( "resources/negative.txt" ).split( "," );
-
-		for ( Status status : result.getTweets() ) {
-			// Tweet created from status
-			Tweet tweet =
-			        new Tweet( status, result.getQuery(), this.msgDictionaryPolarize(
-			                status.getText(), positiveWords, negativeWords ) );
-			// Cleaning tweet message
-			tweet = this.msgCleaner.cleanTweet( tweet );
-
-			String content = tweet.getMsg();
-			Long id = tweet.getId();
-
-			// A tweet is saved if it is not only composed of whitespaces
-			// A tweet is saved if it is not already saved 
-			if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
-				this.tweetPool.put( id, tweet );
-			}
-		}
+		this.save( result, DictionaryAssigner.getInstance() );
 	}
 
 	/**
