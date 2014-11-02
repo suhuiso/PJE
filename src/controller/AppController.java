@@ -66,6 +66,19 @@ public class AppController {
 		this.model.unpolarizedSave( result );
 	}
 	
+	/**
+	 * Asks to the model to save the results of a query with a dictionary method.
+	 * 
+	 * @param result
+	 *            results of a query previously made
+	 */
+	public void dictionarySaveRequest ( QueryResult result ) {
+		this.model.dictionarySave( result );
+	}
+	
+	/**
+	 * Asks to the model to save informations that need to be saved before closing the window.
+	 */
 	public void closingWindowSaveRequest () {
 		this.model.closingWindowSave();
 	}

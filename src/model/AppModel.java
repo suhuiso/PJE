@@ -175,7 +175,7 @@ public class AppModel extends Observable {
 	 * @param result
 	 *            result of a query previously made
 	 */
-	public void dictionaryPolarize ( QueryResult result ) {
+	public void dictionarySave ( QueryResult result ) {
 		String[] positiveWords = this.fileToString( "resources/positive.txt" ).split( "," );
 		String[] negativeWords = this.fileToString( "resources/negative.txt" ).split( "," );
 

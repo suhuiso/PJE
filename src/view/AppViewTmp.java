@@ -73,7 +73,7 @@ public class AppViewTmp extends JFrame implements Observer {
 
 		public void actionPerformed ( ActionEvent e ) {
 			System.out.println( "SaveButton click received" );
-			AppViewTmp.this.controller.unpolarizedSaveRequest( lastQueryResult );
+			AppViewTmp.this.controller.dictionarySaveRequest( lastQueryResult );
 		}
 	}
 
