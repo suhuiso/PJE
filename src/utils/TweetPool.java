@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
 
+import feeling.Feeling;
+
 /**
  * Pool of tweets reprsenting tweets that are already saved and tweets that going to be saved.
  * 

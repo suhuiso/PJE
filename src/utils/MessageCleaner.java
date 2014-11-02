@@ -24,9 +24,7 @@ public class MessageCleaner {
 	// METHODS //
 	/////////////
 
-	/**
-	 * Unaccessible constructor of MessageCleaner.
-	 */
+	// Unaccessible constructor of MessageCleaner
 	private MessageCleaner () {
 		this.methods = new ArrayList< Method >();
 

@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Date;
 
+import feeling.Feeling;
 import twitter4j.Status;
 
 /**
