@@ -84,7 +84,8 @@ public class AppModel extends Observable {
 	private void save ( QueryResult result, FeelingAssigner assigner ) {
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
-			Tweet tweet = new Tweet( status, result.getQuery(), assigner.assigns( status.getText() ) );
+			Tweet tweet =
+			        new Tweet( status, result.getQuery(), assigner.assigns( status.getText() ) );
 			// Cleaning tweet message
 			tweet = this.msgCleaner.cleanTweet( tweet );
 
@@ -118,7 +119,8 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void dictionarySave ( QueryResult result ) {
-		this.save( result, DictionaryAssigner.getInstance() );
+		this.save( result, new DictionaryAssigner( "resources/positive.txt",
+		        "resources/negative.txt" ) );
 	}
 
 	/**
