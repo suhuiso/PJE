@@ -10,7 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Singleton object assigning a feeling to a message of a tweet using the dictionary method.
+ * Class reprsenting objects that assign a feeling to a message of a tweet using the dictionary
+ * method.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
@@ -21,25 +22,30 @@ public class DictionaryAssigner extends FeelingAssigner {
 	////////////
 
 	/**
-	 * Only instance of DictionaryAssigner class.
+	 * Path to the positive dictionary of the DictionaryAssigner.
 	 */
-	private static final DictionaryAssigner INSTANCE = new DictionaryAssigner();
+	private String positivePath;
+
+	/**
+	 * Path to the negative dictionary of the DictionaryAssigner.
+	 */
+	private String negativePath;
 
 	/////////////
 	// METHODS //
 	/////////////
 
-	// Unaccessible constructor of DictionaryAssigner
-	public DictionaryAssigner () {
-	}
-
 	/**
-	 * Gives the only instance of DictionaryAssigner class.
+	 * Contructor of DictionaryAssigner.
 	 * 
-	 * @return only instance of DictionaryAssigner class
+	 * @param positivePath
+	 *            path to the positive dictionary of the DictionaryAssigner
+	 * @param negativePath
+	 *            path to the negative dictionary of the DictionaryAssigner
 	 */
-	public static DictionaryAssigner getInstance () {
-		return INSTANCE;
+	public DictionaryAssigner ( String positivePath, String negativePath ) {
+		this.positivePath = positivePath;
+		this.negativePath = negativePath;
 	}
 
 	// Load a file into a string
@@ -132,10 +138,10 @@ public class DictionaryAssigner extends FeelingAssigner {
 	public Feeling assigns ( String msg ) {
 		// Lists with clean string
 		List< String > positiveWords =
-		        this.removeEmptyString( Arrays.asList( this.fileToString( "resources/positive.txt" )
+		        this.removeEmptyString( Arrays.asList( this.fileToString( this.positivePath )
 		                .split( "," ) ) );
 		List< String > negativeWords =
-		        this.removeEmptyString( Arrays.asList( this.fileToString( "resources/negative.txt" )
+		        this.removeEmptyString( Arrays.asList( this.fileToString( this.negativePath )
 		                .split( "," ) ) );
 
 		return msgDictionaryPolarize( msg, positiveWords, negativeWords );
