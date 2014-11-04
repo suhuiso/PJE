@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -26,5 +27,14 @@ public class ContentPanel extends JPanel {
 		
 		this.setBackground( Color.WHITE );						/* color: white */
 		this.setBorder( new EmptyBorder( 10, 10, 10, 10 ) );	/* padding: 10px */
+		
+		this.setLayout( new BorderLayout() );
+		
+		/*
+		 * CONTENT :
+		 * 
+		 * ListTweetPanel : List of tweets
+		 */
+		this.add( new ListTweetPanel(), BorderLayout.CENTER );
 	}
 }
