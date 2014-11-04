@@ -87,6 +87,7 @@ public class AppViewTmp extends JFrame implements Observer {
 
 		@Override
 		public void windowClosing ( WindowEvent e ) {
+			System.out.println( "ExitButton click received" );
 			AppViewTmp.this.controller.closingWindowSaveRequest();
 		}
 
