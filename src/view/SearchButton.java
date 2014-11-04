@@ -39,7 +39,7 @@ public class SearchButton extends JButton {
 
 		try {
 			/* Access to the file containing the image */
-			image = ImageIO.read( new File( "search.png" ) );
+			image = ImageIO.read( new File( "resources/img/search.png" ) );
 		} catch ( IOException e ) {
 			/* File can't be loaded */
 			System.err.println( "ERROR: Fail to load search.png file" );
