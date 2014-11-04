@@ -33,7 +33,7 @@ public class AppPanel extends JPanel {
 		 * CONTENT :
 		 * 
 		 * HeaderPanel : Header of the application
-		 * HeaderPanel : Main content 
+		 * ContentPanel : Main content 
 		 */
 		this.add( new HeaderPanel(), BorderLayout.NORTH );
 		this.add( new ContentPanel(), BorderLayout.CENTER );
