@@ -1,6 +1,8 @@
 package feeling;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import utils.Tweet;
@@ -22,6 +24,11 @@ public class KNNAssigner extends FeelingAssigner {
 	 */
 	private TweetPool tweetPool;
 
+	/**
+	 * Number of neighbors considered.
+	 */
+	private int nbNeighbors;
+
 	/////////////
 	// METHODS //
 	/////////////
@@ -31,9 +38,12 @@ public class KNNAssigner extends FeelingAssigner {
 	 * 
 	 * @param tweetPool
 	 *            tweet pool used for basic learning
+	 * @param nbNeighbors
+	 *            number of neighbors considered
 	 */
-	public KNNAssigner ( TweetPool tweetPool ) {
+	public KNNAssigner ( TweetPool tweetPool, int nbNeighbors ) {
 		this.tweetPool = tweetPool;
+		this.nbNeighbors = nbNeighbors;
 	}
 
 	/**
@@ -45,9 +55,9 @@ public class KNNAssigner extends FeelingAssigner {
 	 *            second tweet
 	 * @return distance between tweet1 and tweet2
 	 */
-	public int distance ( Tweet tweet1, Tweet tweet2 ) {
-		List< String > msg1 = Arrays.asList( tweet1.getMsg().split( " " ) );
-		List< String > msg2 = Arrays.asList( tweet2.getMsg().split( " " ) );
+	public int distance ( String tweet1, String tweet2 ) {
+		List< String > msg1 = Arrays.asList( tweet1.split( " " ) );
+		List< String > msg2 = Arrays.asList( tweet2.split( " " ) );
 		int totalNbOfWords = msg1.size() + msg2.size();
 		int commonNbOfWords = 0;
 
@@ -62,8 +72,88 @@ public class KNNAssigner extends FeelingAssigner {
 
 	@Override
 	public Feeling assigns ( String msg ) {
-		// TODO Auto-generated method stub
-		return null;
+		int nb = this.nbNeighbors;
+		List< Tweet > tweets = new ArrayList< Tweet >( this.tweetPool.values() );
+		DTCouple[] neighbors = new DTCouple[ nb ];
+		DTCoupleComparator comparator = new DTCoupleComparator();
+
+		for ( int i = 0; i < nb; i++ ) {
+			Tweet tweet = tweets.get( i );
+			neighbors[ i ] = new DTCouple( this.distance( msg, tweet.getMsg() ), tweet );
+		}
+
+		Arrays.sort( neighbors, comparator );
+
+		for ( int i = nb; i < tweets.size(); i++ ) {
+			Tweet tweet = tweets.get( i );
+			int distance = this.distance( msg, tweet.getMsg() );
+
+			if ( distance < neighbors[ nb - 1 ].getDistance() ) {
+				neighbors[ nb - 1 ] = new DTCouple( distance, tweet );
+				Arrays.sort( neighbors, comparator );
+			}
+		}
+
+		int cptPositive = 0;
+		int cptNegative = 0;
+		int cptNeutral = 0;
+
+		for ( int i = 0; i < nb; i++ ) {
+			Feeling feeling = neighbors[ i ].getTweet().getFeeling();
+
+			if ( feeling == Feeling.POSITIVE ) {
+				cptPositive++;
+			} else if ( feeling == Feeling.NEGATIVE ) {
+				cptNegative++;
+			} else {
+				cptNeutral++;
+			}
+		}
+
+		if ( ( cptNeutral >= cptPositive ) && ( cptNeutral >= cptNegative ) ) {
+			return Feeling.NEUTRAL;
+		} else if ( cptPositive > cptNegative ) {
+			return Feeling.POSITIVE;
+		} else {
+			return Feeling.NEGATIVE;
+		}
+	}
+
+	/////////////////////
+	// PRIVATE CLASSES //
+	/////////////////////
+
+	// Class representing a couple : ( Distance, Tweet )
+	private class DTCouple {
+
+		private int distance;
+
+		private Tweet tweet;
+
+		public DTCouple ( int distance, Tweet tweet ) {
+			this.distance = distance;
+			this.tweet = tweet;
+		}
+
+		public int getDistance () {
+			return this.distance;
+		}
+
+		public Tweet getTweet () {
+			return this.tweet;
+		}
+
+	}
+
+	// Comparator class to compare two instances of DTCouple
+	private class DTCoupleComparator implements Comparator< DTCouple > {
+
+		@Override
+		public int compare ( DTCouple c1, DTCouple c2 ) {
+			return Integer.compare( ( ( feeling.KNNAssigner.DTCouple ) c1 ).getDistance(),
+			        ( ( feeling.KNNAssigner.DTCouple ) c2 ).getDistance() );
+		}
+
 	}
 
 }
