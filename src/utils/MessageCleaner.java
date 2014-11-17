@@ -133,6 +133,17 @@ public class MessageCleaner {
 	}
 
 	/**
+	 * Removes extra spaces from a message.
+	 * 
+	 * @param s
+	 *            string in which remove extra spaces
+	 * @return s without extra spaces
+	 */
+	public String deleteExtraSpaces ( String s ) {
+		return s.replaceAll( "\\s+", " " );
+	}
+
+	/**
 	 * Cleans a message using all previous methods.
 	 * 
 	 * @param text
