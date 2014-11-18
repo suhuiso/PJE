@@ -17,11 +17,22 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	////////////
 	// FIELDS //
 	////////////
-	
+
 	/**
 	 * Tweet pool on which apply the Bayesian classification.
 	 */
-	private TweetPool tweetPool;
+	protected TweetPool tweetPool;
+
+	/**
+	 * Boolean that determines if the Bayesian classification is only applied on words which have
+	 * more than 3 letters.
+	 */
+	protected Boolean simplified;
+
+	/**
+	 * Determines the length of the words to accept when the classification with simplified method.
+	 */
+	private final int WORD_LENGTH_MIN = 3;
 
 	/////////////
 	// METHODS //
@@ -33,8 +44,9 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public BayesAssigner ( TweetPool tweetPool ) {
+	public BayesAssigner ( TweetPool tweetPool, Boolean simplified ) {
 		this.tweetPool = tweetPool;
+		this.simplified = simplified;
 	}
 
 	/**
@@ -100,22 +112,44 @@ public abstract class BayesAssigner extends FeelingAssigner {
 
 		return res;
 	}
-	
+
 	// Gives the probability of a word to occure in a tweet with the feeling
-	private double probaWordForFeeling ( String w, Feeling feeling ) {
+	protected double probaWordForFeeling ( String w, Feeling feeling ) {
 		return ( this.nbOccurenceOfWordForTheFeeling( w, feeling ) + 1 )
 		        / ( this.nbOfWordsForFeeling( feeling ) + this.nbOfWords() );
 	}
 
-	// Gives the probability of a message of the tweet to have the feeling
-	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
-		double res = 1;
-
-		for ( String word : msg.split( " " ) ) {
-			res *= this.probaWordForFeeling( word, feeling );
+	// Gives the accepted words of the msg to do the classification
+	protected String getAcceptedWords ( String msg ) {
+		if ( this.simplified ) {
+			StringBuffer bs = new StringBuffer();
+			for ( String word : msg.split( " " ) ) {
+				if ( word.length() > this.WORD_LENGTH_MIN ) {
+					bs.append( word );
+				}
+			}
+			return bs.toString();
+		} else {
+			return msg;
 		}
+	}
 
-		return res * this.probaFeeling( feeling );
+	// Gives the probability of a message of the tweet to have the feeling
+	protected abstract double probaTweetHasFeeling ( Feeling feeling, String msg );
+
+	@Override
+	public Feeling assigns ( String msg ) {
+		double pNegative = this.probaTweetHasFeeling( Feeling.NEGATIVE, this.getAcceptedWords( msg ) );
+		double pPositive = this.probaTweetHasFeeling( Feeling.POSITIVE, this.getAcceptedWords( msg ) );
+		double pNeutral = this.probaTweetHasFeeling( Feeling.NEUTRAL, this.getAcceptedWords( msg ) );
+
+		if ( ( pNeutral >= pPositive ) && ( pNeutral >= pNegative ) ) {
+			return Feeling.NEUTRAL;
+		} else if ( pPositive > pNegative ) {
+			return Feeling.POSITIVE;
+		} else {
+			return Feeling.NEGATIVE;
+		}
 	}
 
 }
