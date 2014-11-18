@@ -2,11 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Shape;
-import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Search bar field of header panel.
@@ -15,12 +13,6 @@ import javax.swing.JTextField;
  */
 @SuppressWarnings("serial")
 public class SearchBarField extends JTextField {
-
-	////////////
-	// FILEDS //
-	////////////
-
-	private Shape shape;
 
 	/////////////
 	// METHODS //
@@ -32,57 +24,13 @@ public class SearchBarField extends JTextField {
 	public SearchBarField () {
 		super();
 
-		this.setBackground( Color.WHITE );	/* color: white */
-		this.setOpaque( false );		
-	}
-
-	@Override
-	protected void paintComponent ( Graphics g ) {
-		g.setColor( Color.WHITE );
-		g.fillRoundRect(
-				0,					/* X-origin */
-				0,					/* Y-origin */
-				this.getWidth(),	/* width */
-				this.getHeight(),	/* height */
-				this.getHeight(),	/* horizontal diameter of the arc at the four corners */
-				this.getHeight()	/* vertical diameter of the arc at the four corners */
-				);
-
-		super.paintComponent(g);
-	}
-
-	@Override
-	protected void paintBorder ( Graphics g ) {
-		g.setColor( Color.WHITE );
-		g.drawRoundRect(
-				0,					/* X-origin */
-				0,					/* Y-origin */
-				this.getWidth(),	/* width */
-				this.getHeight(),	/* height */
-				this.getHeight(),	/* horizontal diameter of the arc at the four corners */
-				this.getHeight()	/* vertical diameter of the arc at the four corners */
-		);
-	}
-	
-	@Override
-	public boolean contains ( int x, int y ) {
-        if ( shape == null || !shape.getBounds().equals( getBounds() ) ) {
-            shape = new RoundRectangle2D.Float(
-            		0,					/* X-origin */
-            		0,					/* Y-origin */
-            		this.getWidth(),	/* width */
-            		this.getHeight(),	/* height */
-            		this.getHeight(),	/* horizontal diameter of the arc at the four corners */
-            		this.getHeight()	/* vertical diameter of the arc at the four corners */
-            );
-        }
-        
-        return shape.contains( x, y );
+		this.setBackground( Color.WHITE );					/* color: white */
+		this.setBorder( new EmptyBorder( 0, 10, 0, 10 ) );	/* padding: 0 */
 	}
 	
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension( 346, 30 );
+		return new Dimension( 300, 30 );
 	}
 	
 }

@@ -2,9 +2,13 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.AppController;
 
 /**
  * Main panel of the application.
@@ -12,30 +16,66 @@ import javax.swing.border.EmptyBorder;
  * @author Quentin Baert & Thomas Bernard
  */
 @SuppressWarnings("serial")
-public class AppPanel extends JPanel {
+public class AppPanel extends JPanel implements Observer {
 
+	////////////
+	// FIELDS //
+	////////////
+	
+	/**
+	 * Controller of the AppPanel
+	 */
+	private AppController controller;
+	
+	/**
+	 * Header Panel
+	 */
+	private HeaderPanel headerPanel;
+	
+	/**
+	 * Content Panel
+	 */
+	private ContentPanel contentPanel;
+	
 	/////////////
 	// METHODS //
 	/////////////
 
 	/**
 	 * Constructor of the AppPanel
+	 * 
+	 * @param controller
+	 *            controller of the AppPanel
 	 */
-	public AppPanel () {
+	public AppPanel ( AppController controller ) {
 		super();
 		
 		this.setBackground( new Color( 0x55ACEE ) );		/* color: blue */
 		this.setBorder( new EmptyBorder( 8, 8, 8, 8 ) );	/* padding : 8px */
 
 		this.setLayout( new BorderLayout() );
-
+		
+		/* Controller of AppPanel is added */
+		this.controller = controller;
+		
+		/* Add content fields */
+		this.headerPanel = new HeaderPanel( controller );
+		this.contentPanel = new ContentPanel( controller );
+		
 		/*
 		 * CONTENT :
 		 * 
 		 * HeaderPanel : Header of the application
 		 * ContentPanel : Main content 
 		 */
-		this.add( new HeaderPanel(), BorderLayout.NORTH );
-		this.add( new ContentPanel(), BorderLayout.CENTER );
+		this.add( this.headerPanel, BorderLayout.NORTH );
+		this.add( this.contentPanel, BorderLayout.CENTER );
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.headerPanel.update( o, arg );
+		this.contentPanel.update( o, arg );
+	}
+	
 }
