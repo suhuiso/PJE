@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Search bar button of the application.
@@ -18,15 +20,6 @@ import javax.swing.JButton;
 @SuppressWarnings("serial")
 public class SearchButton extends JButton {
 
-	////////////
-	// FILEDS //
-	////////////
-
-	/**
-	 * Image used into the search button
-	 */
-	private BufferedImage image;
-
 	/////////////
 	// METHODS //
 	/////////////
@@ -35,30 +28,18 @@ public class SearchButton extends JButton {
 	 * Constructor of the SearchButton
 	 */
 	public SearchButton () {
-		super();
-
-		try {
-			/* Access to the file containing the image */
-			image = ImageIO.read( new File( "resources/img/search.png" ) );
-		} catch ( IOException e ) {
-			/* File can't be loaded */
-			System.err.println( "ERROR: Fail to load search.png file" );
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	protected void paintComponent ( Graphics g ) {
-		g.fillRoundRect( 0, 0, 30, 30, 30, 30 );
+		super( "Search" );
 		
-		/* Image is drawn and horizontally centered */
-		g.drawImage( image, 7, 7, 15, 15, this );
+		this.setForeground( Color.BLACK );					/* color: black */
+		this.setBackground( Color.WHITE );					/* color: white */
+		this.setBorder( new EmptyBorder( 0, 10, 0, 10 ) );	/* padding: 0 */
 		
-		this.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+		/* Override default style */
+		this.setOpaque(true);
 	}
-	
+		
 	@Override
 	public Dimension getPreferredSize () {
-		return new Dimension( 30, 30 );
+		return new Dimension( 76, 30 );
 	}
 }
