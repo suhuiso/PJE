@@ -25,6 +25,11 @@ public class AppView extends JFrame implements Observer {
 	 */
 	private AppController controller;
 	
+	/**
+	 * App panel
+	 */
+	private AppPanel appPanel;
+	
 	/////////////
 	// METHODS //
 	/////////////
@@ -52,24 +57,26 @@ public class AppView extends JFrame implements Observer {
 		/* App closes when close button is pressed */
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
-		/* Window is made visible */
-		this.setVisible( true );
-
 		/* Controller of AppView is added */
 		this.controller = controller;
+		
+		/* Add content fields */
+		this.appPanel = new AppPanel( controller );
 		
 		/*
 		 * CONTENT :
 		 * 
 		 * AppPanel : Main Panel of the window
 		 */
-		this.setContentPane( new AppPanel() );
+		this.setContentPane( appPanel );
+		
+		/* Window is made visible */
+		this.setVisible( true );
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		this.appPanel.update( o, arg );
 	}
 
 }
