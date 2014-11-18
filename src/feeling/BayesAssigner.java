@@ -8,7 +8,7 @@ import utils.TweetPool;
 
 /**
  * Class representing objects that assign feeling to a message of a tweet with the Bayesian
- * classification
+ * classification.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
@@ -17,7 +17,10 @@ public class BayesAssigner extends FeelingAssigner {
 	////////////
 	// FIELDS //
 	////////////
-
+	
+	/**
+	 * Tweet pool on which apply the Bayesian classification.
+	 */
 	private TweetPool tweetPool;
 
 	/////////////
