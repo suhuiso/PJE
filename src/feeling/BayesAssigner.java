@@ -117,9 +117,9 @@ public class BayesAssigner extends FeelingAssigner {
 
 	@Override
 	public Feeling assigns ( String msg ) {
-		double pNegative = this.probaTweetHasFeeling( Feeling.NEUTRAL, msg );
+		double pNegative = this.probaTweetHasFeeling( Feeling.NEGATIVE, msg );
 		double pPositive = this.probaTweetHasFeeling( Feeling.POSITIVE, msg );
-		double pNeutral = this.probaTweetHasFeeling( Feeling.NEGATIVE, msg );
+		double pNeutral = this.probaTweetHasFeeling( Feeling.NEUTRAL, msg );
 
 		if ( ( pNeutral >= pPositive ) && ( pNeutral >= pNegative ) ) {
 			return Feeling.NEUTRAL;
