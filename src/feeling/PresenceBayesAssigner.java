@@ -20,23 +20,20 @@ public class PresenceBayesAssigner extends BayesAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public PresenceBayesAssigner ( TweetPool tweetPool ) {
-		super( tweetPool );
+	public PresenceBayesAssigner ( TweetPool tweetPool, Boolean simplified ) {
+		super( tweetPool, simplified );
 	}
 
+	// Gives the probability of a message of the tweet to have the feeling
 	@Override
-	public Feeling assigns ( String msg ) {
-		double pNegative = this.probaTweetHasFeeling( Feeling.NEGATIVE, msg );
-		double pPositive = this.probaTweetHasFeeling( Feeling.POSITIVE, msg );
-		double pNeutral = this.probaTweetHasFeeling( Feeling.NEUTRAL, msg );
+	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
+		double res = 1;
 
-		if ( ( pNeutral >= pPositive ) && ( pNeutral >= pNegative ) ) {
-			return Feeling.NEUTRAL;
-		} else if ( pPositive > pNegative ) {
-			return Feeling.POSITIVE;
-		} else {
-			return Feeling.NEGATIVE;
+		for ( String word : msg.split( " " ) ) {
+			res *= this.probaWordForFeeling( word, feeling );
 		}
+
+		return res * this.probaFeeling( feeling );
 	}
 
 }
