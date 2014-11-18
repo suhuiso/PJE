@@ -7,12 +7,12 @@ import utils.Tweet;
 import utils.TweetPool;
 
 /**
- * Class representing objects that assign feeling to a message of a tweet with the Bayesian
+ * Abstract class representing objects that assign feeling to a message of a tweet with the Bayesian
  * classification.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class BayesAssigner extends FeelingAssigner {
+public abstract class BayesAssigner extends FeelingAssigner {
 
 	////////////
 	// FIELDS //
@@ -108,7 +108,7 @@ public class BayesAssigner extends FeelingAssigner {
 	}
 
 	// Gives the probability of a message of the tweet to have the feeling
-	private double probaTweetHasFeeling ( Feeling feeling, String msg ) {
+	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
 		double res = 1;
 
 		for ( String word : msg.split( " " ) ) {
@@ -116,21 +116,6 @@ public class BayesAssigner extends FeelingAssigner {
 		}
 
 		return res * this.probaFeeling( feeling );
-	}
-
-	@Override
-	public Feeling assigns ( String msg ) {
-		double pNegative = this.probaTweetHasFeeling( Feeling.NEGATIVE, msg );
-		double pPositive = this.probaTweetHasFeeling( Feeling.POSITIVE, msg );
-		double pNeutral = this.probaTweetHasFeeling( Feeling.NEUTRAL, msg );
-
-		if ( ( pNeutral >= pPositive ) && ( pNeutral >= pNegative ) ) {
-			return Feeling.NEUTRAL;
-		} else if ( pPositive > pNegative ) {
-			return Feeling.POSITIVE;
-		} else {
-			return Feeling.NEGATIVE;
-		}
 	}
 
 }
