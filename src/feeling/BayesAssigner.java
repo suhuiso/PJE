@@ -24,13 +24,13 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	protected TweetPool tweetPool;
 
 	/**
-	 * Boolean that determines if the Bayesian classification is only applied on words which have
+	 * Tells if the Bayesian classification is only applied on words which have
 	 * more than 3 letters.
 	 */
 	protected Boolean simplified;
 
 	/**
-	 * Determines the length of the words to accept when the classification with simplified method.
+	 * Length of the words to accept when the classification with simplified method.
 	 */
 	private final int WORD_LENGTH_MIN = 3;
 
@@ -139,8 +139,10 @@ public abstract class BayesAssigner extends FeelingAssigner {
 
 	@Override
 	public Feeling assigns ( String msg ) {
-		double pNegative = this.probaTweetHasFeeling( Feeling.NEGATIVE, this.getAcceptedWords( msg ) );
-		double pPositive = this.probaTweetHasFeeling( Feeling.POSITIVE, this.getAcceptedWords( msg ) );
+		double pNegative =
+		        this.probaTweetHasFeeling( Feeling.NEGATIVE, this.getAcceptedWords( msg ) );
+		double pPositive =
+		        this.probaTweetHasFeeling( Feeling.POSITIVE, this.getAcceptedWords( msg ) );
 		double pNeutral = this.probaTweetHasFeeling( Feeling.NEUTRAL, this.getAcceptedWords( msg ) );
 
 		if ( ( pNeutral >= pPositive ) && ( pNeutral >= pNegative ) ) {
