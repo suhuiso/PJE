@@ -52,6 +52,8 @@ public class AppView extends JFrame implements Observer {
 		this.setMinimumSize( new Dimension( 400, 600 ) );
 
 		/* App launch at the middle of the screen */
+		this.setSize( 1000, 600 );
+		this.setResizable( false );		
 		this.setLocationRelativeTo( null );
 
 		/* App closes when close button is pressed */
