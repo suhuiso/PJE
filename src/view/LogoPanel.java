@@ -1,59 +1,30 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-/**
- * Logo panel of the application.
- * 
- * @author Quentin Baert & Thomas Bernard
- */
+import controller.AppController;
+
 @SuppressWarnings("serial")
 public class LogoPanel extends JPanel {
 
-	////////////
-	// FILEDS //
-	////////////
+	private AppController controller;
 
-	/**
-	 * Image used to display the logo
-	 */
-	private BufferedImage image;
-
-	/////////////
-	// METHODS //
-	/////////////
-
-	/**
-	 * Constructor of the LogoPanel
-	 */
-	public LogoPanel() {
+	public LogoPanel( AppController controller ) {
 		super();
-
-		try {
-			/* Access to the file containing the image */
-			image = ImageIO.read( new File( "resources/img/logo.png" ) );
-		} catch ( IOException e ) {
-			/* File can't be loaded */
-			System.err.println( "ERROR: Fail to load logo.png file" );
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		/* Image is drawn and horizontally centered */
-		g.drawImage( image, this.getWidth()/2 - image.getWidth( null )/2 , 0, this );
+		this.setBackground( new Color( 0x2F3238 ) );
+		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		
+		this.controller = controller;
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension( 384, 70 );
+		return new Dimension( 200, 200 );
 	}
 }
