@@ -2,6 +2,7 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +19,7 @@ public class MenuButton extends JButton {
 		this.setForeground( new Color( 0x2F3238 ) );
 		this.setBackground( color );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		this.setFont( new Font( "Lucida Sans", Font.PLAIN, 20 ) );
 		
 		this.card = card;
 		
