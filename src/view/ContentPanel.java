@@ -1,75 +1,39 @@
 package view;
 
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import controller.AppController;
 
-/**
- * Content panel of the application.
- * 
- * @author Quentin Baert & Thomas Bernard
- */
 @SuppressWarnings("serial")
-public class ContentPanel extends JPanel implements Observer {
+public class ContentPanel extends JPanel {
 
-	////////////
-	// FIELDS //
-	////////////
-	
-	/**
-	 * Controller of the ContentPanel
-	 */
 	private AppController controller;
-
-	/**
-	 * List Tweet Panel
-	 */
-	private ListTweetPanel listTweetPanel;
+	private FeelingsPanel feelingsPanel;
+	private TendenciesPanel tendenciesPanel;
+	private LearningPanel learningPanel;
+	private SettingsPanel settingsPanel;
 	
-	/////////////
-	// METHODS //
-	/////////////
-
-	/**
-	 * Constructor of the ContentPanel
-	 * 
-	 * @param controller
-	 *            controller of the ContentPanel
-	 */
 	public ContentPanel( AppController controller ) {
-		super();
+		super();		
+		this.setBackground( Color.WHITE );
+		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+
+		this.setLayout( new CardLayout() );
 		
-		this.setBackground( Color.WHITE );						/* color: white */
-		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );		/* padding: 0px */
-		
-		this.setLayout( new BorderLayout() );
-		
-		/* Controller of ContentPanel is added */
 		this.controller = controller;
 		
-		/* Add content fields */
-		this.listTweetPanel = new ListTweetPanel( controller );
+		this.feelingsPanel = new FeelingsPanel( controller );
+		this.tendenciesPanel = new TendenciesPanel( controller );
+		this.learningPanel = new LearningPanel( controller );
+		this.settingsPanel = new SettingsPanel( controller );
 		
-		/*
-		 * CONTENT :
-		 * 
-		 * ListTweetScrollPane : List of tweets
-		 */
-		JScrollPane listTweetScrollPane = new JScrollPane( this.listTweetPanel );
-		listTweetScrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );	/* padding: 0px */
-		
-		this.add( listTweetScrollPane, BorderLayout.CENTER );
-	}
-
-	@Override
-	public void update( Observable o, Object arg ) {
-		this.listTweetPanel.update( o, arg );
+		this.add( this.feelingsPanel, FeelingsPanel.CARD_FEELINGS );
+		this.add( this.tendenciesPanel, TendenciesPanel.CARD_TENDENCIES );
+		this.add( this.learningPanel, LearningPanel.CARD_LEARNING );
+		this.add( this.settingsPanel, SettingsPanel.CARD_SETTINGS );
 	}
 }
