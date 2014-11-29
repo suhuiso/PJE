@@ -11,6 +11,7 @@ import controller.AppController;
 public class SettingsPanel extends JPanel {
 
     public static final String CARD_SETTINGS =  "Settings Panel";
+    public static final Color SETTINGS_COLOR = new Color( 0x9E54BD );
 
 	public SettingsPanel( AppController controller ) {
 		super();		

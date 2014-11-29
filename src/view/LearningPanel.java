@@ -11,7 +11,7 @@ import controller.AppController;
 public class LearningPanel extends JPanel {
 
     public static final String CARD_LEARNING =  "Learning Panel";
-
+    public static final Color LEARNING_COLOR = new Color( 0xFCD04B );
 	public LearningPanel( AppController controller ) {
 		super();		
 		this.setBackground( new Color( 0xFCD04B ) );

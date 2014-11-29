@@ -11,7 +11,7 @@ import controller.AppController;
 public class TendenciesPanel extends JPanel {
 
     public static final String CARD_TENDENCIES =  "Tendencies Panel";
-
+    public static final Color TENDENCIES_COLOR = new Color( 0x2ECC71 );
 	public TendenciesPanel( AppController controller ) {
 		super();		
 		this.setBackground( new Color( 0x2ECC71 ) );
