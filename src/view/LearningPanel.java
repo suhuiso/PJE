@@ -17,6 +17,7 @@ public class LearningPanel extends JPanel {
     
 	private AppController controller;
     private SearchBarPanel searchBarPanel;
+	private ListTweetPanel listTweetPanel;
     
 	public LearningPanel( AppController controller ) {
 		super();		
@@ -28,8 +29,10 @@ public class LearningPanel extends JPanel {
 		this.controller = controller;
 		
 		this.searchBarPanel = new SearchBarPanel( controller, LearningPanel.LEARNING_COLOR );
+		this.listTweetPanel = new ListTweetPanel( controller, LearningPanel.LEARNING_COLOR );
 		
 		this.add( this.searchBarPanel, BorderLayout.NORTH );
+		this.add( this.listTweetPanel, BorderLayout.CENTER );
 	}
 	
 	@Override
