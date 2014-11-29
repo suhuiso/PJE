@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,34 +13,21 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
-/**
- * Search bar button of the application.
- * 
- * @author Quentin Baert & Thomas Bernard
- */
 @SuppressWarnings("serial")
 public class SearchButton extends JButton {
 
-	/////////////
-	// METHODS //
-	/////////////
-
-	/**
-	 * Constructor of the SearchButton
-	 */
 	public SearchButton () {
-		super( "Search" );
+		super( "Rechercher" );		
+		this.setForeground( Color.WHITE );
+		this.setBackground( new Color( 0x2F3238 ) );
+		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		this.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
 		
-		this.setForeground( Color.BLACK );					/* color: black */
-		this.setBackground( Color.WHITE );					/* color: white */
-		this.setBorder( new EmptyBorder( 0, 10, 0, 10 ) );	/* padding: 0 */
-		
-		/* Override default style */
 		this.setOpaque(true);
 	}
-		
+	
 	@Override
-	public Dimension getPreferredSize () {
-		return new Dimension( 76, 30 );
+	public Dimension getPreferredSize() {
+		return new Dimension( 150, 100 );
 	}
 }
