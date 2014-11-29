@@ -1,11 +1,8 @@
 package view;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -30,10 +27,10 @@ public class MenuPanel extends JPanel {
 		
 		this.controller = controller;
 		
-		this.feelingsButton = new MenuButton( "Sentiments", FeelingsPanel.CARD_FEELINGS, new Color( 0x0E83CD ) );
-		this.tendenciesButton = new MenuButton( "Tendances", TendenciesPanel.CARD_TENDENCIES, new Color( 0x2ECC71 ) );
-		this.learningButton = new MenuButton( "Apprentissage", LearningPanel.CARD_LEARNING, new Color( 0xFCD04B ) );
-		this.settingsButton = new MenuButton( "Réglages", SettingsPanel.CARD_SETTINGS, new Color( 0x9E54BD ) );
+		this.feelingsButton = new MenuButton( "Sentiments", FeelingsPanel.CARD_FEELINGS, FeelingsPanel.FEELINGS_COLOR );
+		this.tendenciesButton = new MenuButton( "Tendances", TendenciesPanel.CARD_TENDENCIES, TendenciesPanel.TENDENCIES_COLOR );
+		this.learningButton = new MenuButton( "Apprentissage", LearningPanel.CARD_LEARNING, LearningPanel.LEARNING_COLOR );
+		this.settingsButton = new MenuButton( "Réglages", SettingsPanel.CARD_SETTINGS, SettingsPanel.SETTINGS_COLOR );
 		
 		this.add( this.feelingsButton );
 		this.add( this.tendenciesButton );
