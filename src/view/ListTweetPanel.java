@@ -18,41 +18,16 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class ListTweetPanel extends JPanel implements Scrollable, Observer {
 
-	////////////
-	// FIELDS //
-	////////////
-	
-	/**
-	 * Controller of the ListTweetPanel
-	 */
 	private AppController controller;
-	
-	/////////////
-	// METHODS //
-	/////////////
 
-	/**
-	 * Constructor of the ListTweetPanel
-	 * 
-	 * @param controller
-	 *            controller of the ListTweetPanel
-	 */
-	public ListTweetPanel( AppController controller ) {
-		super();
-		
-		this.setBackground( new Color( 0x55ACEE ) );			/* color: blue */
-		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );		/* padding: 0px */
+	public ListTweetPanel( AppController controller, Color color ) {
+		super();		
+		this.setBackground( color );
+		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		
 		this.setLayout( new GridLayout( 0, 1, 0, 1 ) );
 
-		/* Controller of ListTweetPanel is added */
 		this.controller = controller;
-		
-		/*
-		 * CONTENT :
-		 * 
-		 * TweetPanel : Tweet
-		 */
 	}
 
 	@Override
@@ -90,6 +65,5 @@ public class ListTweetPanel extends JPanel implements Scrollable, Observer {
 
 		/* View have changed and need to be repaint */
 		this.revalidate();
-	}
-	
+	}	
 }
