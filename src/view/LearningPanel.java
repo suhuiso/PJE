@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,9 +14,26 @@ public class LearningPanel extends JPanel {
 
     public static final String CARD_LEARNING =  "Learning Panel";
     public static final Color LEARNING_COLOR = new Color( 0xFCD04B );
+    
+	private AppController controller;
+    private SearchBarPanel searchBarPanel;
+    
 	public LearningPanel( AppController controller ) {
 		super();		
-		this.setBackground( new Color( 0xFCD04B ) );
+		this.setBackground( LearningPanel.LEARNING_COLOR );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		
+		this.setLayout( new BorderLayout() );
+		
+		this.controller = controller;
+		
+		this.searchBarPanel = new SearchBarPanel( controller, LearningPanel.LEARNING_COLOR );
+		
+		this.add( this.searchBarPanel, BorderLayout.NORTH );
+	}
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension( 800, 600 );
 	}
 }
