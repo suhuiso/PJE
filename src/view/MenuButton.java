@@ -44,4 +44,5 @@ public class MenuButton extends JButton {
 			CardLayout layout = (CardLayout) contentPanel.getLayout();
 			layout.show( contentPanel, MenuButton.this.getCard() );
 		}
-	}}
+	}
+}
