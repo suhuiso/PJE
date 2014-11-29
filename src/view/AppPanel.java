@@ -35,6 +35,7 @@ public class AppPanel extends JPanel implements Observer {
 	/**
 	 * Content Panel
 	 */
+	private SidebarPanel sidebarPanel;
 	private ContentPanel contentPanel;
 	
 	/////////////
@@ -59,7 +60,7 @@ public class AppPanel extends JPanel implements Observer {
 		this.controller = controller;
 		
 		/* Add content fields */
-		this.headerPanel = new HeaderPanel( controller );
+		this.sidebarPanel = new SidebarPanel( controller );
 		this.contentPanel = new ContentPanel( controller );
 		
 		/*
@@ -68,14 +69,15 @@ public class AppPanel extends JPanel implements Observer {
 		 * HeaderPanel : Header of the application
 		 * ContentPanel : Main content 
 		 */
-		this.add( this.headerPanel, BorderLayout.NORTH );
+		this.add( this.sidebarPanel, BorderLayout.WEST );
 		this.add( this.contentPanel, BorderLayout.CENTER );
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		this.headerPanel.update( o, arg );
-		this.contentPanel.update( o, arg );
+	
+	public SidebarPanel getSidebarPanel () {
+		return this.sidebarPanel;
 	}
 	
+	public ContentPanel getContentPanel () {
+		return this.contentPanel;
+	}
 }
