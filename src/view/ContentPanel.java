@@ -2,6 +2,8 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import controller.AppController;
 
 @SuppressWarnings("serial")
-public class ContentPanel extends JPanel {
+public class ContentPanel extends JPanel implements Observer {
 
 	private AppController controller;
 	private FeelingsPanel feelingsPanel;
@@ -35,5 +37,10 @@ public class ContentPanel extends JPanel {
 		this.add( this.tendenciesPanel, TendenciesPanel.CARD_TENDENCIES );
 		this.add( this.learningPanel, LearningPanel.CARD_LEARNING );
 		this.add( this.settingsPanel, SettingsPanel.CARD_SETTINGS );
+	}
+
+	@Override
+	public void update( Observable o, Object arg ) {
+		this.learningPanel.update( o, arg );
 	}
 }
