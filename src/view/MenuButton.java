@@ -13,15 +13,17 @@ import javax.swing.border.EmptyBorder;
 public class MenuButton extends JButton {
 
 	private String card;
+	private Color color;
 	
 	public MenuButton ( String text, String card, Color color ) {
 		super( text );
-		this.setForeground( new Color( 0x2F3238 ) );
-		this.setBackground( color );
+		this.setForeground( this.getColor() );
+		this.setBackground( new Color( 0x2F3238 ) );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		this.setFont( new Font( "Lucida Sans", Font.PLAIN, 20 ) );
 		
 		this.card = card;
+		this.color = color;
 		
 		this.setOpaque( true );
 		
@@ -32,6 +34,22 @@ public class MenuButton extends JButton {
 		return this.card;
 	}
 	
+	public Color getColor () {
+		return this.color;
+	}
+	
+	public void highlight () {
+		this.setForeground( new Color( 0x2F3238 ) );
+		this.setBackground( this.getColor() );
+		this.repaint();
+	}
+	
+	public void unhighlight () {
+		this.setForeground( this.getColor() );
+		this.setBackground( new Color( 0x2F3238 ) );
+		this.repaint();
+	}
+	
 	private void initListener () {
 		MenuButtonListener menuButtonListener = new MenuButtonListener();
 		this.addActionListener( menuButtonListener );
@@ -39,10 +57,13 @@ public class MenuButton extends JButton {
 	
 	class MenuButtonListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			AppPanel appPanel = ( AppPanel ) MenuButton.this.getParent().getParent().getParent();
+			MenuButton buttonPressed = ( MenuButton ) e.getSource();
+			MenuPanel menuPanel = ( MenuPanel ) MenuButton.this.getParent();
+			AppPanel appPanel = ( AppPanel ) menuPanel.getParent().getParent();
 			ContentPanel contentPanel = ( ContentPanel ) appPanel.getContentPanel();
 			CardLayout layout = ( CardLayout ) contentPanel.getLayout();
-			layout.show( contentPanel, MenuButton.this.getCard() );
+			layout.show( contentPanel, buttonPressed.getCard() );
+			menuPanel.setCurrentButton( buttonPressed );
 		}
 	}
 }
