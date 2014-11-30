@@ -12,13 +12,13 @@ public class SearchBarField extends JTextField {
 
 	public SearchBarField () {
 		super();
-		this.setBackground( new Color( 0xEEEEEE ) );
+		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( 0, 20, 0, 20 ) );
 		this.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
 	}
 	
 	@Override
-	public Dimension getPreferredSize() {
+	public Dimension getPreferredSize () {
 		return new Dimension( 580, 100 );
 	}
 }
