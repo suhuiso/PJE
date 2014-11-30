@@ -1,11 +1,14 @@
 package view;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JFrame;
 
 import controller.AppController;
 
 @SuppressWarnings("serial")
-public class AppView extends JFrame {
+public class AppView extends JFrame implements Observer {
 
 	private AppPanel appPanel;
 
@@ -21,5 +24,10 @@ public class AppView extends JFrame {
 		this.setContentPane( appPanel );
 		
 		this.setVisible( true );
+	}
+
+	@Override
+	public void update ( Observable o, Object arg ) {
+		this.appPanel.update( o, arg );
 	}
 }
