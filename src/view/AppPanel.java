@@ -13,7 +13,6 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class AppPanel extends JPanel implements Observer {
 
-	private AppController controller;
 	private SidebarPanel sidebarPanel;
 	private ContentPanel contentPanel;
 	
@@ -23,9 +22,7 @@ public class AppPanel extends JPanel implements Observer {
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 
 		this.setLayout( new BorderLayout() );
-		
-		this.controller = controller;
-		
+				
 		this.sidebarPanel = new SidebarPanel( controller );
 		this.contentPanel = new ContentPanel( controller );
 		
@@ -42,7 +39,7 @@ public class AppPanel extends JPanel implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update( Observable o, Object arg ) {
 		this.contentPanel.update( o, arg );
 	}
 }
