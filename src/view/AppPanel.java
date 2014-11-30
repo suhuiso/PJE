@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import controller.AppController;
 
 @SuppressWarnings("serial")
-public class AppPanel extends JPanel {
+public class AppPanel extends JPanel implements Observer {
 
 	private AppController controller;
 	private SidebarPanel sidebarPanel;
@@ -39,5 +39,10 @@ public class AppPanel extends JPanel {
 	
 	public ContentPanel getContentPanel () {
 		return this.contentPanel;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.contentPanel.update( o, arg );
 	}
 }
