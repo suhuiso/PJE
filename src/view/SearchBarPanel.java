@@ -18,7 +18,7 @@ public class SearchBarPanel extends JPanel {
 	private SearchBarField searchBarField;
 	private SearchButton searchButton;
 	
-	public SearchBarPanel( AppController controller, Color color ) {
+	public SearchBarPanel ( AppController controller, Color color ) {
 		super();	
 		this.setBackground( color );
 		this.setBorder( new EmptyBorder( 25, 25, 25, 25 ) );
@@ -43,13 +43,12 @@ public class SearchBarPanel extends JPanel {
 	
 	class SearchButtonListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			System.out.println( "SearchBarPanel: SearchButtonListener" );
 			SearchBarPanel.this.controller.setQuery( SearchBarPanel.this.searchBarField.getText() );
 		}
 	}
 	
 	@Override
-	public Dimension getPreferredSize() {
+	public Dimension getPreferredSize () {
 		return new Dimension( 800, 100 );
 	}
 }
