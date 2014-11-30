@@ -12,21 +12,18 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
 
-	private AppController controller;
 	private MenuButton feelingsButton;
 	private MenuButton tendenciesButton;
 	private MenuButton learningButton;
 	private MenuButton settingsButton;
 	
-	public MenuPanel( AppController controller ) {
+	public MenuPanel ( AppController controller ) {
 		super();
 		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( -1, 0, -1, 0 ) );
 		
 		this.setLayout( new GridLayout( 0, 1 ) );
-		
-		this.controller = controller;
-		
+				
 		this.feelingsButton = new MenuButton( "Sentiments", FeelingsPanel.CARD_FEELINGS, FeelingsPanel.FEELINGS_COLOR );
 		this.tendenciesButton = new MenuButton( "Tendances", TendenciesPanel.CARD_TENDENCIES, TendenciesPanel.TENDENCIES_COLOR );
 		this.learningButton = new MenuButton( "Apprentissage", LearningPanel.CARD_LEARNING, LearningPanel.LEARNING_COLOR );
@@ -39,7 +36,7 @@ public class MenuPanel extends JPanel {
 	}
 	
 	@Override
-	public Dimension getPreferredSize() {
+	public Dimension getPreferredSize () {
 		return new Dimension( 200, 200 );
 	}
 }
