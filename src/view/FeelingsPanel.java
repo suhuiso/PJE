@@ -1,40 +1,35 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.util.Observable;
 
 import controller.AppController;
 
 @SuppressWarnings("serial")
-public class FeelingsPanel extends JPanel {
+public class FeelingsPanel extends AbstractCardPanel {
 
     public static final String CARD_FEELINGS =  "Feelings Panel";
     public static final Color FEELINGS_COLOR = new Color( 0x0E83CD );
     
-	private AppController controller;
     private SearchBarPanel searchBarPanel;
 	
-	public FeelingsPanel( AppController controller ) {
-		super();		
+	public FeelingsPanel ( AppController controller ) {
+		super( controller );
 		this.setBackground( FeelingsPanel.FEELINGS_COLOR );
-		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
-		
-		this.setLayout( new BorderLayout() );
-		
-		this.controller = controller;
-		
+					
 		this.searchBarPanel = new SearchBarPanel( controller, FeelingsPanel.FEELINGS_COLOR );
 		
 		this.add( this.searchBarPanel, BorderLayout.NORTH );
 	}
-	
+
 	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension( 800, 600 );
+	public void update ( Observable o, Object arg ) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void clear () {
+		// TODO Auto-generated method stub
 	}
 }
