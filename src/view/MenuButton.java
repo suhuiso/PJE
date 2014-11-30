@@ -14,8 +14,8 @@ public class MenuButton extends JButton {
 
 	private String card;
 	
-	public MenuButton( String text, String card, Color color ) {
-		super( text.toUpperCase() );
+	public MenuButton ( String text, String card, Color color ) {
+		super( text );
 		this.setForeground( new Color( 0x2F3238 ) );
 		this.setBackground( color );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
@@ -23,7 +23,7 @@ public class MenuButton extends JButton {
 		
 		this.card = card;
 		
-		this.setOpaque(true);
+		this.setOpaque( true );
 		
 		this.initListener();
 	}
@@ -39,9 +39,9 @@ public class MenuButton extends JButton {
 	
 	class MenuButtonListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			AppPanel appPanel = (AppPanel) MenuButton.this.getParent().getParent().getParent();
-			ContentPanel contentPanel = (ContentPanel) appPanel.getContentPanel();
-			CardLayout layout = (CardLayout) contentPanel.getLayout();
+			AppPanel appPanel = ( AppPanel ) MenuButton.this.getParent().getParent().getParent();
+			ContentPanel contentPanel = ( ContentPanel ) appPanel.getContentPanel();
+			CardLayout layout = ( CardLayout ) contentPanel.getLayout();
 			layout.show( contentPanel, MenuButton.this.getCard() );
 		}
 	}
