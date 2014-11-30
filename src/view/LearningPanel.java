@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import controller.AppController;
 
 @SuppressWarnings("serial")
-public class LearningPanel extends JPanel {
+public class LearningPanel extends JPanel implements Observer {
 
     public static final String CARD_LEARNING =  "Learning Panel";
     public static final Color LEARNING_COLOR = new Color( 0xFCD04B );
@@ -38,5 +40,10 @@ public class LearningPanel extends JPanel {
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension( 800, 600 );
+	}
+
+	@Override
+	public void update ( Observable o, Object arg ) {
+		this.listTweetPanel.update( o, arg );
 	}
 }
