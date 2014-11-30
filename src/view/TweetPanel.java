@@ -14,18 +14,15 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class TweetPanel extends JPanel {
 
-	private AppController controller;
 	private Status status;
 	
-	public TweetPanel( AppController controller, Status status ) {
+	public TweetPanel ( AppController controller, Status status ) {
 		super();
 		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( 10, 10, 10, 10 ) );
 		
 		this.setLayout( new BorderLayout() );
-		
-		this.controller = controller;
-		
+				
 		this.status = status;
 		
 		this.add( new JLabel( "@" + this.status.getUser().getScreenName() ), BorderLayout.NORTH );
@@ -33,7 +30,7 @@ public class TweetPanel extends JPanel {
 	}
 
 	@Override
-	public Dimension getPreferredSize() {
+	public Dimension getPreferredSize () {
 		return new Dimension( 750, 100 );
 	}
 }
