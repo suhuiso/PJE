@@ -23,7 +23,7 @@ public class ListTweetPanel extends JPanel implements Observer {
 	private JList<TweetPanel> listTweet;
 	private JScrollPane scrollPane;
 	
-	public ListTweetPanel( AppController controller, Color color ) {
+	public ListTweetPanel ( AppController controller, Color color ) {
 		super();		
 		this.setBackground( color );
 		this.setBorder( new EmptyBorder( 0, 25, 25, 25 ) );
@@ -42,14 +42,12 @@ public class ListTweetPanel extends JPanel implements Observer {
 		this.scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-		
-		System.out.println( this.scrollPane.getVerticalScrollBar().getUnitIncrement() );
-		
+				
 		this.add( this.scrollPane, BorderLayout.CENTER );
 	}
 
 	@Override
-	public void update( Observable o, Object arg ) {
+	public void update ( Observable o, Object arg ) {
 		QueryResult qr = ( QueryResult ) arg;
 
 		for ( Status status : qr.getTweets() ) {
