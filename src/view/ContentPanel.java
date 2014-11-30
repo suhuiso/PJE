@@ -13,21 +13,18 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class ContentPanel extends JPanel implements Observer {
 
-	private AppController controller;
 	private FeelingsPanel feelingsPanel;
 	private TendenciesPanel tendenciesPanel;
 	private LearningPanel learningPanel;
 	private SettingsPanel settingsPanel;
 	
-	public ContentPanel( AppController controller ) {
+	public ContentPanel ( AppController controller ) {
 		super();		
 		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 
 		this.setLayout( new CardLayout() );
-		
-		this.controller = controller;
-		
+				
 		this.feelingsPanel = new FeelingsPanel( controller );
 		this.tendenciesPanel = new TendenciesPanel( controller );
 		this.learningPanel = new LearningPanel( controller );
@@ -40,7 +37,7 @@ public class ContentPanel extends JPanel implements Observer {
 	}
 
 	@Override
-	public void update( Observable o, Object arg ) {
+	public void update ( Observable o, Object arg ) {
 		this.learningPanel.update( o, arg );
 	}
 }
