@@ -48,6 +48,14 @@ public class NGramme {
 		return this.words;
 	}
 
+	/**
+	 * Gives the number of words of the n-gramme.
+	 * 
+	 * @return number of words of the n-gramme
+	 */
+	public int getDegree () {
+		return this.n;
+	}
 	////////////////////
 	// STATIC METHODS //
 	////////////////////
