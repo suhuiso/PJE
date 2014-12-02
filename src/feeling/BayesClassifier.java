@@ -26,15 +26,15 @@ public abstract class BayesClassifier extends Classifier {
 	protected TweetPool tweetPool;
 
 	/**
-	 * Tells if the Bayesian classification is only applied on words which have
-	 * more than 3 letters.
-	 */
-	protected Boolean simplified;
-
-	/**
 	 * Length of the words to accept when the classification with simplified method.
 	 */
 	private final int WORD_LENGTH_MIN = 3;
+
+	/**
+	 * Tells if the Bayesian classification is only applied on words which have
+	 * more than WORD_LENGTH_MIN letters.
+	 */
+	protected Boolean simplified;
 
 	/**
 	 * List of degrees of the n-grammes considered.
@@ -53,7 +53,7 @@ public abstract class BayesClassifier extends Classifier {
 	 * @param simplified
 	 *            determines if the Bayesian classification is simplified or not
 	 * @param nGrammes
-	 *            degrees of the n-grammes used for the assignement
+	 *            degrees of the n-grammes used for the classification
 	 */
 	public BayesClassifier ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
 		this.tweetPool = tweetPool;
@@ -80,13 +80,20 @@ public abstract class BayesClassifier extends Classifier {
 		return res / this.tweetPool.values().size();
 	}
 
+	/**
+	 * Gives a list of all the n-grammes to consider for the classification.
+	 * 
+	 * @param msg
+	 *            message in which extract the n-grammes
+	 * @return a list of all the n-grammes to consider for the classification
+	 */
 	protected List< NGramme > getNGrammesListFrom ( String msg ) {
 		List< NGramme > res = new ArrayList< NGramme >();
 
 		for ( int degree : this.degrees ) {
 			res.addAll( NGramme.buildNGrammesFrom( msg, degree ) );
 		}
-		
+
 		return res;
 	}
 
@@ -135,7 +142,15 @@ public abstract class BayesClassifier extends Classifier {
 		return res;
 	}
 
-	// Gives the probability of a n-gramme to occure in a tweet with the feeling
+	/**
+	 * Gives the probability of a n-gramme to occure in a tweet with a feeling.
+	 * 
+	 * @param nGramme
+	 *            n-gramme to know the probability that it occures with feeling
+	 * @param feeling
+	 *            feeling with which the n-gramme has probability to occure
+	 * @return probability of a n-gramme to occure in a tweet with feeling
+	 */
 	protected double probaNGrammeForFeeling ( NGramme nGramme, Feeling feeling ) {
 		int degree = nGramme.getDegree();
 
@@ -144,7 +159,13 @@ public abstract class BayesClassifier extends Classifier {
 		                .nbOfNGrammeOfDegree( degree ) );
 	}
 
-	// Gives the accepted words of the msg to do the classification
+	/**
+	 * Give the accepted words of the message to classify.
+	 * 
+	 * @param msg
+	 *            message to classify
+	 * @return message without the words that are not accepted
+	 */
 	protected String getAcceptedWords ( String msg ) {
 		if ( this.simplified ) {
 			StringBuffer bs = new StringBuffer();
@@ -159,7 +180,15 @@ public abstract class BayesClassifier extends Classifier {
 		}
 	}
 
-	// Gives the probability of a message of the tweet to have the feeling
+	/**
+	 * Gives the probability of a message of the tweet to have the feeling.
+	 * 
+	 * @param feeling
+	 *            feeling to know the probability
+	 * @param msg
+	 *            message to classify
+	 * @return probability of msg to have feeling
+	 */
 	protected abstract double probaTweetHasFeeling ( Feeling feeling, String msg );
 
 	@Override
