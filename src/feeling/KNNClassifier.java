@@ -9,11 +9,11 @@ import utils.Tweet;
 import utils.TweetPool;
 
 /**
- * Class reprsenting objects that assign feeling to a message of a tweet using the KNN method.
+ * Class reprsenting objects that classify the message of a tweet using the KNN method.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class KNNAssigner extends FeelingAssigner {
+public class KNNClassifier extends Classifier {
 
 	////////////
 	// FIELDS //
@@ -41,7 +41,7 @@ public class KNNAssigner extends FeelingAssigner {
 	 * @param nbNeighbors
 	 *            number of neighbors considered
 	 */
-	public KNNAssigner ( TweetPool tweetPool, int nbNeighbors ) {
+	public KNNClassifier ( TweetPool tweetPool, int nbNeighbors ) {
 		this.tweetPool = tweetPool;
 		this.nbNeighbors = nbNeighbors;
 	}
@@ -71,7 +71,7 @@ public class KNNAssigner extends FeelingAssigner {
 	}
 
 	@Override
-	public Feeling assigns ( String msg ) {
+	public Feeling classifies ( String msg ) {
 		int nb = this.nbNeighbors;
 		List< Tweet > tweets = new ArrayList< Tweet >( this.tweetPool.values() );
 		DTCouple[] neighbors = new DTCouple[ nb ];
@@ -150,8 +150,8 @@ public class KNNAssigner extends FeelingAssigner {
 
 		@Override
 		public int compare ( DTCouple c1, DTCouple c2 ) {
-			return Integer.compare( ( ( feeling.KNNAssigner.DTCouple ) c1 ).getDistance(),
-			        ( ( feeling.KNNAssigner.DTCouple ) c2 ).getDistance() );
+			return Integer.compare( ( ( feeling.KNNClassifier.DTCouple ) c1 ).getDistance(),
+			        ( ( feeling.KNNClassifier.DTCouple ) c2 ).getDistance() );
 		}
 
 	}

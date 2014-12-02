@@ -11,9 +11,9 @@ import twitter4j.TwitterFactory;
 import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
-import feeling.DefaultAssigner;
-import feeling.DictionaryAssigner;
-import feeling.FeelingAssigner;
+import feeling.DefaultClassifier;
+import feeling.DictionaryClassifier;
+import feeling.Classifier;
 
 /**
  * Model of the application. Handles the data.
@@ -81,11 +81,11 @@ public class AppModel extends Observable {
 	}
 
 	// Save the results of a query using the feeling assigner passed in parameter
-	private void save ( QueryResult result, FeelingAssigner assigner ) {
+	private void save ( QueryResult result, Classifier assigner ) {
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
 			Tweet tweet =
-			        new Tweet( status, result.getQuery(), assigner.assigns( status.getText() ) );
+			        new Tweet( status, result.getQuery(), assigner.classifies( status.getText() ) );
 			// Cleaning tweet message
 			tweet = this.msgCleaner.cleanTweet( tweet );
 
@@ -108,7 +108,7 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void unpolarizedSave ( QueryResult result ) {
-		this.save( result, DefaultAssigner.getInstance() );
+		this.save( result, DefaultClassifier.getInstance() );
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class AppModel extends Observable {
 	 *            result of a query previously made
 	 */
 	public void dictionarySave ( QueryResult result ) {
-		this.save( result, new DictionaryAssigner( "resources/positive.txt",
+		this.save( result, new DictionaryClassifier( "resources/positive.txt",
 		        "resources/negative.txt" ) );
 	}
 

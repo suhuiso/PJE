@@ -4,8 +4,14 @@ import java.util.List;
 
 import utils.TweetPool;
 
-public class FrequencyBayesAssigner extends BayesAssigner {
-	
+/**
+ * Class representing objects that classify the message of a tweet with the Bayesian
+ * classification using frequency method.
+ * 
+ * @author Quentin Baert & Thomas Bernard
+ */
+public class FrequencyBayesClassifier extends BayesClassifier {
+
 	/////////////
 	// METHODS //
 	/////////////
@@ -16,10 +22,11 @@ public class FrequencyBayesAssigner extends BayesAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public FrequencyBayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
+	public FrequencyBayesClassifier ( TweetPool tweetPool, Boolean simplified,
+	        List< Integer > degrees ) {
 		super( tweetPool, simplified, degrees );
 	}
-	
+
 	// Gives the number of occurence of the n-gramme in the message
 	private int nbOccurenceOfNGrammeInMsg ( NGramme ng, String msg ) {
 		int res = 0;
@@ -37,7 +44,7 @@ public class FrequencyBayesAssigner extends BayesAssigner {
 	@Override
 	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
 		double res = 1;
-		List< NGramme > nGrammes = this.getNGrammesListFrom ( msg );
+		List< NGramme > nGrammes = this.getNGrammesListFrom( msg );
 
 		for ( NGramme nGramme : nGrammes ) {
 			int nb = this.nbOccurenceOfNGrammeInMsg( nGramme, msg );

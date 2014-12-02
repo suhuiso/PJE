@@ -5,12 +5,12 @@ import java.util.List;
 import utils.TweetPool;
 
 /**
- * Class representing objects that assign feeling to a message of a tweet with the Bayesian
+ * Class representing objects that classify the message of a tweet with the Bayesian
  * classification using presence method.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class PresenceBayesAssigner extends BayesAssigner {
+public class PresenceBayesClassifier extends BayesClassifier {
 
 	/////////////
 	// METHODS //
@@ -22,7 +22,8 @@ public class PresenceBayesAssigner extends BayesAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public PresenceBayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
+	public PresenceBayesClassifier ( TweetPool tweetPool, Boolean simplified,
+	        List< Integer > degrees ) {
 		super( tweetPool, simplified, degrees );
 	}
 
@@ -30,7 +31,7 @@ public class PresenceBayesAssigner extends BayesAssigner {
 	@Override
 	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
 		double res = 1;
-		List< NGramme > nGrammes = this.getNGrammesListFrom ( msg );
+		List< NGramme > nGrammes = this.getNGrammesListFrom( msg );
 
 		for ( NGramme nGramme : nGrammes ) {
 			res *= this.probaNGrammeForFeeling( nGramme, feeling );

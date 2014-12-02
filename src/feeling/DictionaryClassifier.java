@@ -10,12 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class reprsenting objects that assign a feeling to a message of a tweet using the dictionary
+ * Class reprsenting objects that classify the message of a tweet using the dictionary
  * method.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class DictionaryAssigner extends FeelingAssigner {
+public class DictionaryClassifier extends Classifier {
 
 	////////////
 	// FIELDS //
@@ -43,7 +43,7 @@ public class DictionaryAssigner extends FeelingAssigner {
 	 * @param negativePath
 	 *            path to the negative dictionary of the DictionaryAssigner
 	 */
-	public DictionaryAssigner ( String positivePath, String negativePath ) {
+	public DictionaryClassifier ( String positivePath, String negativePath ) {
 		this.positivePath = positivePath;
 		this.negativePath = negativePath;
 	}
@@ -135,7 +135,7 @@ public class DictionaryAssigner extends FeelingAssigner {
 	}
 
 	@Override
-	public Feeling assigns ( String msg ) {
+	public Feeling classifies ( String msg ) {
 		// Lists with clean string
 		List< String > positiveWords =
 		        this.removeEmptyString( Arrays.asList( this.fileToString( this.positivePath )

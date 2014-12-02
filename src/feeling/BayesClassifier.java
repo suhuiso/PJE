@@ -9,12 +9,12 @@ import utils.Tweet;
 import utils.TweetPool;
 
 /**
- * Abstract class representing objects that assign feeling to a message of a tweet with the Bayesian
+ * Abstract class representing objects that classify the message of a tweet with the Bayesian
  * classification.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public abstract class BayesAssigner extends FeelingAssigner {
+public abstract class BayesClassifier extends Classifier {
 
 	////////////
 	// FIELDS //
@@ -55,7 +55,7 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	 * @param nGrammes
 	 *            degrees of the n-grammes used for the assignement
 	 */
-	public BayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
+	public BayesClassifier ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
 		this.tweetPool = tweetPool;
 		this.simplified = simplified;
 		this.degrees = degrees;
@@ -163,7 +163,7 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	protected abstract double probaTweetHasFeeling ( Feeling feeling, String msg );
 
 	@Override
-	public Feeling assigns ( String msg ) {
+	public Feeling classifies ( String msg ) {
 		double pNegative =
 		        this.probaTweetHasFeeling( Feeling.NEGATIVE, this.getAcceptedWords( msg ) );
 		double pPositive =

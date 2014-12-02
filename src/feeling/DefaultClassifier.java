@@ -1,40 +1,40 @@
 package feeling;
 
 /**
- * Singleton object assigning UNPOLARIZED feeling to a message of a tweet.
+ * Singleton object classify the message of a tweet as UNPOLARIZED.
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class DefaultAssigner extends FeelingAssigner {
+public class DefaultClassifier extends Classifier {
 
 	////////////
 	// FIELDS //
 	////////////
-	
+
 	/**
 	 * Only instance of DefaultAssigner class.
 	 */
-	private static final DefaultAssigner INSTANCE = new DefaultAssigner();
-	
+	private static final DefaultClassifier INSTANCE = new DefaultClassifier();
+
 	/////////////
 	// METHODS //
 	/////////////
-	
+
 	// Unaccessible constructor of DefaultAssigner
-	private DefaultAssigner () {
+	private DefaultClassifier () {
 	}
-	
+
 	/**
 	 * Gives the only instance of DefaultAssigner class.
 	 * 
 	 * @return only instance of DefaultAssigner class
 	 */
-	public static DefaultAssigner getInstance () {
+	public static DefaultClassifier getInstance () {
 		return INSTANCE;
 	}
 
 	@Override
-	public Feeling assigns ( String msg ) {
+	public Feeling classifies ( String msg ) {
 		return Feeling.UNPOLARIZED;
 	}
 
