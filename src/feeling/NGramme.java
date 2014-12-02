@@ -56,6 +56,27 @@ public class NGramme {
 	public int getDegree () {
 		return this.n;
 	}
+
+	@Override
+	public int hashCode () {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + n;
+		result = prime * result + Arrays.hashCode( words );
+		return result;
+	}
+
+	@Override
+	public boolean equals ( Object obj ) {
+		if ( this == obj ) return true;
+		if ( obj == null ) return false;
+		if ( getClass() != obj.getClass() ) return false;
+		NGramme other = ( NGramme ) obj;
+		if ( n != other.n ) return false;
+		if ( !Arrays.equals( words, other.words ) ) return false;
+		return true;
+	}
+
 	////////////////////
 	// STATIC METHODS //
 	////////////////////
