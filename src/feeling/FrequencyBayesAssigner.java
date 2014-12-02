@@ -1,9 +1,11 @@
 package feeling;
 
+import java.util.List;
+
 import utils.TweetPool;
 
 public class FrequencyBayesAssigner extends BayesAssigner {
-
+	
 	/////////////
 	// METHODS //
 	/////////////
@@ -14,16 +16,16 @@ public class FrequencyBayesAssigner extends BayesAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public FrequencyBayesAssigner ( TweetPool tweetPool, Boolean simplified ) {
-		super( tweetPool, simplified );
+	public FrequencyBayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
+		super( tweetPool, simplified, degrees );
 	}
 	
-	// Gives the number of occurence of the word in the message
-	private int nbOccurenceOfWordInMsg ( String w, String msg ) {
+	// Gives the number of occurence of the n-gramme in the message
+	private int nbOccurenceOfNGrammeInMsg ( NGramme ng, String msg ) {
 		int res = 0;
 
-		for ( String word : msg.split( " " ) ) {
-			if ( word.equals( w ) ) {
+		for ( NGramme nGramme : NGramme.buildNGrammesFrom( msg, ng.getDegree() ) ) {
+			if ( nGramme.equals( ng ) ) {
 				res++;
 			}
 		}
@@ -35,10 +37,11 @@ public class FrequencyBayesAssigner extends BayesAssigner {
 	@Override
 	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
 		double res = 1;
+		List< NGramme > nGrammes = this.getNGrammesListFrom ( msg );
 
-		for ( String word : msg.split( " " ) ) {
-			int nb = this.nbOccurenceOfWordInMsg( word, msg );
-			res *= Math.pow( this.probaWordForFeeling( word, feeling ), nb );
+		for ( NGramme nGramme : nGrammes ) {
+			int nb = this.nbOccurenceOfNGrammeInMsg( nGramme, msg );
+			res *= Math.pow( this.probaNGrammeForFeeling( nGramme, feeling ), nb );
 		}
 
 		return res;
