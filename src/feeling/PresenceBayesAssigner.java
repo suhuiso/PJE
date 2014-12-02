@@ -1,5 +1,7 @@
 package feeling;
 
+import java.util.List;
+
 import utils.TweetPool;
 
 /**
@@ -20,17 +22,18 @@ public class PresenceBayesAssigner extends BayesAssigner {
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
 	 */
-	public PresenceBayesAssigner ( TweetPool tweetPool, Boolean simplified ) {
-		super( tweetPool, simplified );
+	public PresenceBayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
+		super( tweetPool, simplified, degrees );
 	}
 
 	// Gives the probability of a message of the tweet to have the feeling
 	@Override
 	protected double probaTweetHasFeeling ( Feeling feeling, String msg ) {
 		double res = 1;
+		List< NGramme > nGrammes = this.getNGrammesListFrom ( msg );
 
-		for ( String word : msg.split( " " ) ) {
-			res *= this.probaWordForFeeling( word, feeling );
+		for ( NGramme nGramme : nGrammes ) {
+			res *= this.probaNGrammeForFeeling( nGramme, feeling );
 		}
 
 		return res * this.probaFeeling( feeling );
