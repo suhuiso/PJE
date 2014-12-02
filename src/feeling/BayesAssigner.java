@@ -1,5 +1,7 @@
 package feeling;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,6 +36,11 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	 */
 	private final int WORD_LENGTH_MIN = 3;
 
+	/**
+	 * List of degrees of the n-grammes considered.
+	 */
+	protected List< Integer > degrees;
+
 	/////////////
 	// METHODS //
 	/////////////
@@ -43,10 +50,15 @@ public abstract class BayesAssigner extends FeelingAssigner {
 	 * 
 	 * @param tweetPool
 	 *            tweet pool used for the Bayesian classification
+	 * @param simplified
+	 *            determines if the Bayesian classification is simplified or not
+	 * @param nGrammes
+	 *            degrees of the n-grammes used for the assignement
 	 */
-	public BayesAssigner ( TweetPool tweetPool, Boolean simplified ) {
+	public BayesAssigner ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
 		this.tweetPool = tweetPool;
 		this.simplified = simplified;
+		this.degrees = degrees;
 	}
 
 	/**
@@ -68,27 +80,37 @@ public abstract class BayesAssigner extends FeelingAssigner {
 		return res / this.tweetPool.values().size();
 	}
 
-	// Gives the number of words in the tweet pool
-	private int nbOfWords () {
-		Set< String > set = new TreeSet< String >();
+	protected List< NGramme > getNGrammesListFrom ( String msg ) {
+		List< NGramme > res = new ArrayList< NGramme >();
+
+		for ( int degree : this.degrees ) {
+			res.addAll( NGramme.buildNGrammesFrom( msg, degree ) );
+		}
+		
+		return res;
+	}
+
+	// Gives the number of n-gramme with this degree in the tweet pool
+	private int nbOfNGrammeOfDegree ( int degree ) {
+		Set< NGramme > set = new TreeSet< NGramme >();
 
 		for ( Tweet tweet : this.tweetPool.values() ) {
-			for ( String word : tweet.getMsg().split( " " ) ) {
-				set.add( word );
+			for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), degree ) ) {
+				set.add( nGramme );
 			}
 		}
 
 		return set.size();
 	}
 
-	// Gives the number of words in tweets that have the feeling in the tweet pool
-	private int nbOfWordsForFeeling ( Feeling feeling ) {
-		Set< String > set = new TreeSet< String >();
+	// Gives the number of n-grammes with this degree in tweets that have the feeling in the tweet pool
+	private int nbOfNGrammesForFeeling ( Feeling feeling, int degree ) {
+		Set< NGramme > set = new TreeSet< NGramme >();
 
 		for ( Tweet tweet : this.tweetPool.values() ) {
 			if ( tweet.getFeeling() == feeling ) {
-				for ( String word : tweet.getMsg().split( " " ) ) {
-					set.add( word );
+				for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), degree ) ) {
+					set.add( nGramme );
 				}
 			}
 		}
@@ -96,14 +118,14 @@ public abstract class BayesAssigner extends FeelingAssigner {
 		return set.size();
 	}
 
-	// Gives the number of occurence of the word in tweets that have the feeling
-	private int nbOccurenceOfWordForTheFeeling ( String w, Feeling feeling ) {
+	// Gives the number of occurence of the n-gramme in tweets that have the feeling
+	private int nbOccurenceOfNGrammeForTheFeeling ( NGramme ng, Feeling feeling ) {
 		int res = 0;
 
 		for ( Tweet tweet : this.tweetPool.values() ) {
 			if ( tweet.getFeeling() == feeling ) {
-				for ( String word : tweet.getMsg().split( " " ) ) {
-					if ( word.equals( w ) ) {
+				for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), ng.getDegree() ) ) {
+					if ( nGramme.equals( ng ) ) {
 						res++;
 					}
 				}
@@ -113,10 +135,13 @@ public abstract class BayesAssigner extends FeelingAssigner {
 		return res;
 	}
 
-	// Gives the probability of a word to occure in a tweet with the feeling
-	protected double probaWordForFeeling ( String w, Feeling feeling ) {
-		return ( this.nbOccurenceOfWordForTheFeeling( w, feeling ) + 1 )
-		        / ( this.nbOfWordsForFeeling( feeling ) + this.nbOfWords() );
+	// Gives the probability of a n-gramme to occure in a tweet with the feeling
+	protected double probaNGrammeForFeeling ( NGramme nGramme, Feeling feeling ) {
+		int degree = nGramme.getDegree();
+
+		return ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 )
+		        / ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
+		                .nbOfNGrammeOfDegree( degree ) );
 	}
 
 	// Gives the accepted words of the msg to do the classification
@@ -125,7 +150,7 @@ public abstract class BayesAssigner extends FeelingAssigner {
 			StringBuffer bs = new StringBuffer();
 			for ( String word : msg.split( " " ) ) {
 				if ( word.length() > this.WORD_LENGTH_MIN ) {
-					bs.append( word );
+					bs.append( word + " " );
 				}
 			}
 			return bs.toString();
