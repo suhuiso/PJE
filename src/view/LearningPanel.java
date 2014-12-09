@@ -15,7 +15,7 @@ public class LearningPanel extends AbstractCardPanel {
     private SearchBarPanel searchBarPanel;
 	private ListTweetPanel listTweetPanel;
     
-	public LearningPanel( AppController controller ) {
+	public LearningPanel ( AppController controller ) {
 		super( controller );
 		this.setBackground( LearningPanel.LEARNING_COLOR );
 
