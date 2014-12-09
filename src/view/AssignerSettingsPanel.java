@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -75,11 +73,11 @@ public class AssignerSettingsPanel extends JPanel {
 	}
 	
 	private void initListeners () {
-		this.radio1.addActionListener( new RadioButtonListener( 1 ) );
-		this.radio2.addActionListener( new RadioButtonListener( 2 ) );
-		this.radio3.addActionListener( new RadioButtonListener( 3 ) );
-		this.radio4.addActionListener( new RadioButtonListener( 4 ) );
-		this.radio5.addActionListener( new RadioButtonListener( 5 ) );
+		this.radio1.addActionListener( new RadioButtonListener( 0 ) );
+		this.radio2.addActionListener( new RadioButtonListener( 1 ) );
+		this.radio3.addActionListener( new RadioButtonListener( 2 ) );
+		this.radio4.addActionListener( new RadioButtonListener( 3 ) );
+		this.radio5.addActionListener( new RadioButtonListener( 4 ) );
 	}
 	
 	@Override
