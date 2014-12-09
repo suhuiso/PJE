@@ -13,23 +13,27 @@ public class FeelingsPanel extends AbstractCardPanel {
     public static final Color FEELINGS_COLOR = new Color( 0x0E83CD );
     
     private SearchBarPanel searchBarPanel;
-	
+	private ListTweetPanel listTweetPanel;
+    
 	public FeelingsPanel ( AppController controller ) {
 		super( controller );
 		this.setBackground( FeelingsPanel.FEELINGS_COLOR );
 					
 		this.searchBarPanel = new SearchBarPanel( controller, FeelingsPanel.FEELINGS_COLOR );
-		
+		this.listTweetPanel = new ListTweetPanel( controller, FeelingsPanel.FEELINGS_COLOR );		
+
 		this.add( this.searchBarPanel, BorderLayout.NORTH );
+		this.add( this.listTweetPanel, BorderLayout.CENTER );
 	}
 
 	@Override
 	public void update ( Observable o, Object arg ) {
-		// TODO Auto-generated method stub
+		this.listTweetPanel.update( o, arg );
 	}
 
 	@Override
 	public void clear () {
-		// TODO Auto-generated method stub
+		this.searchBarPanel.clear();
+		this.listTweetPanel.clear();
 	}
 }

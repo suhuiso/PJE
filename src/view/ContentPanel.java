@@ -43,18 +43,19 @@ public class ContentPanel extends JPanel implements Observer {
 	}
 	
 	public void setCurrentPanel ( AbstractCardPanel newPanel ) {
+		System.out.println( "setCurrentPanel:" + newPanel.toString() );
 		this.getCurrentPanel().clear();
 		this.currentPanel = newPanel;
 	}
 	
 	@Override
 	public void update ( Observable o, Object arg ) {
-		this.learningPanel.update( o, arg );
+		this.getCurrentPanel().update( o, arg );
 	}
 	
 	public AbstractCardPanel getPanelByName ( String cardName ) {	
 		if ( cardName.equals( FeelingsPanel.CARD_FEELINGS ) ) {
-			return this.learningPanel;
+			return this.feelingsPanel;
 		} else if ( cardName.equals( TendenciesPanel.CARD_TENDENCIES ) ) {
 			return this.tendenciesPanel;
 		} else if ( cardName.equals( LearningPanel.CARD_LEARNING ) ) {
