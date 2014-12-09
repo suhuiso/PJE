@@ -172,6 +172,7 @@ public class MessageCleaner {
 	 * @return cleaning tweet
 	 */
 	public Tweet cleanTweet ( Tweet tweet ) {
-		return tweet.setMsg( this.cleanText( tweet.getMsg() ) );
+		tweet.setMsg( this.cleanText( tweet.getMsg() ) );
+		return tweet;
 	}
 }
