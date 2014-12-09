@@ -82,6 +82,8 @@ public class AppModel extends Observable {
 	public void search ( String searchQuery ) {
 		Query query = new Query( searchQuery );
 		QueryResult result = null;
+		
+		query.setLang( "fr" );
 
 		try {
 			result = this.TWITTER.search( query );
