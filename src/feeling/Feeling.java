@@ -77,5 +77,18 @@ public enum Feeling {
 				throw new IllegalArgumentException( "Value has to be -1, 0, 2 or 4" );
 		}
 	}
+	
+	@Override
+	public String toString () {
+		if ( this == UNPOLARIZED ) {
+			return "Non noté";
+		} else if ( this == NEGATIVE ) {
+			return "Négatif";
+		} else if ( this == NEUTRAL ) {
+			return "Positif";
+		} else {
+			return "Neutre";
+		}
+	}
 
 }
