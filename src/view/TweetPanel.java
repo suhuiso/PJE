@@ -26,11 +26,12 @@ public class TweetPanel extends JPanel {
 		this.tweet = tweet;
 		
 		this.add( new JLabel( "@" + this.tweet.getTwittos() ), BorderLayout.NORTH );
-		this.add( new JLabel( this.tweet.getMsg() ), BorderLayout.CENTER );
+		this.add( new JLabel( "<html>" + this.tweet.getMsg() + "</html>" ), BorderLayout.CENTER );
+		this.add( new JLabel( "Classe = " + this.tweet.getFeeling().toString() + "  " ),  BorderLayout.EAST );
 	}
 
 	@Override
 	public Dimension getPreferredSize () {
-		return new Dimension( 750, 100 );
+		return new Dimension( 750, 125 );
 	}
 }
