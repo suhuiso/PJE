@@ -56,5 +56,9 @@ public class ListTweetPanel extends JPanel implements Observer {
 
 		/* View have changed and need to be repaint */
 		this.revalidate();
-	}	
+	}
+	
+	public void clear () {
+		this.listTweetModel.clear();
+	}
 }

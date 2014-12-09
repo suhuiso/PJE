@@ -63,6 +63,7 @@ public class MenuButton extends JButton {
 			ContentPanel contentPanel = ( ContentPanel ) appPanel.getContentPanel();
 			CardLayout layout = ( CardLayout ) contentPanel.getLayout();
 			layout.show( contentPanel, buttonPressed.getCard() );
+			contentPanel.setCurrentPanel( contentPanel.getPanelByName( buttonPressed.getCard() ) );
 			menuPanel.setCurrentButton( buttonPressed );
 		}
 	}
