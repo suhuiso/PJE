@@ -34,12 +34,12 @@ public class AssignerSettingsPanel extends JPanel {
 		this.setLayout( new GridLayout( 0, 1 ) );
 		
 		this.prefs = Preferences.userNodeForPackage( this.getClass() );
-		this.label = new JLabel( "Assigneurs disponibles :" );
-		this.radio1 = new JRadioButton( "Assigneur 1" );
-		this.radio2 = new JRadioButton( "Assigneur 2" );
-		this.radio3 = new JRadioButton( "Assigneur 3" );
-		this.radio4 = new JRadioButton( "Assigneur 4" );
-		this.radio5 = new JRadioButton( "Assigneur 5" );
+		this.label = new JLabel( "Classifieurs disponibles :" );
+		this.radio1 = new JRadioButton( "Dictionnaire" );
+		this.radio2 = new JRadioButton( "KNN" );
+		this.radio3 = new JRadioButton( "Bayes par présence" );
+		this.radio4 = new JRadioButton( "Bayes par fréquence" );
+		this.radio5 = new JRadioButton( "Bayes par fréquence uni-gramme" );
 		this.buttonGroup = new ButtonGroup();
 
 		this.buttonGroup.add( this.radio1 );
