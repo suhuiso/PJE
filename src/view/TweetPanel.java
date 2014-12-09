@@ -8,25 +8,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import twitter4j.Status;
+import utils.Tweet;
 import controller.AppController;
 
 @SuppressWarnings("serial")
 public class TweetPanel extends JPanel {
 
-	private Status status;
+	private Tweet tweet;
 	
-	public TweetPanel ( AppController controller, Status status ) {
+	public TweetPanel ( AppController controller, Tweet tweet ) {
 		super();
 		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( 10, 10, 10, 10 ) );
 		
 		this.setLayout( new BorderLayout() );
 				
-		this.status = status;
+		this.tweet = tweet;
 		
-		this.add( new JLabel( "@" + this.status.getUser().getScreenName() ), BorderLayout.NORTH );
-		this.add( new JLabel( this.status.getText() ), BorderLayout.CENTER );
+		this.add( new JLabel( "@" + this.tweet.getTwittos() ), BorderLayout.NORTH );
+		this.add( new JLabel( this.tweet.getMsg() ), BorderLayout.CENTER );
 	}
 
 	@Override

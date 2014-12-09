@@ -19,7 +19,7 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class AssignerSettingsPanel extends JPanel {
 
-	private Preferences prefs;
+	private AppController controller;
 	private JLabel label;
 	private JRadioButton radio1;
 	private JRadioButton radio2;
@@ -33,7 +33,7 @@ public class AssignerSettingsPanel extends JPanel {
 		this.setBackground( color );
 		this.setLayout( new GridLayout( 0, 1 ) );
 		
-		this.prefs = Preferences.userNodeForPackage( this.getClass() );
+		this.controller = controller;
 		this.label = new JLabel( "Classifieurs disponibles :" );
 		this.radio1 = new JRadioButton( "Dictionnaire" );
 		this.radio2 = new JRadioButton( "KNN" );
@@ -62,14 +62,14 @@ public class AssignerSettingsPanel extends JPanel {
 		this.add( this.radio4 );
 		this.add( this.radio5 );
 				
-		int currentAssigner = this.prefs.getInt( "CURRENT_ASSIGNER", 0 );
+		//int currentAssigner = this.controller.getCurrentClassifier();
 		
-		if ( currentAssigner == 0 ) {
+		/*if ( currentAssigner == 0 ) {
 			this.prefs.putInt( "CURRENT_ASSIGNER", 1 );
 			this.radio1.setSelected( true );
 		} else {
 			// TODO select le classifieur courant
-		}
+		}*/
 		
 		this.initListeners();
 	}
@@ -96,13 +96,7 @@ public class AssignerSettingsPanel extends JPanel {
 		}
 		
 		public void actionPerformed ( ActionEvent e ) {
-			AssignerSettingsPanel.this.prefs.putInt( "CURRENT_ASSIGNER", this.assignerUsed );
-			try {
-				AssignerSettingsPanel.this.prefs.flush();
-			} catch (BackingStoreException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			AssignerSettingsPanel.this.controller.setCurrentClassifierId( this.assignerUsed );
 		}
 	}
 }

@@ -13,7 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 import twitter4j.QueryResult;
 import twitter4j.Status;
+import utils.Tweet;
 import controller.AppController;
+import feeling.Feeling;
 
 @SuppressWarnings("serial")
 public class ListTweetPanel extends JPanel implements Observer {
@@ -51,7 +53,9 @@ public class ListTweetPanel extends JPanel implements Observer {
 		QueryResult qr = ( QueryResult ) arg;
 
 		for ( Status status : qr.getTweets() ) {
-			this.listTweetModel.addElement( new TweetPanel( this.controller, status ) );
+			Tweet tweet = new Tweet( status, qr.getQuery(), Feeling.UNPOLARIZED );
+			tweet.setFeeling( this.controller.getCurrentClassifier().classifies( tweet.getMsg() ) );
+			this.listTweetModel.addElement( new TweetPanel( this.controller, tweet ) );
 		}		
 
 		/* View have changed and need to be repaint */

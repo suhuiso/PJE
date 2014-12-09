@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -11,9 +12,11 @@ import twitter4j.TwitterFactory;
 import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
+import feeling.Classifier;
 import feeling.DefaultClassifier;
 import feeling.DictionaryClassifier;
-import feeling.Classifier;
+import feeling.KNNClassifier;
+import feeling.PresenceBayesClassifier;
 
 /**
  * Model of the application. Handles the data.
@@ -41,6 +44,11 @@ public class AppModel extends Observable {
 	 */
 	private MessageCleaner msgCleaner;
 
+	/**
+	 * Classifiers available in the application
+	 */
+	private Classifier[] classifiers;
+	
 	/////////////
 	// METHODS //
 	/////////////
@@ -52,8 +60,19 @@ public class AppModel extends Observable {
 	public AppModel () {
 		this.tweetPool = new TweetPool( "resources/tweetPool.csv" );
 		this.msgCleaner = MessageCleaner.getInstance();
+		// TODO Mettre les classifieurs réels
+		this.classifiers = new Classifier[ 5 ];
+		this.classifiers[ 0 ] = new DictionaryClassifier( "./resources/positive.txt", "./resources/negative.txt" );
+		this.classifiers[ 1 ] = new KNNClassifier( this.tweetPool, 5 );
+		this.classifiers[ 2 ] = new PresenceBayesClassifier( this.tweetPool, false, new ArrayList<Integer>( 1 ) );
+		this.classifiers[ 3 ] = new PresenceBayesClassifier( this.tweetPool, true, new ArrayList<Integer>( 1 ) );
+		this.classifiers[ 4 ] = new PresenceBayesClassifier( this.tweetPool, false, new ArrayList<Integer>( 2 ) );
 	}
 
+	public Classifier getClassifierById ( int id ) {
+		return this.classifiers[ id ];
+	}
+	
 	/**
 	 * Makes a research in the Twitter API.
 	 * 
@@ -129,5 +148,4 @@ public class AppModel extends Observable {
 	public void closingWindowSave () {
 		this.tweetPool.writeCSV( "resources/tweetPool.csv" );
 	}
-
 }
