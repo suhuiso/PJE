@@ -33,6 +33,7 @@ public class LearningPanel extends AbstractCardPanel {
 
 	@Override
 	public void clear () {
-		// TODO Auto-generated method stub
+		this.searchBarPanel.clear();
+		this.listTweetPanel.clear();
 	}
 }

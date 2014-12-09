@@ -17,6 +17,7 @@ public class ContentPanel extends JPanel implements Observer {
 	private TendenciesPanel tendenciesPanel;
 	private LearningPanel learningPanel;
 	private SettingsPanel settingsPanel;
+	private AbstractCardPanel currentPanel;
 	
 	public ContentPanel ( AppController controller ) {
 		super();		
@@ -29,6 +30,7 @@ public class ContentPanel extends JPanel implements Observer {
 		this.tendenciesPanel = new TendenciesPanel( controller );
 		this.learningPanel = new LearningPanel( controller );
 		this.settingsPanel = new SettingsPanel( controller );
+		this.currentPanel = this.feelingsPanel;
 		
 		this.add( this.feelingsPanel, FeelingsPanel.CARD_FEELINGS );
 		this.add( this.tendenciesPanel, TendenciesPanel.CARD_TENDENCIES );
@@ -36,8 +38,29 @@ public class ContentPanel extends JPanel implements Observer {
 		this.add( this.settingsPanel, SettingsPanel.CARD_SETTINGS );
 	}
 
+	public AbstractCardPanel getCurrentPanel () {
+		return this.currentPanel;
+	}
+	
+	public void setCurrentPanel ( AbstractCardPanel newPanel ) {
+		this.getCurrentPanel().clear();
+		this.currentPanel = newPanel;
+	}
+	
 	@Override
 	public void update ( Observable o, Object arg ) {
 		this.learningPanel.update( o, arg );
+	}
+	
+	public AbstractCardPanel getPanelByName ( String cardName ) {	
+		if ( cardName.equals( FeelingsPanel.CARD_FEELINGS ) ) {
+			return this.learningPanel;
+		} else if ( cardName.equals( TendenciesPanel.CARD_TENDENCIES ) ) {
+			return this.tendenciesPanel;
+		} else if ( cardName.equals( LearningPanel.CARD_LEARNING ) ) {
+			return this.learningPanel;
+		} else {
+			return this.settingsPanel;
+		}
 	}
 }

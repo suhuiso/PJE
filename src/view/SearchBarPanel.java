@@ -51,4 +51,8 @@ public class SearchBarPanel extends JPanel {
 	public Dimension getPreferredSize () {
 		return new Dimension( 800, 100 );
 	}
+	
+	public void clear () {
+		this.searchBarField.setText( "" );
+	}
 }
