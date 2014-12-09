@@ -81,11 +81,11 @@ public class AppModel extends Observable {
 	}
 
 	// Save the results of a query using the feeling assigner passed in parameter
-	private void save ( QueryResult result, Classifier assigner ) {
+	private void save ( QueryResult result, Classifier classifier ) {
 		for ( Status status : result.getTweets() ) {
 			// Tweet created from status
 			Tweet tweet =
-			        new Tweet( status, result.getQuery(), assigner.classifies( status.getText() ) );
+			        new Tweet( status, result.getQuery(), classifier.classifies( status.getText() ) );
 			// Cleaning tweet message
 			tweet = this.msgCleaner.cleanTweet( tweet );
 
