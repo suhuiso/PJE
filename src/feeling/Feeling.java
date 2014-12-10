@@ -85,9 +85,9 @@ public enum Feeling {
 		} else if ( this == NEGATIVE ) {
 			return "Négatif";
 		} else if ( this == NEUTRAL ) {
-			return "Positif";
-		} else {
 			return "Neutre";
+		} else {
+			return "Positif";
 		}
 	}
 
