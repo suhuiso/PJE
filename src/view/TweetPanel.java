@@ -14,7 +14,7 @@ import controller.AppController;
 @SuppressWarnings("serial")
 public class TweetPanel extends JPanel {
 
-	private Tweet tweet;
+	protected Tweet tweet;
 	
 	public TweetPanel ( AppController controller, Tweet tweet ) {
 		super();
