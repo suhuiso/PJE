@@ -93,13 +93,15 @@ public class AppController {
 	}
 
 	/**
-	 * Asks to the model to save the results of a query.
+	 * Asks to the model to save a tweet in the tweet pool.
 	 * 
-	 * @param result
-	 *            results of a query previously made
+	 * @param tweet
+	 *            tweet to save
+	 * @param feeling
+	 *            feeling to assign to the tweet
 	 */
-	public void unpolarizedSaveRequest ( QueryResult result ) {
-		this.model.unpolarizedSave( result );
+	public void saveRequest ( Tweet tweet, Feeling feeling ) {
+		this.model.save( tweet, feeling );
 	}
 
 	/**
