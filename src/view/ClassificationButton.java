@@ -36,7 +36,7 @@ public class ClassificationButton extends JButton {
 	
 	@Override
 	public Dimension getPreferredSize () {
-		return new Dimension( 150, 35 );
+		return new Dimension( 125, 35 );
 	}
 	
 	public Feeling getFeeling () {

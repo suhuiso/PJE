@@ -14,6 +14,7 @@ public class LearningPanel extends AbstractCardPanel {
 
     public static final String CARD_LEARNING =  "Learning Panel";
     public static final Color LEARNING_COLOR = new Color( 0xFCD04B );
+    public static final Color LEARNING_COLOR_BRIGHTER = new Color( 0xFEF3D2 );
     
     private SearchBarPanel searchBarPanel;
 	private LearningListTweetPanel listTweetPanel;
@@ -27,6 +28,7 @@ public class LearningPanel extends AbstractCardPanel {
 
 		JScrollPane scrollContainer = new JScrollPane( this.listTweetPanel );
 		scrollContainer.getVerticalScrollBar().setUnitIncrement(10);
+		scrollContainer.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		scrollContainer.setBackground( LearningPanel.LEARNING_COLOR );
 		scrollContainer.setBorder( new EmptyBorder( 0, 25, 25, 25 ) );
 		
