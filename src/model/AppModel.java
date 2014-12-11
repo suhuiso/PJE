@@ -122,7 +122,7 @@ public class AppModel extends Observable {
 			}
 
 			this.setChanged();
-			this.notifyObservers( result );
+			this.notifyObservers( res );
 		} catch ( TwitterException e ) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
