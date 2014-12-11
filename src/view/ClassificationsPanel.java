@@ -19,7 +19,7 @@ public class ClassificationsPanel extends JPanel {
 	public ClassificationsPanel ( AppController controller ) {
 		super();
 		
-		this.setBackground( Color.RED );
+		this.setBackground( Color.WHITE );
 		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		
 		this.negativeButton = new ClassificationButton( controller, "Negatif", Feeling.NEGATIVE );
