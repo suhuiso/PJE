@@ -51,12 +51,23 @@ public class AppController {
 		        this.model.getClassifierById( this.prefs.getInt( "CURRENT_ASSIGNER", 0 ) );
 	}
 
+	/**
+	 * Gives the current classifier.
+	 * 
+	 * @return current classifier
+	 */
 	public Classifier getCurrentClassifier () {
 		System.out
 		        .println( "getCurrentCLassifier : current classifier = " + this.currentClassifier );
 		return this.currentClassifier;
 	}
 
+	/**
+	 * Sets the current classifier
+	 * 
+	 * @param id
+	 *            id of the new current classifier
+	 */
 	public void setCurrentClassifierId ( int id ) {
 		System.out.println( "setCurrentClassifierId: current classifier = " + id );
 		this.currentClassifier = this.model.getClassifierById( id );
