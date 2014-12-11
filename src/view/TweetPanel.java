@@ -38,4 +38,9 @@ public class TweetPanel extends JPanel {
 	public Dimension getPreferredSize () {
 		return new Dimension( 750, 125 );
 	}
+	
+	@Override
+	public Dimension getMaximumSize () {
+		return new Dimension( 750, 125 );
+	}
 }
