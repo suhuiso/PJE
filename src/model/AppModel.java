@@ -13,8 +13,8 @@ import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
 import feeling.Classifier;
-import feeling.DefaultClassifier;
 import feeling.DictionaryClassifier;
+import feeling.Feeling;
 import feeling.KNNClassifier;
 import feeling.PresenceBayesClassifier;
 
@@ -48,7 +48,7 @@ public class AppModel extends Observable {
 	 * Classifiers available in the application
 	 */
 	private Classifier[] classifiers;
-	
+
 	/////////////
 	// METHODS //
 	/////////////
@@ -62,17 +62,21 @@ public class AppModel extends Observable {
 		this.msgCleaner = MessageCleaner.getInstance();
 		// TODO Mettre les classifieurs réels
 		this.classifiers = new Classifier[ 5 ];
-		this.classifiers[ 0 ] = new DictionaryClassifier( "./resources/positive.txt", "./resources/negative.txt" );
+		this.classifiers[ 0 ] =
+		        new DictionaryClassifier( "./resources/positive.txt", "./resources/negative.txt" );
 		this.classifiers[ 1 ] = new KNNClassifier( this.tweetPool, 5 );
-		this.classifiers[ 2 ] = new PresenceBayesClassifier( this.tweetPool, false, new ArrayList<Integer>( 1 ) );
-		this.classifiers[ 3 ] = new PresenceBayesClassifier( this.tweetPool, true, new ArrayList<Integer>( 1 ) );
-		this.classifiers[ 4 ] = new PresenceBayesClassifier( this.tweetPool, false, new ArrayList<Integer>( 2 ) );
+		this.classifiers[ 2 ] =
+		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 1 ) );
+		this.classifiers[ 3 ] =
+		        new PresenceBayesClassifier( this.tweetPool, true, new ArrayList< Integer >( 1 ) );
+		this.classifiers[ 4 ] =
+		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 2 ) );
 	}
 
 	public Classifier getClassifierById ( int id ) {
 		return this.classifiers[ id ];
 	}
-	
+
 	/**
 	 * Makes a research in the Twitter API.
 	 * 
@@ -82,7 +86,7 @@ public class AppModel extends Observable {
 	public void search ( String searchQuery ) {
 		Query query = new Query( searchQuery );
 		QueryResult result = null;
-		
+
 		query.setLang( "fr" );
 
 		try {
@@ -101,47 +105,25 @@ public class AppModel extends Observable {
 		this.notifyObservers( result );
 	}
 
-	// Save the results of a query using the feeling assigner passed in parameter
-	private void save ( QueryResult result, Classifier classifier ) {
-		for ( Status status : result.getTweets() ) {
-			// Tweet created from status
-			Tweet tweet =
-			        new Tweet( status, result.getQuery(), classifier.classifies( status.getText() ) );
-			// Cleaning tweet message
-			tweet = this.msgCleaner.cleanTweet( tweet );
+	/**
+	 * Save the tweet with the feeling in the tweet pool.
+	 * 
+	 * @param tweet
+	 *            tweet to save
+	 * @param feeling
+	 *            feeling of the tweet
+	 */
+	public void save ( Tweet tweet, Feeling feeling ) {
+		tweet = this.msgCleaner.cleanTweet( tweet );
+		tweet.setFeeling( feeling );
+		String content = tweet.getMsg();
+		Long id = tweet.getId();
 
-			String content = tweet.getMsg();
-			Long id = tweet.getId();
-
-			// A tweet is saved if it is not only composed of whitespaces
-			// A tweet is saved if it is not already saved 
-			if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
-				this.tweetPool.put( id, tweet );
-			}
+		// A tweet is saved if it is not only composed of whitespaces
+		// A tweet is saved if it is not already saved 
+		if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
+			this.tweetPool.put( id, tweet );
 		}
-	}
-
-	/**
-	 * Saves the results of a query in a file named "tweetPool.csv".
-	 * The tweets which are saved are non polarized.
-	 * 
-	 * @param result
-	 *            result of a query previously made
-	 */
-	public void unpolarizedSave ( QueryResult result ) {
-		this.save( result, DefaultClassifier.getInstance() );
-	}
-
-	/**
-	 * Saves the results of a query in a file named "tweetPool.csv".
-	 * The tweets which are saved are polarized with a dictionnary method.
-	 * 
-	 * @param result
-	 *            result of a query previously made
-	 */
-	public void dictionarySave ( QueryResult result ) {
-		this.save( result, new DictionaryClassifier( "resources/positive.txt",
-		        "resources/negative.txt" ) );
 	}
 
 	/**
