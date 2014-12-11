@@ -57,11 +57,9 @@ public class AppController {
 	 * @return current classifier
 	 */
 	public Classifier getCurrentClassifier () {
-		System.out
-		        .println( "getCurrentCLassifier : current classifier = " + this.currentClassifier );
 		return this.currentClassifier;
 	}
-
+	
 	/**
 	 * Sets the current classifier
 	 * 
@@ -69,7 +67,6 @@ public class AppController {
 	 *            id of the new current classifier
 	 */
 	public void setCurrentClassifierId ( int id ) {
-		System.out.println( "setCurrentClassifierId: current classifier = " + id );
 		this.currentClassifier = this.model.getClassifierById( id );
 		this.prefs.putInt( "CURRENT_ASSIGNER", id );
 		try {
@@ -80,6 +77,25 @@ public class AppController {
 		}
 	}
 
+	/**
+	 * Gives the number of tweets to display.
+	 * 
+	 * @return number of tweets
+	 */
+	public int getCountTweets () {
+		return this.model.getTweetsNb();
+	}
+
+	/**
+	 * Sets the number of tweets to display
+	 * 
+	 * @param newValue
+	 *            new number of tweets
+	 */
+	public void setCountTweets ( int newValue ) {
+		this.model.setTweetsNb( newValue );
+	}
+	
 	/**
 	 * Controls the query passed in parameter.
 	 * 

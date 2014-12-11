@@ -81,6 +81,25 @@ public class AppModel extends Observable {
 	}
 
 	/**
+	 * Gives the number of tweets to display.
+	 * 
+	 * @return number of tweets
+	 */
+	public int getTweetsNb () {
+		return this.tweetsNb;
+	}
+	
+	/**
+	 * Set the number of tweets to display.
+	 * 
+	 * @param newValue
+	 *            new number of tweets
+	 */
+	public void setTweetsNb ( int newValue ) {
+		this.tweetsNb = newValue;
+	}
+	
+	/**
 	 * Gives the classifier with the id
 	 * 
 	 * @param id
