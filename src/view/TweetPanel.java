@@ -30,6 +30,10 @@ public class TweetPanel extends JPanel {
 		this.add( new JLabel( "Classe = " + this.tweet.getFeeling().toString() + "  " ),  BorderLayout.EAST );
 	}
 
+	public Tweet getTweet () {
+		return this.tweet;
+	}
+	
 	@Override
 	public Dimension getPreferredSize () {
 		return new Dimension( 750, 125 );
