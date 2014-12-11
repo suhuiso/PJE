@@ -13,14 +13,14 @@ public class LearningPanel extends AbstractCardPanel {
     public static final Color LEARNING_COLOR = new Color( 0xFCD04B );
     
     private SearchBarPanel searchBarPanel;
-	private ListTweetPanel listTweetPanel;
+	private LearningListTweetPanel listTweetPanel;
     
 	public LearningPanel ( AppController controller ) {
 		super( controller );
 		this.setBackground( LearningPanel.LEARNING_COLOR );
 
 		this.searchBarPanel = new SearchBarPanel( controller, LearningPanel.LEARNING_COLOR );
-		this.listTweetPanel = new ListTweetPanel( controller, LearningPanel.LEARNING_COLOR );
+		this.listTweetPanel = new LearningListTweetPanel( controller, LearningPanel.LEARNING_COLOR );
 
 		this.add( this.searchBarPanel, BorderLayout.NORTH );
 		this.add( this.listTweetPanel, BorderLayout.CENTER );
