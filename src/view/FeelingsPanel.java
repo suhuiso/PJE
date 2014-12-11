@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Observable;
 
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+
 import controller.AppController;
 
 @SuppressWarnings("serial")
@@ -21,9 +24,14 @@ public class FeelingsPanel extends AbstractCardPanel {
 					
 		this.searchBarPanel = new SearchBarPanel( controller, FeelingsPanel.FEELINGS_COLOR );
 		this.listTweetPanel = new ListTweetPanel( controller, FeelingsPanel.FEELINGS_COLOR );		
-
+		
+		JScrollPane scrollContainer = new JScrollPane( this.listTweetPanel );
+		scrollContainer.getVerticalScrollBar().setUnitIncrement(10);
+		scrollContainer.setBackground( FeelingsPanel.FEELINGS_COLOR );
+		scrollContainer.setBorder( new EmptyBorder( 0, 25, 25, 25 ) );
+		
 		this.add( this.searchBarPanel, BorderLayout.NORTH );
-		this.add( this.listTweetPanel, BorderLayout.CENTER );
+		this.add( scrollContainer, BorderLayout.CENTER );
 	}
 
 	@Override
