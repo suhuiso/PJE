@@ -151,13 +151,14 @@ public class AppModel extends Observable {
 	 */
 	public void saves ( Tweet tweet, Feeling feeling ) {
 		tweet = this.msgCleaner.cleanTweet( tweet );
-		tweet.setFeeling( feeling );
 		String content = tweet.getMsg();
 		Long id = tweet.getId();
 
 		// A tweet is saved if it is not only composed of whitespaces
-		// A tweet is saved if it is not already saved 
-		if ( ( !content.trim().isEmpty() ) && ( !this.tweetPool.containsKey( id ) ) ) {
+		// A tweet is saved if it is not already saved
+		
+		if ( !content.trim().isEmpty() ) {
+			tweet.setFeeling( feeling );
 			this.tweetPool.put( id, tweet );
 		}
 	}
