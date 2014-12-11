@@ -83,11 +83,11 @@ public enum Feeling {
 		if ( this == UNPOLARIZED ) {
 			return "Non noté";
 		} else if ( this == NEGATIVE ) {
-			return "Négatif";
+			return "-";
 		} else if ( this == NEUTRAL ) {
-			return "Neutre";
+			return "=";
 		} else {
-			return "Positif";
+			return "+";
 		}
 	}
 

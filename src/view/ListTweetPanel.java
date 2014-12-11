@@ -34,7 +34,7 @@ public class ListTweetPanel extends JPanel implements Observer {
 
 		for ( Tweet tweet : lt ) {
 			this.controller.classificationRequest( tweet );
-			this.add( new TweetPanel( this.controller, tweet ) );
+			this.add( new TweetPanel( this.controller, tweet, FeelingsPanel.FEELINGS_COLOR_BRIGHTER ) );
 		}
 
 		/* View have changed and need to be repaint */

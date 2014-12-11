@@ -14,6 +14,7 @@ public class FeelingsPanel extends AbstractCardPanel {
 
     public static final String CARD_FEELINGS =  "Feelings Panel";
     public static final Color FEELINGS_COLOR = new Color( 0x0E83CD );
+    public static final Color FEELINGS_COLOR_BRIGHTER = new Color( 0xC3E0F2 );
     
     private SearchBarPanel searchBarPanel;
 	private ListTweetPanel listTweetPanel;
@@ -27,6 +28,7 @@ public class FeelingsPanel extends AbstractCardPanel {
 		
 		JScrollPane scrollContainer = new JScrollPane( this.listTweetPanel );
 		scrollContainer.getVerticalScrollBar().setUnitIncrement(10);
+		scrollContainer.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		scrollContainer.setBackground( FeelingsPanel.FEELINGS_COLOR );
 		scrollContainer.setBorder( new EmptyBorder( 0, 25, 25, 25 ) );
 		
