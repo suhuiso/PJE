@@ -122,7 +122,7 @@ public class AppController {
 	 *            feeling to assign to the tweet
 	 */
 	public void saveRequest ( Tweet tweet, Feeling feeling ) {
-		this.model.save( tweet, feeling );
+		this.model.saves( tweet, feeling );
 	}
 
 	/**
