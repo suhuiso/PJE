@@ -97,6 +97,20 @@ public class AppController {
 	}
 	
 	/**
+	 * Updates Twitter configuration to use Lille 1 Proxy
+	 */
+	public void setProxyTwitter () {
+		this.model.setProxyTwitter();
+	}
+
+	/**
+	 * Updates Twitter configuration to not use Lille 1 Proxy
+	 */
+	public void unsetProxyTwitter () {
+		this.model.unsetProxyTwitter();
+	}
+	
+	/**
 	 * Controls the query passed in parameter.
 	 * 
 	 * @param query

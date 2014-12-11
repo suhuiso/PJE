@@ -10,6 +10,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
@@ -33,7 +34,7 @@ public class AppModel extends Observable {
 	/**
 	 * Singleton representing the Twitter API.
 	 */
-	private final Twitter TWITTER = TwitterFactory.getSingleton();
+	private Twitter twitter = TwitterFactory.getSingleton();
 
 	/**
 	 * TweetPool of the model.
@@ -81,6 +82,26 @@ public class AppModel extends Observable {
 	}
 
 	/**
+	 * Updates Twitter configuration to use Lille 1 Proxy
+	 */
+	public void setProxyTwitter () {
+		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+		configurationBuilder.setHttpProxyHost( "cache-etu.univ-lille1.fr" );
+		configurationBuilder.setHttpProxyPort( 3128 );
+		
+		this.twitter = new TwitterFactory( configurationBuilder.build() ).getInstance();
+	}
+
+	/**
+	 * Updates Twitter configuration to not use Lille 1 Proxy
+	 */
+	public void unsetProxyTwitter () {
+		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+		
+		this.twitter = new TwitterFactory( configurationBuilder.build() ).getInstance();
+	}
+	
+	/**
 	 * Gives the number of tweets to display.
 	 * 
 	 * @return number of tweets
@@ -125,7 +146,7 @@ public class AppModel extends Observable {
 		query.setCount( this.tweetsNb );
 
 		try {
-			result = this.TWITTER.search( query );
+			result = this.twitter.search( query );
 
 			// TODO : Gérer le fait que res ne possède potentiellement pas assez de tweets
 
