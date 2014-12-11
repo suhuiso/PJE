@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import twitter4j.Query;
@@ -48,7 +49,7 @@ public class AppModel extends Observable {
 	 * Classifiers available in the application.
 	 */
 	private Classifier[] classifiers;
-	
+
 	/**
 	 * Number of tweets recover in one search.
 	 */
@@ -99,6 +100,7 @@ public class AppModel extends Observable {
 	public void search ( String searchQuery ) {
 		Query query = new Query( searchQuery );
 		QueryResult result = null;
+		List< Tweet > res = new ArrayList< Tweet >();
 
 		query.setLang( "fr" );
 		query.setCount( this.tweetsNb );
@@ -106,10 +108,15 @@ public class AppModel extends Observable {
 		try {
 			result = this.TWITTER.search( query );
 
-			// Debug
+			// TODO : Gérer le fait que res ne possède potentiellement pas assez de tweets
+
 			for ( Status status : result.getTweets() ) {
-				System.out
-				        .println( "@" + status.getUser().getScreenName() + ":" + status.getText() );
+					res.add( new Tweet( status, searchQuery, Feeling.UNPOLARIZED ) );
+			}
+
+			// Debug
+			for ( Tweet tweet : res ) {
+				System.out.println( tweet );
 			}
 
 			this.setChanged();
