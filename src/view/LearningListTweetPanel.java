@@ -21,7 +21,7 @@ public class LearningListTweetPanel extends ListTweetPanel {
 
 		for ( Tweet tweet : lt ) {
 			this.controller.classificationRequest( tweet );
-			this.listTweetModel.addElement( new LearningTweetPanel( this.controller, tweet ) );
+			this.add( new LearningTweetPanel( this.controller, tweet ) );
 		}
 
 		/* View have changed and need to be repaint */
