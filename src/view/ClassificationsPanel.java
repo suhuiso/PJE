@@ -31,6 +31,12 @@ public class ClassificationsPanel extends JPanel {
 		this.add( this.positiveButton );
 	}
 	
+	public void unhighlightButtons () {
+		this.negativeButton.unhighlight();
+		this.neutralButton.unhighlight();
+		this.positiveButton.unhighlight();
+	}
+	
 	@Override
 	public Dimension getPreferredSize () {
 		return new Dimension( 500, 50 );
