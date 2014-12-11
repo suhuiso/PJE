@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,57 +12,58 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import twitter4j.QueryResult;
-import twitter4j.Status;
 import utils.Tweet;
 import controller.AppController;
-import feeling.Feeling;
 
-@SuppressWarnings("serial")
+@SuppressWarnings ( "serial" )
 public class ListTweetPanel extends JPanel implements Observer {
 
 	protected AppController controller;
-	protected DefaultListModel<TweetPanel> listTweetModel;
-	protected JList<TweetPanel> listTweet;
+
+	protected DefaultListModel< TweetPanel > listTweetModel;
+
+	protected JList< TweetPanel > listTweet;
+
 	protected JScrollPane scrollPane;
-	
+
 	public ListTweetPanel ( AppController controller, Color color ) {
-		super();		
+		super();
 		this.setBackground( color );
 		this.setBorder( new EmptyBorder( 0, 25, 25, 25 ) );
-		
+
 		this.setLayout( new BorderLayout() );
 
 		this.controller = controller;
-		
-		this.listTweetModel = new DefaultListModel<TweetPanel>();
-		
-		this.listTweet = new JList<TweetPanel>( this.listTweetModel );
-	    this.listTweet.setCellRenderer( new TweetRenderer() );
+
+		this.listTweetModel = new DefaultListModel< TweetPanel >();
+
+		this.listTweet = new JList< TweetPanel >( this.listTweetModel );
+		this.listTweet.setCellRenderer( new TweetRenderer() );
 		this.listTweet.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
-		
-		this.scrollPane = new JScrollPane( this.listTweet );		
+
+		this.scrollPane = new JScrollPane( this.listTweet );
 		this.scrollPane.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-				
+
 		this.add( this.scrollPane, BorderLayout.CENTER );
 	}
 
 	@Override
 	public void update ( Observable o, Object arg ) {
-		QueryResult qr = ( QueryResult ) arg;
+		@SuppressWarnings ( "unchecked" )
+		List< Tweet > lt = ( List< Tweet > ) arg;
 
 		for ( Status status : qr.getTweets() ) {
 			Tweet tweet = new Tweet( status, qr.getQuery(), Feeling.UNPOLARIZED );
 			tweet.setFeeling( this.controller.getCurrentClassifier().classifies( tweet.getMsg() ) );
 			this.listTweetModel.addElement( new TweetPanel( this.controller, tweet ) );
-		}		
+		}
 
 		/* View have changed and need to be repaint */
 		this.revalidate();
 	}
-	
+
 	public void clear () {
 		this.listTweetModel.clear();
 	}
