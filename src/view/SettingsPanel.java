@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.Observable;
 
+import javax.swing.BoxLayout;
 import javax.swing.border.EmptyBorder;
 
 import controller.AppController;
@@ -15,16 +16,21 @@ public class SettingsPanel extends AbstractCardPanel {
     public static final Color SETTINGS_COLOR = new Color( 0x9E54BD );
 
     private AssignerSettingsPanel assignerSettingsPanel;
+    private CountTweetsPanel countTweetsPanel;
     
 	public SettingsPanel( AppController controller ) {
 		super( controller );
 		this.setBorder( new EmptyBorder( 25, 25, 25, 25 ) );
 		this.setBackground( SettingsPanel.SETTINGS_COLOR );
-		this.setLayout( new FlowLayout() );
+		this.setLayout( new BoxLayout( this, BoxLayout.PAGE_AXIS ) );
 		
 		this.assignerSettingsPanel = new AssignerSettingsPanel( controller, SettingsPanel.SETTINGS_COLOR );
+		this.assignerSettingsPanel.setAlignmentX( LEFT_ALIGNMENT );
+		this.countTweetsPanel = new CountTweetsPanel( controller, SettingsPanel.SETTINGS_COLOR );
+		this.countTweetsPanel.setAlignmentX( LEFT_ALIGNMENT );
 		
 		this.add( this.assignerSettingsPanel );
+		this.add( this.countTweetsPanel );
 	}
 
 	@Override
