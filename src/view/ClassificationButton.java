@@ -21,15 +21,15 @@ public class ClassificationButton extends JButton {
 	
 	public ClassificationButton ( AppController controller, String text, Feeling feeling ) {
 		super( text );
-		//this.setForeground( Color.WHITE );
-		//this.setBackground( new Color( 0x2F3238 ) );
-		//this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
-		//this.setFont( new Font( "Lucida Sans", Font.PLAIN, 15 ) );
+		this.setForeground( Color.WHITE );
+		this.setBackground( new Color( 0x2F3238 ) );
+		this.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		this.setFont( new Font( "Lucida Sans", Font.PLAIN, 15 ) );
 		
 		this.controller = controller;
 		this.feeling = feeling;
 		
-		//this.setOpaque( true );
+		this.setOpaque( true );
 				
 		this.initListener();
 	}
