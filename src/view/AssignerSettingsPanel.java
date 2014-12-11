@@ -84,6 +84,11 @@ public class AssignerSettingsPanel extends JPanel {
 	public Dimension getPreferredSize () {
 		return new Dimension( 750, 200 );
 	}
+
+	@Override
+	public Dimension getMaximumSize () {
+		return new Dimension( 750, 200 );
+	}
 	
 	class RadioButtonListener implements ActionListener {
 		
