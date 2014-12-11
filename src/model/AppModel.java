@@ -141,13 +141,15 @@ public class AppModel extends Observable {
 		tweet.setFeeling( classifier.classifies( tweet.getMsg() ) );
 	}
 
+	/**
+	 * Saves the tweet with the feeling in the tweet pool.
 	 * 
 	 * @param tweet
 	 *            tweet to save
 	 * @param feeling
 	 *            feeling of the tweet
 	 */
-	public void save ( Tweet tweet, Feeling feeling ) {
+	public void saves ( Tweet tweet, Feeling feeling ) {
 		tweet = this.msgCleaner.cleanTweet( tweet );
 		tweet.setFeeling( feeling );
 		String content = tweet.getMsg();
