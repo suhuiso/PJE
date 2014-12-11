@@ -44,7 +44,14 @@ public class ClassificationButton extends JButton {
 	}
 	
 	public void highlight () {
+		this.setForeground( new Color( 0x2F3238 ) );
 		this.setBackground( new Color( 0xFCD04B ) );
+		this.repaint();
+	}
+	
+	public void unhighlight () {
+		this.setForeground( Color.WHITE );
+		this.setBackground( new Color( 0x2F3238 ) );
 		this.repaint();
 	}
 	
@@ -56,9 +63,11 @@ public class ClassificationButton extends JButton {
 	class ClassificationButtonListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {	
 			ClassificationButton buttonPressed = ( ClassificationButton ) e.getSource();
-			LearningTweetPanel learningTweetPanel = ( LearningTweetPanel ) buttonPressed.getParent().getParent();
+			ClassificationsPanel classificationsPanel = ( ClassificationsPanel ) buttonPressed.getParent();
+			LearningTweetPanel learningTweetPanel = ( LearningTweetPanel ) classificationsPanel.getParent();
 			Tweet currentTweet = learningTweetPanel.getTweet();
 			ClassificationButton.this.controller.saveRequest( currentTweet, buttonPressed.getFeeling() );
+			classificationsPanel.unhighlightButtons();
 			buttonPressed.highlight();
 			System.out.println( "ClassificationButtonListener@actionPerformed: " + buttonPressed.getFeeling() );
 		}
