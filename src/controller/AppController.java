@@ -104,6 +104,16 @@ public class AppController {
 	}
 
 	/**
+	 * Asks to the model to classify a tweet with the current classifier.
+	 * 
+	 * @param tweet
+	 *            tweet to classify with the current classifier
+	 */
+	public void classificationRequest ( Tweet tweet ) {
+		this.model.classifies( tweet, this.getCurrentClassifier() );
+	}
+
+	/**
 	 * Asks to the model to save a tweet in the tweet pool.
 	 * 
 	 * @param tweet
