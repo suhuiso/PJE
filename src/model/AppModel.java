@@ -45,9 +45,14 @@ public class AppModel extends Observable {
 	private MessageCleaner msgCleaner;
 
 	/**
-	 * Classifiers available in the application
+	 * Classifiers available in the application.
 	 */
 	private Classifier[] classifiers;
+	
+	/**
+	 * Number of tweets recover in one search.
+	 */
+	private int tweetsNb;
 
 	/////////////
 	// METHODS //
@@ -71,6 +76,7 @@ public class AppModel extends Observable {
 		        new PresenceBayesClassifier( this.tweetPool, true, new ArrayList< Integer >( 1 ) );
 		this.classifiers[ 4 ] =
 		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 2 ) );
+		this.tweetsNb = 25;
 	}
 
 	/**
@@ -95,6 +101,7 @@ public class AppModel extends Observable {
 		QueryResult result = null;
 
 		query.setLang( "fr" );
+		query.setCount( this.tweetsNb );
 
 		try {
 			result = this.TWITTER.search( query );
