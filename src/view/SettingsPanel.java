@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.util.Observable;
 
 import javax.swing.BoxLayout;
