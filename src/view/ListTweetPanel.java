@@ -20,10 +20,10 @@ import feeling.Feeling;
 @SuppressWarnings("serial")
 public class ListTweetPanel extends JPanel implements Observer {
 
-	private AppController controller;
-	private DefaultListModel<TweetPanel> listTweetModel;
-	private JList<TweetPanel> listTweet;
-	private JScrollPane scrollPane;
+	protected AppController controller;
+	protected DefaultListModel<TweetPanel> listTweetModel;
+	protected JList<TweetPanel> listTweet;
+	protected JScrollPane scrollPane;
 	
 	public ListTweetPanel ( AppController controller, Color color ) {
 		super();		
