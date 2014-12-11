@@ -111,7 +111,9 @@ public class AppModel extends Observable {
 			// TODO : Gérer le fait que res ne possède potentiellement pas assez de tweets
 
 			for ( Status status : result.getTweets() ) {
+				if ( !status.isRetweet() ) {
 					res.add( new Tweet( status, searchQuery, Feeling.UNPOLARIZED ) );
+				}
 			}
 
 			// Debug
