@@ -91,18 +91,19 @@ public class AppModel extends Observable {
 
 		try {
 			result = this.TWITTER.search( query );
+
+			// Debug
+			for ( Status status : result.getTweets() ) {
+				System.out
+				        .println( "@" + status.getUser().getScreenName() + ":" + status.getText() );
+			}
+
+			this.setChanged();
+			this.notifyObservers( result );
 		} catch ( TwitterException e ) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// Debug
-		for ( Status status : result.getTweets() ) {
-			System.out.println( "@" + status.getUser().getScreenName() + ":" + status.getText() );
-		}
-
-		this.setChanged();
-		this.notifyObservers( result );
 	}
 
 	/**
