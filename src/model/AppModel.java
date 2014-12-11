@@ -130,7 +130,17 @@ public class AppModel extends Observable {
 	}
 
 	/**
-	 * Save the tweet with the feeling in the tweet pool.
+	 * Classifies the tweet with the given classifier.
+	 * 
+	 * @param tweet
+	 *            tweet to classify
+	 * @param classifier
+	 *            classifier to use to classify the tweet
+	 */
+	public void classifies ( Tweet tweet, Classifier classifier ) {
+		tweet.setFeeling( classifier.classifies( tweet.getMsg() ) );
+	}
+
 	 * 
 	 * @param tweet
 	 *            tweet to save
