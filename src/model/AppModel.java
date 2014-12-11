@@ -73,6 +73,13 @@ public class AppModel extends Observable {
 		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 2 ) );
 	}
 
+	/**
+	 * Gives the classifier with the id
+	 * 
+	 * @param id
+	 *            id of the classifier
+	 * @return classifier with this id
+	 */
 	public Classifier getClassifierById ( int id ) {
 		return this.classifiers[ id ];
 	}
