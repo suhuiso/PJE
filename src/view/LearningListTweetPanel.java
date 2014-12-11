@@ -19,9 +19,8 @@ public class LearningListTweetPanel extends ListTweetPanel {
 		@SuppressWarnings ( "unchecked" )
 		List< Tweet > lt = ( List< Tweet > ) arg;
 
-		for ( Status status : qr.getTweets() ) {
-			Tweet tweet = new Tweet( status, qr.getQuery(), Feeling.UNPOLARIZED );
-			tweet.setFeeling( this.controller.getCurrentClassifier().classifies( tweet.getMsg() ) );
+		for ( Tweet tweet : lt ) {
+			this.controller.classificationRequest( tweet );
 			this.listTweetModel.addElement( new LearningTweetPanel( this.controller, tweet ) );
 		}
 
