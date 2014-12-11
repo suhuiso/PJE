@@ -36,7 +36,7 @@ public class CountTweetsPanel extends JPanel {
 		this.selectField.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
 
 		this.add( this.label, BorderLayout.WEST );
-		this.add( this.selectField, BorderLayout.CENTER );
+		this.add( this.selectField, BorderLayout.EAST );
 		
 		this.initListeners();
 	}
@@ -47,7 +47,7 @@ public class CountTweetsPanel extends JPanel {
 	
 	@Override
 	public Dimension getPreferredSize () {
-		return new Dimension( 400, 80 );
+		return new Dimension( 400, 50 );
 	}
 
 	@Override

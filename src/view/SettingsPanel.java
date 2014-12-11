@@ -16,6 +16,7 @@ public class SettingsPanel extends AbstractCardPanel {
 
     private AssignerSettingsPanel assignerSettingsPanel;
     private CountTweetsPanel countTweetsPanel;
+    private ProxyPanel proxyPanel;
     
 	public SettingsPanel( AppController controller ) {
 		super( controller );
@@ -27,9 +28,12 @@ public class SettingsPanel extends AbstractCardPanel {
 		this.assignerSettingsPanel.setAlignmentX( LEFT_ALIGNMENT );
 		this.countTweetsPanel = new CountTweetsPanel( controller, SettingsPanel.SETTINGS_COLOR );
 		this.countTweetsPanel.setAlignmentX( LEFT_ALIGNMENT );
+		this.proxyPanel = new ProxyPanel( controller, SettingsPanel.SETTINGS_COLOR );
+		this.proxyPanel.setAlignmentX( LEFT_ALIGNMENT );
 		
 		this.add( this.assignerSettingsPanel );
 		this.add( this.countTweetsPanel );
+		this.add( this.proxyPanel );
 	}
 
 	@Override
