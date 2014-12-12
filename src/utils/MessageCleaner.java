@@ -111,17 +111,6 @@ public class MessageCleaner {
 	}
 
 	/**
-	 * Removes RT from a message.
-	 * 
-	 * @param s
-	 *            string in which remove RT
-	 * @return s without RT
-	 */
-	public String deleteRT ( String s ) {
-		return s.replaceAll( "RT\\s?\"[\\w\\s\\d]+\"", "" );
-	}
-
-	/**
 	 * Removes numbers from a message.
 	 * 
 	 * @param s
