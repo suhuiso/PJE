@@ -68,7 +68,7 @@ public class KNNClassifier extends CrossValidable {
 	@Override
 	public Feeling classifies ( String msg ) {
 		int nb = this.nbNeighbors;
-		List< Tweet > tweets = new ArrayList< Tweet >( this.tweetPool.values() );
+		List< Tweet > tweets = new ArrayList< Tweet >( this.tweetPool.tweets() );
 		DTCouple[] neighbors = new DTCouple[ nb ];
 		DTCoupleComparator comparator = new DTCoupleComparator();
 

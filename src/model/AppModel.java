@@ -88,7 +88,7 @@ public class AppModel extends Observable {
 		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
 		configurationBuilder.setHttpProxyHost( "cache-etu.univ-lille1.fr" );
 		configurationBuilder.setHttpProxyPort( 3128 );
-		
+
 		this.twitter = new TwitterFactory( configurationBuilder.build() ).getInstance();
 	}
 
@@ -97,10 +97,10 @@ public class AppModel extends Observable {
 	 */
 	public void unsetProxyTwitter () {
 		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-		
+
 		this.twitter = new TwitterFactory( configurationBuilder.build() ).getInstance();
 	}
-	
+
 	/**
 	 * Gives the number of tweets to display.
 	 * 
@@ -109,7 +109,7 @@ public class AppModel extends Observable {
 	public int getTweetsNb () {
 		return this.tweetsNb;
 	}
-	
+
 	/**
 	 * Set the number of tweets to display.
 	 * 
@@ -119,7 +119,7 @@ public class AppModel extends Observable {
 	public void setTweetsNb ( int newValue ) {
 		this.tweetsNb = newValue;
 	}
-	
+
 	/**
 	 * Gives the classifier with the id
 	 * 
@@ -192,14 +192,11 @@ public class AppModel extends Observable {
 	public void saves ( Tweet tweet, Feeling feeling ) {
 		tweet = this.msgCleaner.cleanTweet( tweet );
 		String content = tweet.getMsg();
-		Long id = tweet.getId();
 
 		// A tweet is saved if it is not only composed of whitespaces
-		// A tweet is saved if it is not already saved
-		
 		if ( !content.trim().isEmpty() ) {
 			tweet.setFeeling( feeling );
-			this.tweetPool.put( id, tweet );
+			this.tweetPool.add( tweet );
 		}
 	}
 

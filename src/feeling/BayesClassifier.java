@@ -65,14 +65,16 @@ public abstract class BayesClassifier extends CrossValidable {
 	 */
 	public double probaFeeling ( Feeling feeling ) {
 		int res = 0;
+		int cpt = 0;
 
-		for ( Tweet tweet : this.tweetPool.values() ) {
+		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			if ( tweet.getFeeling() == feeling ) {
 				res++;
 			}
+			cpt++;
 		}
 
-		return res / this.tweetPool.values().size();
+		return res / cpt;
 	}
 
 	/**
@@ -96,7 +98,7 @@ public abstract class BayesClassifier extends CrossValidable {
 	private int nbOfNGrammeOfDegree ( int degree ) {
 		Set< NGramme > set = new TreeSet< NGramme >();
 
-		for ( Tweet tweet : this.tweetPool.values() ) {
+		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), degree ) ) {
 				set.add( nGramme );
 			}
@@ -109,7 +111,7 @@ public abstract class BayesClassifier extends CrossValidable {
 	private int nbOfNGrammesForFeeling ( Feeling feeling, int degree ) {
 		Set< NGramme > set = new TreeSet< NGramme >();
 
-		for ( Tweet tweet : this.tweetPool.values() ) {
+		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			if ( tweet.getFeeling() == feeling ) {
 				for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), degree ) ) {
 					set.add( nGramme );
@@ -124,7 +126,7 @@ public abstract class BayesClassifier extends CrossValidable {
 	private int nbOccurenceOfNGrammeForTheFeeling ( NGramme ng, Feeling feeling ) {
 		int res = 0;
 
-		for ( Tweet tweet : this.tweetPool.values() ) {
+		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			if ( tweet.getFeeling() == feeling ) {
 				for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), ng.getDegree() ) ) {
 					if ( nGramme.equals( ng ) ) {

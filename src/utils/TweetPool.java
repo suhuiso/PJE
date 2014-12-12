@@ -9,8 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import feeling.Feeling;
 
@@ -26,9 +26,9 @@ public class TweetPool {
 	////////////
 
 	/**
-	 * Hash map to save tweets.
+	 * Set to save tweets.
 	 */
-	private HashMap< Long, Tweet > tweetPool;
+	private Set< Tweet > tweetPool;
 
 	/////////////
 	// METHODS //
@@ -41,7 +41,7 @@ public class TweetPool {
 	 *            path of the CSV file where tweets has been previously saved
 	 */
 	public TweetPool ( String path ) {
-		this.tweetPool = new HashMap< Long, Tweet >();
+		this.tweetPool = new HashSet< Tweet >();
 		this.readCSV( path );
 	}
 
@@ -49,7 +49,14 @@ public class TweetPool {
 	 * Simple constructor.
 	 */
 	public TweetPool () {
-		this.tweetPool = new HashMap< Long, Tweet >();
+		this.tweetPool = new HashSet< Tweet >();
+	}
+
+	/**
+	 * Gives an access to the tweets of the tweet pool.
+	 */
+	public Set< Tweet > tweets () {
+		return this.tweetPool;
 	}
 
 	/**
@@ -76,7 +83,7 @@ public class TweetPool {
 					                        .parse( elem[ 3 ] ), elem[ 4 ],
 					                Feeling.createByValue( Integer.parseInt( elem[ 5 ] ) ) );
 
-					this.tweetPool.put( tweet.getId(), tweet );
+					this.tweetPool.add( tweet );
 				}
 
 				br.close();
@@ -106,7 +113,7 @@ public class TweetPool {
 		try {
 			BufferedWriter out = new BufferedWriter( new FileWriter( path, false ) );
 
-			for ( Tweet tweet : this.tweetPool.values() ) {
+			for ( Tweet tweet : this.tweetPool ) {
 				String tweetText =
 				        tweet.getId()
 				                + ","
@@ -130,36 +137,23 @@ public class TweetPool {
 	}
 
 	/**
-	 * Tells if the TweetPool contains an id as key.
-	 * 
-	 * @param id
-	 *            id to know if it is contained in the hash map
-	 * @return true if id is a key in the hash map, false otherwise
-	 */
-	public boolean containsKey ( long id ) {
-		return this.tweetPool.containsKey( id );
-	}
-
-	/**
-	 * Puts a couple (key, value) in the tweet pool.
-	 * 
-	 * @param key
-	 *            id of the tweet to add
-	 * @param value
+	 * Adds a tweet in the tweet pool.
+	 *
+	 * @param tweet
 	 *            tweet to add
 	 */
-	public void put ( Long key, Tweet value ) {
-		this.tweetPool.put( key, value );
+	public void add ( Tweet tweet ) {
+		this.tweetPool.add( tweet );
 	}
 
 	/**
-	 * Removes a couple (key, value) in the tweet pool.
+	 * Removes a tweet in the tweet pool.
 	 * 
-	 * @param key
-	 *            id of the tweet to remove
+	 * @param tweet
+	 *            tweet to remove
 	 */
-	public void remove ( Long key ) {
-		this.tweetPool.remove( key );
+	public void remove ( Tweet tweet ) {
+		this.tweetPool.remove( tweet );
 	}
 
 	/**
@@ -167,15 +161,6 @@ public class TweetPool {
 	 */
 	public void clear () {
 		this.tweetPool.clear();
-	}
-
-	/**
-	 * Gives the values contained in the tweet pool.
-	 * 
-	 * @return values contained in the tweet pool
-	 */
-	public Collection< Tweet > values () {
-		return this.tweetPool.values();
 	}
 
 }
