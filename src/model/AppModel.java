@@ -17,6 +17,7 @@ import utils.TweetPool;
 import feeling.Classifier;
 import feeling.DictionaryClassifier;
 import feeling.Feeling;
+import feeling.FrequencyBayesClassifier;
 import feeling.KNNClassifier;
 import feeling.PresenceBayesClassifier;
 
@@ -67,17 +68,50 @@ public class AppModel extends Observable {
 	public AppModel () {
 		this.tweetPool = new TweetPool( "resources/tweetPool.csv" );
 		this.msgCleaner = MessageCleaner.getInstance();
-		// TODO Mettre les classifieurs réels
-		this.classifiers = new Classifier[ 5 ];
+		
+		// Classifiers
+		this.classifiers = new Classifier[ 16 ];
+		
+		// Lists representing unigram, bigram, and unigram + bigram parameters 
+		List< Integer > uni = new ArrayList< Integer >( 1 );
+		List< Integer > bi = new ArrayList< Integer >( 2 );
+		List< Integer > uniAndBi = new ArrayList< Integer >( 1 );
+		uniAndBi.add( 2 );
+		
+		// Classifiers initialisation
 		this.classifiers[ 0 ] =
 		        new DictionaryClassifier( "./resources/positive.txt", "./resources/negative.txt" );
 		this.classifiers[ 1 ] = new KNNClassifier( this.tweetPool, 5 );
 		this.classifiers[ 2 ] =
-		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 1 ) );
+		        new PresenceBayesClassifier( this.tweetPool, false, uni );
 		this.classifiers[ 3 ] =
-		        new PresenceBayesClassifier( this.tweetPool, true, new ArrayList< Integer >( 1 ) );
+		        new PresenceBayesClassifier( this.tweetPool, true, uni );
 		this.classifiers[ 4 ] =
-		        new PresenceBayesClassifier( this.tweetPool, false, new ArrayList< Integer >( 2 ) );
+		        new PresenceBayesClassifier( this.tweetPool, false, bi );
+		this.classifiers[ 5 ] =
+				new PresenceBayesClassifier( this.tweetPool, true, bi );
+		this.classifiers[ 6 ] =
+				new PresenceBayesClassifier( this.tweetPool, false, bi );
+		this.classifiers[ 7 ] =
+				new PresenceBayesClassifier( this.tweetPool, true, uniAndBi );
+		this.classifiers[ 8 ] =
+				new FrequencyBayesClassifier( this.tweetPool, false, uniAndBi );
+		this.classifiers[ 9 ] =
+		        new FrequencyBayesClassifier( this.tweetPool, false, uni );
+		this.classifiers[ 10 ] =
+		        new FrequencyBayesClassifier( this.tweetPool, true, uni );
+		this.classifiers[ 11 ] =
+		        new FrequencyBayesClassifier( this.tweetPool, false, bi );
+		this.classifiers[ 12 ] =
+				new FrequencyBayesClassifier( this.tweetPool, true, bi );
+		this.classifiers[ 13 ] =
+				new FrequencyBayesClassifier( this.tweetPool, false, bi );
+		this.classifiers[ 14 ] =
+				new FrequencyBayesClassifier( this.tweetPool, true, uniAndBi );
+		this.classifiers[ 15 ] =
+				new FrequencyBayesClassifier( this.tweetPool, false, uniAndBi );
+		
+		// Default tweetsNb
 		this.tweetsNb = 25;
 	}
 
