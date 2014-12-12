@@ -46,6 +46,13 @@ public class TweetPool {
 	}
 
 	/**
+	 * Simple constructor.
+	 */
+	public TweetPool () {
+		this.tweetPool = new HashMap< Long, Tweet >();
+	}
+
+	/**
 	 * Reads a CSV file and fill the tweet pool with.
 	 * 
 	 * @param path
@@ -89,6 +96,12 @@ public class TweetPool {
 		}
 	}
 
+	/**
+	 * Writes the tweet pool in a CSV file.
+	 * 
+	 * @param path
+	 *            path of the CSV file where write the tweet pool
+	 */
 	public void writeCSV ( String path ) {
 		try {
 			BufferedWriter out = new BufferedWriter( new FileWriter( path, false ) );
@@ -148,7 +161,7 @@ public class TweetPool {
 	public void remove ( Long key ) {
 		this.tweetPool.remove( key );
 	}
-	
+
 	/**
 	 * Clears the tweet pool.
 	 */
