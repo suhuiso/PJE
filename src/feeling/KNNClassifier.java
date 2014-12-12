@@ -13,16 +13,11 @@ import utils.TweetPool;
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public class KNNClassifier extends Classifier {
+public class KNNClassifier extends CrossValidable {
 
 	////////////
 	// FIELDS //
 	////////////
-
-	/**
-	 * Tweet pool used for basic learning.
-	 */
-	private TweetPool tweetPool;
 
 	/**
 	 * Number of neighbors considered.
@@ -42,7 +37,7 @@ public class KNNClassifier extends Classifier {
 	 *            number of neighbors considered
 	 */
 	public KNNClassifier ( TweetPool tweetPool, int nbNeighbors ) {
-		this.tweetPool = tweetPool;
+		super( tweetPool );
 		this.nbNeighbors = nbNeighbors;
 	}
 
@@ -153,6 +148,12 @@ public class KNNClassifier extends Classifier {
 			return Integer.compare( ( ( feeling.KNNClassifier.DTCouple ) c1 ).getDistance(),
 			        ( ( feeling.KNNClassifier.DTCouple ) c2 ).getDistance() );
 		}
+
+	}
+
+	@Override
+	public void setTweetPool ( TweetPool newTweetPool ) {
+		// TODO Auto-generated method stub
 
 	}
 

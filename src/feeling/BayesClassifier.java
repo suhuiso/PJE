@@ -14,16 +14,11 @@ import utils.TweetPool;
  * 
  * @author Quentin Baert & Thomas Bernard
  */
-public abstract class BayesClassifier extends Classifier {
+public abstract class BayesClassifier extends CrossValidable {
 
 	////////////
 	// FIELDS //
 	////////////
-
-	/**
-	 * Tweet pool on which apply the Bayesian classification.
-	 */
-	protected TweetPool tweetPool;
 
 	/**
 	 * Length of the words to accept when the classification with simplified method.
@@ -56,7 +51,7 @@ public abstract class BayesClassifier extends Classifier {
 	 *            degrees of the n-grammes used for the classification
 	 */
 	public BayesClassifier ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {
-		this.tweetPool = tweetPool;
+		super( tweetPool );
 		this.simplified = simplified;
 		this.degrees = degrees;
 	}
