@@ -91,7 +91,7 @@ public class Tweet {
 	 */
 	public Tweet ( Status status, String query, Feeling feeling ) {
 		this.id = status.getId();
-		this.twittos = status.getUser().getName();
+		this.twittos = status.getUser().getScreenName();
 		this.msg = status.getText();
 		this.date = status.getCreatedAt();
 		this.query = query;
