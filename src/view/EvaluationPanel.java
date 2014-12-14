@@ -24,4 +24,8 @@ public class EvaluationPanel extends AbstractCardPanel {
 	public void clear() {
 		// TODO Auto-generated method stub
 	}
+	
+	public String toString () {
+		return EvaluationPanel.CARD_EVALUATION;
+	}
 }

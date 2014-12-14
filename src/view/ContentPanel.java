@@ -46,7 +46,7 @@ public class ContentPanel extends JPanel implements Observer {
 	}
 	
 	public void setCurrentPanel ( AbstractCardPanel newPanel ) {
-		System.out.println( "setCurrentPanel:" + newPanel.toString() );
+		System.out.println( "ContentPanel@setCurrentPanel: " + newPanel.toString() );
 		this.getCurrentPanel().clear();
 		this.currentPanel = newPanel;
 	}

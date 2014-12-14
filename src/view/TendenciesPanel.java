@@ -36,4 +36,8 @@ public class TendenciesPanel extends AbstractCardPanel {
 		this.searchBarPanel.clear();
 		this.statisticsPanel.clear();
 	}
+	
+	public String toString () {
+		return TendenciesPanel.CARD_TENDENCIES;
+	}
 }

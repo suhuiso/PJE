@@ -46,4 +46,8 @@ public class LearningPanel extends AbstractCardPanel {
 		this.searchBarPanel.clear();
 		this.listTweetPanel.clear();
 	}
+	
+	public String toString () {
+		return LearningPanel.CARD_LEARNING;
+	}
 }

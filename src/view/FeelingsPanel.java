@@ -46,4 +46,8 @@ public class FeelingsPanel extends AbstractCardPanel {
 		this.searchBarPanel.clear();
 		this.listTweetPanel.clear();
 	}
+	
+	public String toString () {
+		return FeelingsPanel.CARD_FEELINGS;
+	}
 }
