@@ -15,6 +15,7 @@ public class MenuPanel extends JPanel {
 	private MenuButton feelingsButton;
 	private MenuButton tendenciesButton;
 	private MenuButton learningButton;
+	private MenuButton evaluationButton;
 	private MenuButton settingsButton;
 	private MenuButton currentButton;
 	
@@ -28,12 +29,14 @@ public class MenuPanel extends JPanel {
 		this.feelingsButton = new MenuButton( "Sentiments", FeelingsPanel.CARD_FEELINGS, FeelingsPanel.FEELINGS_COLOR );
 		this.tendenciesButton = new MenuButton( "Tendances", TendenciesPanel.CARD_TENDENCIES, TendenciesPanel.TENDENCIES_COLOR );
 		this.learningButton = new MenuButton( "Apprentissage", LearningPanel.CARD_LEARNING, LearningPanel.LEARNING_COLOR );
+		this.evaluationButton = new MenuButton( "Evaluation", EvaluationPanel.CARD_EVALUATION, EvaluationPanel.EVALUATION_COLOR );
 		this.settingsButton = new MenuButton( "Réglages", SettingsPanel.CARD_SETTINGS, SettingsPanel.SETTINGS_COLOR );
 		this.setCurrentButton( this.feelingsButton );
 		
 		this.add( this.feelingsButton );
 		this.add( this.tendenciesButton );
 		this.add( this.learningButton );
+		this.add( this.evaluationButton );
 		this.add( this.settingsButton );
 	}
 	
@@ -51,6 +54,7 @@ public class MenuPanel extends JPanel {
 		this.feelingsButton.unhighlight();
 		this.tendenciesButton.unhighlight();
 		this.learningButton.unhighlight();
+		this.evaluationButton.unhighlight();
 		this.settingsButton.unhighlight();
 	}
 	

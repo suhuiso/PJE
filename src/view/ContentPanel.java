@@ -16,6 +16,7 @@ public class ContentPanel extends JPanel implements Observer {
 	private FeelingsPanel feelingsPanel;
 	private TendenciesPanel tendenciesPanel;
 	private LearningPanel learningPanel;
+	private EvaluationPanel evaluationPanel;
 	private SettingsPanel settingsPanel;
 	private AbstractCardPanel currentPanel;
 	
@@ -29,12 +30,14 @@ public class ContentPanel extends JPanel implements Observer {
 		this.feelingsPanel = new FeelingsPanel( controller );
 		this.tendenciesPanel = new TendenciesPanel( controller );
 		this.learningPanel = new LearningPanel( controller );
+		this.evaluationPanel = new EvaluationPanel( controller );
 		this.settingsPanel = new SettingsPanel( controller );
 		this.currentPanel = this.feelingsPanel;
 		
 		this.add( this.feelingsPanel, FeelingsPanel.CARD_FEELINGS );
 		this.add( this.tendenciesPanel, TendenciesPanel.CARD_TENDENCIES );
 		this.add( this.learningPanel, LearningPanel.CARD_LEARNING );
+		this.add( this.evaluationPanel, EvaluationPanel.CARD_EVALUATION );
 		this.add( this.settingsPanel, SettingsPanel.CARD_SETTINGS );
 	}
 
@@ -60,6 +63,8 @@ public class ContentPanel extends JPanel implements Observer {
 			return this.tendenciesPanel;
 		} else if ( cardName.equals( LearningPanel.CARD_LEARNING ) ) {
 			return this.learningPanel;
+		} else if ( cardName.equals( EvaluationPanel.CARD_EVALUATION) ) {
+			return this.evaluationPanel;
 		} else {
 			return this.settingsPanel;
 		}
