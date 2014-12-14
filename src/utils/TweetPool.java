@@ -7,8 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,8 +78,7 @@ public class TweetPool {
 
 					Tweet tweet =
 					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ],
-					                DateFormat.getDateInstance( DateFormat.MEDIUM )
-					                        .parse( elem[ 3 ] ), elem[ 4 ],
+					                new Date( new Long( elem[3] ) ), elem[ 4 ],
 					                Feeling.createByValue( Integer.parseInt( elem[ 5 ] ) ) );
 
 					this.tweetPool.add( tweet );
@@ -94,9 +92,6 @@ public class TweetPool {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch ( NumberFormatException e ) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch ( ParseException e ) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -123,8 +118,10 @@ public class TweetPool {
 				                + tweet.getMsg()
 				                + "\""
 				                + ","
-				                + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(
-				                        tweet.getDate() ) + "," + tweet.getQuery() + ","
+				                + tweet.getDate().getTime()
+				                + ","
+				                + tweet.getQuery()
+				                + ","
 				                + tweet.getFeeling().getValue();
 				out.write( tweetText );
 				out.newLine();
