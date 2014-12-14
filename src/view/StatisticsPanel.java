@@ -46,6 +46,6 @@ public class StatisticsPanel extends JPanel {
 	}
 	
 	public void clear () {
-		//TODO
+		this.removeAll();
 	}
 }
