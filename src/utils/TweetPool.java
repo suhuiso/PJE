@@ -81,7 +81,7 @@ public class TweetPool {
 					                new Date( new Long( elem[3] ) ), elem[ 4 ],
 					                Feeling.createByValue( Integer.parseInt( elem[ 5 ] ) ) );
 
-					this.tweetPool.add( tweet );
+					this.add( tweet );
 				}
 
 				br.close();
@@ -141,6 +141,7 @@ public class TweetPool {
 	 */
 	public void add ( Tweet tweet ) {
 		this.tweetPool.add( tweet );
+		System.out.println( "TweetPool@add: \n" + tweet );
 	}
 
 	/**
