@@ -65,19 +65,19 @@ public class PieChartBuilder extends ChartBuilder {
 
 		// Slices construction
 		Slice positivesSlice =
-		        Slice.newSlice( ( positives * 100 ) / nb, Color.newColor( "CACACA" ), "Positive tweets", "Positive tweets" );
+		        Slice.newSlice( ( positives * 100 ) / nb, Color.newColor( "0E83CD" ), "Positif", "Positif" );
 		Slice negativesSlice =
-		        Slice.newSlice( ( negatives * 100 ) / nb, Color.newColor( "DF7417" ), "Negative tweets", "Negative tweets" );
+		        Slice.newSlice( ( negatives * 100 ) / nb, Color.newColor( "CC6055" ), "Négatif", "Négatif" );
 		Slice neutralsSlice =
-		        Slice.newSlice( ( neutrals * 100 ) / nb, Color.newColor( "951800" ), "Neutral tweets", "Neutral tweets" );
-
+		        Slice.newSlice( ( neutrals * 100 ) / nb, Color.newColor( "FCD04B" ), "Neutre", "Neutre" );
+		
 		// Pie chart creation
 		PieChart chart = GCharts.newPieChart( positivesSlice, negativesSlice, neutralsSlice );
 
 		// Pie chart parameters
-		chart.setTitle( "Feeling about : " + this.request, Color.BLACK, 16 );
-		chart.setSize( 600, 200 );
-		chart.setThreeD( true );
+		chart.setTitle( "Estimation du sentiment pour la recherche \"" + this.request + "\"", Color.BLACK, 16 );
+		chart.setSize( 750, 400 );
+		chart.setThreeD( false );
 		
 		// Transparent background
 		chart.setBackgroundFill( Fills.newSolidFill( Color.newColor( "000000", 0 ) ) );
