@@ -1,5 +1,9 @@
 package controller;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -59,7 +63,7 @@ public class AppController {
 	public Classifier getCurrentClassifier () {
 		return this.currentClassifier;
 	}
-	
+
 	/**
 	 * Sets the current classifier
 	 * 
@@ -95,7 +99,7 @@ public class AppController {
 	public void setCountTweets ( int newValue ) {
 		this.model.setTweetsNb( newValue );
 	}
-	
+
 	/**
 	 * Updates Twitter configuration to use Lille 1 Proxy
 	 */
@@ -109,7 +113,7 @@ public class AppController {
 	public void unsetProxyTwitter () {
 		this.model.unsetProxyTwitter();
 	}
-	
+
 	/**
 	 * Controls the query passed in parameter.
 	 * 
@@ -153,6 +157,15 @@ public class AppController {
 	 */
 	public void saveRequest ( Tweet tweet, Feeling feeling ) {
 		this.model.saves( tweet, feeling );
+	}
+
+	public Image pieChartImageRequest ( List< Tweet > tweets ) throws MalformedURLException,
+	        IOException, IllegalArgumentException {
+		if ( tweets.isEmpty() ) {
+			throw new IllegalArgumentException( "List of tweets is empty." );
+		}
+
+		return this.model.generatePieChartImage( this.currentClassifier, tweets );
 	}
 
 	/**

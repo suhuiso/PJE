@@ -1,9 +1,13 @@
 package model;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import statistics.PieChartBuilder;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -221,6 +225,10 @@ public class AppModel extends Observable {
 			tweet.setFeeling( feeling );
 			this.tweetPool.add( tweet );
 		}
+	}
+	
+	public Image generatePieChartImage ( Classifier classifier, List< Tweet > tweets ) throws MalformedURLException, IOException {
+		return new PieChartBuilder( classifier, tweets.get(0).getQuery(), tweets ).getPieChartImage();
 	}
 
 	/**
