@@ -39,7 +39,7 @@ public class AssignerSettingsPanel extends JPanel {
 		this.radios[ 2 ] = new JRadioButton( "Bayes : présence, non simplifié, uni-grammes" );
 		this.radios[ 3 ] = new JRadioButton( "Bayes : présence, simplifié, uni-grammes" );
 		this.radios[ 4 ] = new JRadioButton( "Bayes : présence, non simplifié, bi-grammes" );
-		this.radios[ 5 ] = new JRadioButton( "Bayes : présence, simplifié, uni-grammes" );
+		this.radios[ 5 ] = new JRadioButton( "Bayes : présence, simplifié, bi-grammes" );
 		this.radios[ 6 ] =
 		        new JRadioButton( "Bayes : présence, non simplifié, uni-grammes + bi-grammes" );
 		this.radios[ 7 ] =
@@ -47,7 +47,7 @@ public class AssignerSettingsPanel extends JPanel {
 		this.radios[ 8 ] = new JRadioButton( "Bayes : fréquence, non simplifié, uni-grammes" );
 		this.radios[ 9 ] = new JRadioButton( "Bayes : fréquence, simplifié, uni-grammes" );
 		this.radios[ 10 ] = new JRadioButton( "Bayes : fréquence, non simplifié, bi-grammes" );
-		this.radios[ 11 ] = new JRadioButton( "Bayes : fréquence, simplifié, uni-grammes" );
+		this.radios[ 11 ] = new JRadioButton( "Bayes : fréquence, simplifié, bi-grammes" );
 		this.radios[ 12 ] =
 		        new JRadioButton( "Bayes : fréquence, non simplifié, uni-grammes + bi-grammes" );
 		this.radios[ 13 ] =
