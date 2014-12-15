@@ -205,4 +205,7 @@ public abstract class BayesClassifier extends CrossValidable {
 		}
 	}
 
+	public String toString () {
+		return "Bayes";
+	}
 }

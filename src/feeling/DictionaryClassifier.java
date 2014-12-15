@@ -146,4 +146,8 @@ public class DictionaryClassifier extends Classifier {
 
 		return msgDictionaryPolarize( msg, positiveWords, negativeWords );
 	}
+	
+	public String toString () {
+		return "Dictionnaire";
+	}
 }

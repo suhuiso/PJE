@@ -40,4 +40,7 @@ public class PresenceBayesClassifier extends BayesClassifier {
 		return res * this.probaFeeling( feeling );
 	}
 
+	public String toString () {
+		return "Bayes par présence";
+	}
 }

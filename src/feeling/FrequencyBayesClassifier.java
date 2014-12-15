@@ -54,4 +54,7 @@ public class FrequencyBayesClassifier extends BayesClassifier {
 		return res;
 	}
 
+	public String toString () {
+		return "Bayes par fréquence";
+	}
 }

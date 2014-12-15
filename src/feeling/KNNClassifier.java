@@ -156,5 +156,9 @@ public class KNNClassifier extends CrossValidable {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String toString () {
+		return "KNN";
+	}
 
 }
