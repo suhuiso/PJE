@@ -146,6 +146,7 @@ public class MessageCleaner {
 			try {
 				s = ( String ) m.invoke( this, s );
 			} catch ( Exception e ) {
+				// TODO
 				e.printStackTrace();
 			}
 		}
@@ -160,8 +161,7 @@ public class MessageCleaner {
 	 *            tweet to clean
 	 * @return cleaning tweet
 	 */
-	public Tweet cleanTweet ( Tweet tweet ) {
+	public void cleanTweet ( Tweet tweet ) {
 		tweet.setMsg( this.cleanText( tweet.getMsg() ) );
-		return tweet;
 	}
 }
