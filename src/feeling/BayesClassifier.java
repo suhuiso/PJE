@@ -64,8 +64,8 @@ public abstract class BayesClassifier extends CrossValidable {
 	 * @return the probability that feeling appears in the tweet pool
 	 */
 	public double probaFeeling ( Feeling feeling ) {
-		int res = 0;
-		int cpt = 0;
+		double res = 0;
+		double cpt = 0;
 
 		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			if ( tweet.getFeeling() == feeling ) {
@@ -150,10 +150,14 @@ public abstract class BayesClassifier extends CrossValidable {
 	 */
 	protected double probaNGrammeForFeeling ( NGramme nGramme, Feeling feeling ) {
 		int degree = nGramme.getDegree();
-
-		return ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 )
-		        / ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
-		                .nbOfNGrammeOfDegree( degree ) );
+		
+		System.out.println( ( ( double ) ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 ) )
+		        / ( ( double ) ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
+		                .nbOfNGrammeOfDegree( degree ) ) ) );
+		
+		return ( ( double ) ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 ) )
+		        / ( ( double ) ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
+		                .nbOfNGrammeOfDegree( degree ) ) );
 	}
 
 	/**
