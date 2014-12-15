@@ -59,7 +59,7 @@ public class AppModel extends Observable {
 	/**
 	 * Number of tweets recover in one search.
 	 */
-	private int tweetsNb;
+	private int nbTweets;
 
 	/////////////
 	// METHODS //
@@ -106,7 +106,7 @@ public class AppModel extends Observable {
 		this.classifiers[ 13 ] = new FrequencyBayesClassifier( this.tweetPool, true, uniAndBi );
 
 		// Default tweetsNb
-		this.tweetsNb = 25;
+		this.nbTweets = 25;
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class AppModel extends Observable {
 	 * @return number of tweets
 	 */
 	public int getTweetsNb () {
-		return this.tweetsNb;
+		return this.nbTweets;
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class AppModel extends Observable {
 	 *            new number of tweets
 	 */
 	public void setTweetsNb ( int newValue ) {
-		this.tweetsNb = newValue;
+		this.nbTweets = newValue;
 	}
 
 	/**
@@ -171,22 +171,26 @@ public class AppModel extends Observable {
 		List< Tweet > res = new ArrayList< Tweet >();
 
 		query.setLang( "fr" );
-		query.setCount( this.tweetsNb );
+		query.setCount( this.nbTweets );
 
 		try {
 			result = this.twitter.search( query );
 
-			// TODO : Gérer le fait que res ne possède potentiellement pas assez de tweets
+			// Try to have extactly nbTweets tweets in the res list
+			while ( result.hasNext() && ( res.size() < this.nbTweets ) ) {
+				List< Status > list = result.getTweets();
+				int i = 0;
 
-			for ( Status status : result.getTweets() ) {
-				if ( !status.isRetweet() ) {
-					res.add( new Tweet( status, searchQuery, Feeling.UNPOLARIZED ) );
+				while ( ( i < list.size() ) && ( res.size() < this.nbTweets ) ) {
+					Status status = list.get( i );
+					if ( !status.isRetweet() ) {
+						res.add( new Tweet( status, searchQuery, Feeling.UNPOLARIZED ) );
+					}
+					i++;
 				}
-			}
 
-			// Debug
-			for ( Tweet tweet : res ) {
-				System.out.println( tweet );
+				query = result.nextQuery();
+				result = this.twitter.search( query );
 			}
 
 			this.setChanged();
