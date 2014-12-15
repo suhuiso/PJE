@@ -50,4 +50,9 @@ public class LearningPanel extends AbstractCardPanel {
 	public String toString () {
 		return LearningPanel.CARD_LEARNING;
 	}
+
+	@Override
+	public void resume() {
+		this.searchBarPanel.resume();
+	}
 }

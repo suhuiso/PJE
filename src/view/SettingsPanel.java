@@ -49,4 +49,9 @@ public class SettingsPanel extends AbstractCardPanel {
 	public String toString () {
 		return SettingsPanel.CARD_SETTINGS;
 	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+	}
 }

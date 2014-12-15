@@ -55,4 +55,8 @@ public class SearchBarPanel extends JPanel {
 	public void clear () {
 		this.searchBarField.setText( "" );
 	}
+	
+	public void resume () {
+		this.classifierLabel.setText( "avec " + this.controller.getCurrentClassifier().toString() );
+	}
 }

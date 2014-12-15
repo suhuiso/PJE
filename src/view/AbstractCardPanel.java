@@ -32,5 +32,7 @@ public abstract class AbstractCardPanel extends JPanel implements Observer {
 	@Override
 	public abstract void update ( Observable o, Object arg );
 	
+	public abstract void resume ();
+	
 	public abstract void clear ();
 }

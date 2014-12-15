@@ -28,4 +28,9 @@ public class EvaluationPanel extends AbstractCardPanel {
 	public String toString () {
 		return EvaluationPanel.CARD_EVALUATION;
 	}
+
+	@Override
+	public void resume() {
+		// TODO
+	}
 }

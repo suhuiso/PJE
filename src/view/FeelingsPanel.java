@@ -50,4 +50,9 @@ public class FeelingsPanel extends AbstractCardPanel {
 	public String toString () {
 		return FeelingsPanel.CARD_FEELINGS;
 	}
+
+	@Override
+	public void resume() {
+		this.searchBarPanel.resume();
+	}
 }

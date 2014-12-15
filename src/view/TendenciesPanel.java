@@ -40,4 +40,9 @@ public class TendenciesPanel extends AbstractCardPanel {
 	public String toString () {
 		return TendenciesPanel.CARD_TENDENCIES;
 	}
+
+	@Override
+	public void resume() {
+		this.searchBarPanel.resume();
+	}
 }
