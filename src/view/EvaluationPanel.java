@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -36,14 +37,14 @@ public class EvaluationPanel extends AbstractCardPanel {
 		
 		this.evaluationTitlePanel = new EvaluationTitlePanel( controller, EvaluationPanel.EVALUATION_COLOR );
 		
-		this.evaluationValueLabel = new JLabel( "53%", SwingConstants.CENTER );
+		this.evaluationValueLabel = new JLabel( "", SwingConstants.CENTER );
 		this.evaluationValueLabel.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		this.evaluationValueLabel.setFont( new Font( "Lucida Sans", Font.PLAIN, 100 ) );
 		
 		this.evaluationButton = new JButton( "Evaluer" );
 		this.evaluationButton.setForeground( Color.WHITE );
 		this.evaluationButton.setBackground( new Color( 0x2F3238 ) );
-		this.evaluationButton.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
+		this.evaluationButton.setBorder( BorderFactory.createMatteBorder( 15, 200, 15, 200, EvaluationPanel.EVALUATION_COLOR ) );
 		this.evaluationButton.setFont( new Font( "Lucida Sans", Font.PLAIN, 20 ) );
 		this.evaluationButton.setPreferredSize( new Dimension( 150, 100 ) );
 		this.evaluationButton.setOpaque( true );
@@ -58,7 +59,7 @@ public class EvaluationPanel extends AbstractCardPanel {
 	}
 
 	public void clear() {
-		// TODO Auto-generated method stub
+		this.evaluationValueLabel.setText( "" );
 	}
 	
 	public String toString () {
@@ -67,6 +68,6 @@ public class EvaluationPanel extends AbstractCardPanel {
 
 	@Override
 	public void resume() {
-		// TODO
+		this.evaluationTitlePanel.resume();
 	}
 }

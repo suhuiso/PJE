@@ -30,7 +30,7 @@ public class EvaluationTitlePanel extends JPanel {
 		this.controller = controller;
 		this.classifier = this.controller.getCurrentClassifier();
 		
-		this.evaluationLabel = new JLabel( "Evaluation du classifieur :", SwingConstants.CENTER );
+		this.evaluationLabel = new JLabel( "Evaluation du taux d'erreur du classifieur :", SwingConstants.CENTER );
 		this.evaluationLabel.setBorder( new EmptyBorder( 0, 0, 0, 0 ) );
 		this.evaluationLabel.setBackground( color );
 		this.evaluationLabel.setForeground( new Color( 0x2F3238 ) );
@@ -46,5 +46,10 @@ public class EvaluationTitlePanel extends JPanel {
 		
 		this.add( this.evaluationLabel, BorderLayout.NORTH );
 		this.add( this.classifierLabel, BorderLayout.SOUTH );
+	}
+	
+	public void resume () {
+		this.classifier = this.controller.getCurrentClassifier();
+		this.classifierLabel.setText( this.classifier.toString() );
 	}
 }
