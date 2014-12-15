@@ -21,7 +21,13 @@ public abstract class CrossValidable extends Classifier {
 	/////////////
 	// METHODS //
 	/////////////
-	
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param tweetPool
+	 *            learning base used for classification
+	 */
 	public CrossValidable ( TweetPool tweetPool ) {
 		this.tweetPool = tweetPool;
 	}
