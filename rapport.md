@@ -106,6 +106,29 @@ Pour cela, nous avons utilisé l'écran **Apprentissage** de notre application q
 
 ### Interface graphique
 
+L'interface de notre application se décompose en deux éléments.  
+A gauche, une barre latérale fait office de menu et permet de naviguer entre les différentes fonctionnalités de l'application. A droite, la partie principale de la fenêtre, représente les différentes fonctionnalités liéss à l'analyse de sentiments sur Twitter.
+
+Dans le détail, le menu permet d'accéder à :
+
+- **Sentiments** :  
+Cet écran permet d'effectuer une recherche sur un thème particulier, d'obtenir les tweets correspondants à cette recherche et d'indiquer pour chaque tweet le sentiment déterminé par nos algorithmes.  
+
+- **Tendances** :  
+Comme pour la section **Sentiments**, cet écran permet d'effectuer une recherche sur un thème particulier mais cette fois les tweets ne sont pas individuellement affichés. En revanche, une estimation du sentiments des tweets trouvés est effectuée puis affichée sous forme de diagramme circulaire.
+
+- **Apprentissage** :  
+Cet écran permet d'effectuer une recherche sur un thème particulier et de définir manuellement un sentiment sur un tweet. Le sentiment déterminé par notre application est indiqué à titre de comparaison, mais c'est à l'utilisateur de choisir le sentiment approprié, dans le but d'ajouter ce tweet à notre base d'apprentissage et améliorer les algorithmes de classifications.
+
+- **Evaluation** :  
+Cet écran permet d'évaluer la qualité du classifieur utilisé par l'application. Le classifieur est utilisé sur l'ensemble de la base d'apprentissage pour déterminer le taux d'erreur de celui-ci.
+
+- **Réglages** :  
+Cet écran permet de modifier le comportement de l'application. Trois paramètres sont ainsi configurables :  
+	- *Classifieur* : Permet de choisir le classifieur à utiliser dans le reste de l'application
+	- *Nombre de tweets* : Permet de choisir le nombre de tweets à utiliser/analyser dans le reste de l'application
+	- *Proxy Lille 1* : Permet d'activer ou non l'utilisation du proxy Lille 1 pour l'accès à l'API Twitter
+
 ##### Copies d'écrans
 
 ##### Manuel d'utilisation
