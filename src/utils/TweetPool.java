@@ -78,8 +78,9 @@ public class TweetPool {
 					String[] elem = line.split( "," );
 
 					Tweet tweet =
-					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ], new Date(
-					                new Long( elem[ 3 ] ) ), elem[ 4 ],
+					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ].substring(
+					                1, elem[ 2 ].length() - 1 ), new Date( new Long( elem[ 3 ] ) ),
+					                elem[ 4 ],
 					                Feeling.createByValue( Integer.parseInt( elem[ 5 ] ) ) );
 
 					this.add( tweet );
