@@ -40,7 +40,6 @@ public class SearchBarPanel extends JPanel {
 		this.classifierLabel.setBackground( Color.WHITE );
 		this.classifierLabel.setForeground( new Color( 0x2F3238 ) );
 		this.classifierLabel.setFont( new Font( "Lucida Sans", Font.BOLD, 18 ) );
-		this.classifierLabel.setBorder( new EmptyBorder( 25, 25, 25, 25 ) );
 		this.classifierLabel.setBorder( new CompoundBorder(
 			BorderFactory.createMatteBorder( 0, 0, 0, 20, color ),
 			BorderFactory.createMatteBorder( 0, 0, 0, 20, Color.WHITE )
