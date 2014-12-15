@@ -10,6 +10,6 @@ public abstract class ClassifierStatistics {
 	/**
 	 * Evaluates the classifier using the tweet pool.
 	 */
-	public abstract float evaluates ();
+	public abstract double evaluates ();
 
 }
