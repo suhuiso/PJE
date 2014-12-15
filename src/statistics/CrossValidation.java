@@ -50,7 +50,6 @@ public class CrossValidation extends ClassifierStatistics {
 	 */
 	public CrossValidation ( TweetPool tweetPool, CrossValidable classifier, int nbFolds ) {
 		this.tweetPool = tweetPool;
-		// TODO : PLUTÔT COPIER LE CLASSIFIER NON ?
 		this.classifier = classifier;
 		this.nbFolds = nbFolds;
 	}
@@ -123,7 +122,7 @@ public class CrossValidation extends ClassifierStatistics {
 					}
 				}
 			}
-			
+
 			// Set the classifier learning base
 			this.classifier.setTweetPool( learningBase );
 
@@ -134,7 +133,7 @@ public class CrossValidation extends ClassifierStatistics {
 					res++;
 				}
 			}
-			
+
 			// TODO : Retourner res ou ( res / toClassify.tweets().size() ) ?
 			return res;
 		}
@@ -144,11 +143,14 @@ public class CrossValidation extends ClassifierStatistics {
 	public float evaluates () {
 		int res = 0;
 		TweetPool[] folds = this.generatesFolds();
-		
+
 		for ( int fold = 0; fold < this.nbFolds; fold++ ) {
 			res += this.evaluatesWithFoldNb( fold, folds );
 		}
-		
+
+		// Put the intiale tweet pool in the classifier
+		this.classifier.setTweetPool( this.tweetPool );
+
 		return res / this.nbFolds;
 	}
 
