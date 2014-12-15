@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import statistics.CrossValidation;
 import statistics.PieChartBuilder;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -19,6 +20,7 @@ import utils.MessageCleaner;
 import utils.Tweet;
 import utils.TweetPool;
 import feeling.Classifier;
+import feeling.CrossValidable;
 import feeling.DictionaryClassifier;
 import feeling.Feeling;
 import feeling.FrequencyBayesClassifier;
@@ -237,11 +239,26 @@ public class AppModel extends Observable {
 		return new PieChartBuilder( classifier, tweets.get( 0 ).getQuery(), tweets )
 		        .getPieChartImage();
 	}
-
+	
 	/**
 	 * Saves the tweet pool of the model in a CSV file.
 	 */
 	public void closingWindowSave () {
 		this.tweetPool.writeCSV( "resources/tweetPool.csv" );
+	}
+
+	/**
+	 * Build a CrossValidation object to evaluate the classifier
+	 * 
+	 * @param classifier
+	 * 				classifier to evaluate
+	 */
+	public void evaluateClassifier ( Classifier classifier ) {
+		if ( classifier.isCrossValidable() ) {
+			CrossValidation crossValidation = new CrossValidation( this.tweetPool, ( CrossValidable ) classifier, 10 );
+			Float res = crossValidation.evaluates();
+			this.setChanged();
+			this.notifyObservers( res );
+		}
 	}
 }
