@@ -1,10 +1,9 @@
 package feeling;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-
 import utils.Tweet;
 import utils.TweetPool;
 
@@ -96,7 +95,7 @@ public abstract class BayesClassifier extends CrossValidable {
 
 	// Gives the number of n-gramme with this degree in the tweet pool
 	private int nbOfNGrammeOfDegree ( int degree ) {
-		Set< NGramme > set = new TreeSet< NGramme >();
+		Set< NGramme > set = new HashSet< NGramme >();
 
 		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			for ( NGramme nGramme : NGramme.buildNGrammesFrom( tweet.getMsg(), degree ) ) {
@@ -109,7 +108,7 @@ public abstract class BayesClassifier extends CrossValidable {
 
 	// Gives the number of n-grammes with this degree in tweets that have the feeling in the tweet pool
 	private int nbOfNGrammesForFeeling ( Feeling feeling, int degree ) {
-		Set< NGramme > set = new TreeSet< NGramme >();
+		Set< NGramme > set = new HashSet< NGramme >();
 
 		for ( Tweet tweet : this.tweetPool.tweets() ) {
 			if ( tweet.getFeeling() == feeling ) {
@@ -150,11 +149,7 @@ public abstract class BayesClassifier extends CrossValidable {
 	 */
 	protected double probaNGrammeForFeeling ( NGramme nGramme, Feeling feeling ) {
 		int degree = nGramme.getDegree();
-		
-		System.out.println( ( ( double ) ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 ) )
-		        / ( ( double ) ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
-		                .nbOfNGrammeOfDegree( degree ) ) ) );
-		
+
 		return ( ( double ) ( this.nbOccurenceOfNGrammeForTheFeeling( nGramme, feeling ) + 1 ) )
 		        / ( ( double ) ( this.nbOfNGrammesForFeeling( feeling, degree ) + this
 		                .nbOfNGrammeOfDegree( degree ) ) );
