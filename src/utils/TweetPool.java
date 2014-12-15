@@ -7,9 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import feeling.Feeling;
 
@@ -27,7 +28,7 @@ public class TweetPool {
 	/**
 	 * Set to save tweets.
 	 */
-	private Set< Tweet > tweetPool;
+	private Map< Long, Tweet > tweetPool;
 
 	/////////////
 	// METHODS //
@@ -40,7 +41,7 @@ public class TweetPool {
 	 *            path of the CSV file where tweets has been previously saved
 	 */
 	public TweetPool ( String path ) {
-		this.tweetPool = new HashSet< Tweet >();
+		this.tweetPool = new HashMap< Long, Tweet >();
 		this.readCSV( path );
 	}
 
@@ -48,14 +49,14 @@ public class TweetPool {
 	 * Simple constructor.
 	 */
 	public TweetPool () {
-		this.tweetPool = new HashSet< Tweet >();
+		this.tweetPool = new HashMap< Long, Tweet >();
 	}
 
 	/**
 	 * Gives an access to the tweets of the tweet pool.
 	 */
-	public Set< Tweet > tweets () {
-		return this.tweetPool;
+	public Collection< Tweet > tweets () {
+		return this.tweetPool.values();
 	}
 
 	/**
@@ -108,7 +109,7 @@ public class TweetPool {
 		try {
 			BufferedWriter out = new BufferedWriter( new FileWriter( path, false ) );
 
-			for ( Tweet tweet : this.tweetPool ) {
+			for ( Tweet tweet : this.tweets() ) {
 				String msg = tweet.getMsg();
 				StringBuffer tweetText =
 				        new StringBuffer( tweet.getId() + "," + tweet.getTwittos() + "," );
@@ -139,8 +140,7 @@ public class TweetPool {
 	 *            tweet to add
 	 */
 	public void add ( Tweet tweet ) {
-		this.tweetPool.add( tweet );
-		System.out.println( "TweetPool@add: \n" + tweet );
+		this.tweetPool.put( tweet.getId(), tweet );
 	}
 
 	/**
