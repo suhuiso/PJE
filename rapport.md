@@ -1,7 +1,4 @@
-**Quentin Baert**  
-**Thomas Bernard**  
-
-# Rapport PJE : Présentation de l'application Tweel
+![Header](header.png)
 
 # Description générale du projet
 
