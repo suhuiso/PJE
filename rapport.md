@@ -222,7 +222,18 @@ L'évaluation s'effectue sur le classifieur actuellement choisi dans les **Régl
 
 # Résultats de la classification avec les différentes méthodes et analyses
 
-*Tester les différents classifiers ?*
+* L'évaluation du *DictionnaryClassifier* n'a pas été implémenté. Nous supposons cependant que son efficacité est totalement liée à la persipicacité et à la complétude de ses deux dictionnaires.
+
+Pour les classifieurs *CrossValidable*, la méthode d'évaluation de cross validation est utilisée.
+
+* L'évaluation du *KNNClassifier* est globalement mauvaise avec un taux d'erreur suppérieur à 60%.  
+La fonction de distance entre deux tweets en est peut être responsable étant donné que des tweets très courts (un ou deux mots) minimiseront parfois plus la distance que des tweets contenant beaucoup de mots en communs.
+
+* L'évaluation des *BayesClassifier* donne un taux d'erreur inférieur à 50%.
+
+Les meilleurs classifieurs implémentés sont donc les *BayesClassifier* avec un peu plus d'une classification correcte sur deux.  
+Il nous semble tout de même intéréssant de revoir les algorithmes de classifications bayesiennes pour obtenir de meilleurs résultats.  
+On pourrait également se pencher sur l'amélioration des dictionnaires du *DictionnaryClassifier* et de la fonction de distance du *KNNClassifier*.
 
 # Conclusion
 
