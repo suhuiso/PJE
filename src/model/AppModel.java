@@ -260,7 +260,7 @@ public class AppModel extends Observable {
 		if ( classifier.isCrossValidable() ) {
 			CrossValidation crossValidation =
 			        new CrossValidation( this.tweetPool, ( CrossValidable ) classifier, 10 );
-			Float res = crossValidation.evaluates();
+			Double res = crossValidation.evaluates();
 			this.setChanged();
 			this.notifyObservers( res );
 		}
