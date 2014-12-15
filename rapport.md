@@ -131,6 +131,24 @@ Cet écran permet de modifier le comportement de l'application. Trois paramètre
 
 ##### Copies d'écrans
 
+![Page accueil](screen01.jpg)
+Page d'accueil de l'application
+
+![Page accueil](screen02.jpg)
+Recherche de tweets sur le mot-clé "Lille", et affichage du sentiment déterminé à partir du classifieur Dictionnaire
+
+![Page accueil](screen03.jpg)
+Recherche d'une tendance sur le mot-clé "Lille", et affichage d'un diagramme circulaire donnant la répartition entre tweets positifs, négatifs et neutres, à partir du classifieur Bayes par présence
+
+![Page accueil](screen04.jpg)
+Recherche de tweets sur le mot-clé "Lille", affichage des résultats avec indication du sentiment à l'aide du classifieur Bayes par présence. Les différents boutons sous chaque tweet permettent de lui associer un sentiment et de l'ajouter à la base d'apprentissage
+
+![Page accueil](screen05.jpg)
+Evaluation du classifieur actuellement utilisé par l'application, c'est à dire Bayes par fréquence, et calcul en temps réel de son taux d'erreur
+
+![Page accueil](screen06.jpg)
+Paramètres de l'application, avec choix du classifieur à utiliser, du nombre de tweets à traiter simultanément et de l'utilisation du proxy Lille 1
+
 ##### Manuel d'utilisation
 
 ## Résultat de la classification avec les différentes méthodes et analyses
