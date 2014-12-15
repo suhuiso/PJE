@@ -151,6 +151,26 @@ Paramètres de l'application, avec choix du classifieur à utiliser, du nombre d
 
 ##### Manuel d'utilisation
 
+L'application Tweel est fournie sous la forme d'un fichier JAR.
+
+Exécution de l'application :  
+```
+java -jar tweel.jar
+```
+
+**/!\\ L'application Tweel nécessite Java 7 ou ultérieur**
+
+Ce fichier JAR s'accompagne d'un dossier `resources` et d'un fichier `twitter4j.properties`. Ces deux éléments sont indispensables au bon fonctionnement de l'application.
+
+- `twitter4j.properties` contient les tokens d'auhentifications à l'API Twitter. En l'état, l'application peut être utilisée avec les accès fournis mais vous pouvez utiliser des tokens différents.
+
+- `resources` est un dossier contenant les fichiers :
+	- `negative.txt` est utilisé par le classifieur Dictionnaire pour identifier les mots à connotation négative.
+	- `positive.txt` est utilisé par le classifieur Dictionnaire pour identifier les mots à connotation positive.
+	- `tweetPool.csv` est le fichier qui contient la base d'apprentissage. Celui-ci se met à jour automatiquement lorsque vous notez manuellement des tweets dans la section Apprentissage de l'application.
+
+
+
 ## Résultat de la classification avec les différentes méthodes et analyses
 
 *Tester les différents classifiers ?*
