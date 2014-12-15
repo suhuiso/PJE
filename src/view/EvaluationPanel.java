@@ -58,7 +58,7 @@ public class EvaluationPanel extends AbstractCardPanel {
 	}
 
 	public void clear() {
-		// TODO Auto-generated method stub
+		this.evaluationValueLabel.setText( "" );
 	}
 	
 	public String toString () {
@@ -67,6 +67,6 @@ public class EvaluationPanel extends AbstractCardPanel {
 
 	@Override
 	public void resume() {
-		// TODO
+		this.evaluationTitlePanel.resume();
 	}
 }
