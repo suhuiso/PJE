@@ -77,8 +77,8 @@ public class TweetPool {
 					String[] elem = line.split( "," );
 
 					Tweet tweet =
-					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ],
-					                new Date( new Long( elem[3] ) ), elem[ 4 ],
+					        new Tweet( Long.parseLong( elem[ 0 ] ), elem[ 1 ], elem[ 2 ], new Date(
+					                new Long( elem[ 3 ] ) ), elem[ 4 ],
 					                Feeling.createByValue( Integer.parseInt( elem[ 5 ] ) ) );
 
 					this.add( tweet );
@@ -109,21 +109,20 @@ public class TweetPool {
 			BufferedWriter out = new BufferedWriter( new FileWriter( path, false ) );
 
 			for ( Tweet tweet : this.tweetPool ) {
-				String tweetText =
-				        tweet.getId()
-				                + ","
-				                + tweet.getTwittos()
-				                + ","
-				                + "\""
-				                + tweet.getMsg()
-				                + "\""
-				                + ","
-				                + tweet.getDate().getTime()
-				                + ","
-				                + tweet.getQuery()
-				                + ","
-				                + tweet.getFeeling().getValue();
-				out.write( tweetText );
+				String msg = tweet.getMsg();
+				StringBuffer tweetText =
+				        new StringBuffer( tweet.getId() + "," + tweet.getTwittos() + "," );
+
+				if ( msg.charAt( 0 ) == '"' && msg.charAt( msg.length() - 1 ) == '"' ) {
+					tweetText.append( tweet.getMsg() );
+				} else {
+					tweetText.append( "\"" + tweet.getMsg() + "\"" );
+				}
+
+				tweetText.append( "," + tweet.getDate().getTime() + "," + tweet.getQuery() + ","
+				        + tweet.getFeeling().getValue() );
+
+				out.write( tweetText.toString() );
 				out.newLine();
 			}
 
