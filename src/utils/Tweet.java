@@ -185,69 +185,33 @@ public class Tweet {
 	}
 
 	@Override
-	public boolean equals ( Object obj ) {
-		if ( this == obj ) {
-			return true;
-		}
-		if ( obj == null ) {
-			return false;
-		}
-		if ( ! ( obj instanceof Tweet ) ) {
-			return false;
-		}
-		Tweet other = ( Tweet ) obj;
-		if ( date == null ) {
-			if ( other.date != null ) {
-				return false;
-			}
-		} else if ( !date.equals( other.date ) ) {
-			return false;
-		}
-		if ( feeling != other.feeling ) {
-			return false;
-		}
-		if ( id == null ) {
-			if ( other.id != null ) {
-				return false;
-			}
-		} else if ( !id.equals( other.id ) ) {
-			return false;
-		}
-		if ( msg == null ) {
-			if ( other.msg != null ) {
-				return false;
-			}
-		} else if ( !msg.equals( other.msg ) ) {
-			return false;
-		}
-		if ( query == null ) {
-			if ( other.query != null ) {
-				return false;
-			}
-		} else if ( !query.equals( other.query ) ) {
-			return false;
-		}
-		if ( twittos == null ) {
-			if ( other.twittos != null ) {
-				return false;
-			}
-		} else if ( !twittos.equals( other.twittos ) ) {
-			return false;
-		}
-		return true;
-	}
+    public boolean equals ( Object obj ) {
+	    if ( this == obj ) {
+		    return true;
+	    }
+	    if ( obj == null ) {
+		    return false;
+	    }
+	    if ( ! ( obj instanceof Tweet ) ) {
+		    return false;
+	    }
+	    Tweet other = ( Tweet ) obj;
+	    if ( id == null ) {
+		    if ( other.id != null ) {
+			    return false;
+		    }
+	    } else if ( !id.equals( other.id ) ) {
+		    return false;
+	    }
+	    return true;
+    }
 
 	@Override
-	public int hashCode () {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ( ( date == null ) ? 0 : date.hashCode() );
-		result = prime * result + ( ( feeling == null ) ? 0 : feeling.hashCode() );
-		result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
-		result = prime * result + ( ( msg == null ) ? 0 : msg.hashCode() );
-		result = prime * result + ( ( query == null ) ? 0 : query.hashCode() );
-		result = prime * result + ( ( twittos == null ) ? 0 : twittos.hashCode() );
-		return result;
-	}
+    public int hashCode () {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
+	    return result;
+    }
 
 }
