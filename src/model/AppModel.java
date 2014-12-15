@@ -80,9 +80,12 @@ public class AppModel extends Observable {
 		this.classifiers = new Classifier[ 14 ];
 
 		// Lists representing unigram, bigram, and unigram + bigram parameters 
-		List< Integer > uni = new ArrayList< Integer >( 1 );
-		List< Integer > bi = new ArrayList< Integer >( 2 );
-		List< Integer > uniAndBi = new ArrayList< Integer >( 1 );
+		List< Integer > uni = new ArrayList< Integer >();
+		uni.add( 1 );
+		List< Integer > bi = new ArrayList< Integer >();
+		bi.add( 2 );
+		List< Integer > uniAndBi = new ArrayList< Integer >();
+		uniAndBi.add( 1 );
 		uniAndBi.add( 2 );
 
 		// Classifiers initialisation
@@ -239,7 +242,7 @@ public class AppModel extends Observable {
 		return new PieChartBuilder( classifier, tweets.get( 0 ).getQuery(), tweets )
 		        .getPieChartImage();
 	}
-	
+
 	/**
 	 * Saves the tweet pool of the model in a CSV file.
 	 */
@@ -251,11 +254,12 @@ public class AppModel extends Observable {
 	 * Build a CrossValidation object to evaluate the classifier
 	 * 
 	 * @param classifier
-	 * 				classifier to evaluate
+	 *            classifier to evaluate
 	 */
 	public void evaluateClassifier ( Classifier classifier ) {
 		if ( classifier.isCrossValidable() ) {
-			CrossValidation crossValidation = new CrossValidation( this.tweetPool, ( CrossValidable ) classifier, 10 );
+			CrossValidation crossValidation =
+			        new CrossValidation( this.tweetPool, ( CrossValidable ) classifier, 10 );
 			Float res = crossValidation.evaluates();
 			this.setChanged();
 			this.notifyObservers( res );
