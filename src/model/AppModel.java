@@ -39,7 +39,7 @@ public class AppModel extends Observable {
 	/**
 	 * Singleton representing the Twitter API.
 	 */
-	private Twitter twitter = TwitterFactory.getSingleton();
+	private Twitter twitter;
 
 	/**
 	 * TweetPool of the model.
@@ -70,6 +70,7 @@ public class AppModel extends Observable {
 	 * named "tweetPool.csv".
 	 */
 	public AppModel () {
+		this.twitter = TwitterFactory.getSingleton();
 		this.tweetPool = new TweetPool( "resources/tweetPool.csv" );
 		this.msgCleaner = MessageCleaner.getInstance();
 
@@ -226,9 +227,11 @@ public class AppModel extends Observable {
 			this.tweetPool.add( tweet );
 		}
 	}
-	
-	public Image generatePieChartImage ( Classifier classifier, List< Tweet > tweets ) throws MalformedURLException, IOException {
-		return new PieChartBuilder( classifier, tweets.get(0).getQuery(), tweets ).getPieChartImage();
+
+	public Image generatePieChartImage ( Classifier classifier, List< Tweet > tweets )
+	        throws MalformedURLException, IOException {
+		return new PieChartBuilder( classifier, tweets.get( 0 ).getQuery(), tweets )
+		        .getPieChartImage();
 	}
 
 	/**
