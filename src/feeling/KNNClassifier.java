@@ -2,7 +2,6 @@ package feeling;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import utils.Tweet;
@@ -62,7 +61,7 @@ public class KNNClassifier extends CrossValidable {
 			}
 		}
 
-		return ( totalNbOfWords - commonNbOfWords ) / totalNbOfWords;
+		return totalNbOfWords - ( 2 * commonNbOfWords );
 	}
 
 	@Override
@@ -70,22 +69,29 @@ public class KNNClassifier extends CrossValidable {
 		int nb = this.nbNeighbors;
 		List< Tweet > tweets = new ArrayList< Tweet >( this.tweetPool.tweets() );
 		DTCouple[] neighbors = new DTCouple[ nb ];
-		DTCoupleComparator comparator = new DTCoupleComparator();
+		int maxIndex = 0;
 
 		for ( int i = 0; i < nb; i++ ) {
 			Tweet tweet = tweets.get( i );
 			neighbors[ i ] = new DTCouple( this.distance( msg, tweet.getMsg() ), tweet );
+			if ( neighbors[ i ].getDistance() > neighbors[ maxIndex ].getDistance() ) {
+				maxIndex = i;
+			}
 		}
-
-		Arrays.sort( neighbors, comparator );
 
 		for ( int i = nb; i < tweets.size(); i++ ) {
 			Tweet tweet = tweets.get( i );
 			int distance = this.distance( msg, tweet.getMsg() );
 
-			if ( distance < neighbors[ nb - 1 ].getDistance() ) {
-				neighbors[ nb - 1 ] = new DTCouple( distance, tweet );
-				Arrays.sort( neighbors, comparator );
+			if ( distance < neighbors[ maxIndex ].getDistance() ) {
+				neighbors[ maxIndex ] = new DTCouple( distance, tweet );
+
+				// Search the new maxIndex
+				for ( int k = 0; k < neighbors.length; k++ ) {
+					if ( neighbors[ k ].getDistance() > neighbors[ maxIndex ].getDistance() ) {
+						maxIndex = k;
+					}
+				}
 			}
 		}
 
@@ -114,6 +120,10 @@ public class KNNClassifier extends CrossValidable {
 		}
 	}
 
+	public String toString () {
+		return "KNN";
+	}
+
 	/////////////////////
 	// PRIVATE CLASSES //
 	/////////////////////
@@ -130,7 +140,7 @@ public class KNNClassifier extends CrossValidable {
 			this.tweet = tweet;
 		}
 
-		public int getDistance () {
+		public double getDistance () {
 			return this.distance;
 		}
 
@@ -138,27 +148,10 @@ public class KNNClassifier extends CrossValidable {
 			return this.tweet;
 		}
 
-	}
-
-	// Comparator class to compare two instances of DTCouple
-	private class DTCoupleComparator implements Comparator< DTCouple > {
-
-		@Override
-		public int compare ( DTCouple c1, DTCouple c2 ) {
-			return Integer.compare( ( ( feeling.KNNClassifier.DTCouple ) c1 ).getDistance(),
-			        ( ( feeling.KNNClassifier.DTCouple ) c2 ).getDistance() );
+		public String toString () {
+			return "(" + this.distance + ", " + this.tweet + ")";
 		}
 
-	}
-
-	@Override
-	public void setTweetPool ( TweetPool newTweetPool ) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	public String toString () {
-		return "KNN";
 	}
 
 }
