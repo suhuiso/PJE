@@ -155,7 +155,7 @@ Paramètres de l'application, avec choix du classifieur à utiliser, du nombre d
 
 L'application Tweel est fournie sous la forme d'un fichier JAR.
 
-Ce fichier JAR s'accompagne d'un dossier `resources` et d'un fichier `twitter4j.properties`. Ces deux éléments sont indispensables au bon fonctionnement de l'application.
+Ce fichier JAR s'accompagne d'un dossier `resources` et d'un fichier `twitter4j.properties`. **Ces deux éléments sont indispensables au bon fonctionnement de l'application et doivent être présent dans le même dossier que tweel.jar.**
 
 - `twitter4j.properties` contient les tokens d'auhentifications à l'API Twitter. En l'état, l'application peut être utilisée avec les accès fournis mais vous pouvez utiliser des tokens différents.
 
@@ -168,6 +168,12 @@ Exécution de l'application :
 ```
 java -jar tweel.jar
 ```
+
+1. La section **Sentiments** de l'application permet de connaitre le sentiment de chaque tweet pour une recherche donnée.  
+Entrez le terme recherché dans le champ en haut de l'écran et lancez la recherche à partir du bouton *Rechercher*. Les tweets correspondants s'affichent, avec l'identifiant, le contenu du tweet, et l'évaluation de son sentiment. Ce sentiment prend la forme d'un **+** pour les tweets **positifs**, un **-** pour les tweets **négatifs**, un **=** pour les tweets considérés comme **neutres**.
+
+2. La section **Tendances** de l'application permet de connaitre le sentiment général pour une recherche donnée.  
+Entrez le terme recherhé dans le champ en haut de l'écran et lancez la recherche à partir du bouton *Rechercher*. Les tweets correspondants sont analysés et sont utilisés pour générer un **diagramme circulaire** indiquant la proportion de tweets jugés **positifs**, **négatifs** et **neutres**.
 
 ## Résultat de la classification avec les différentes méthodes et analyses
 
