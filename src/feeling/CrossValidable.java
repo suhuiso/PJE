@@ -41,5 +41,10 @@ public abstract class CrossValidable extends Classifier {
 	public void setTweetPool ( TweetPool newTweetPool ) {
 		this.tweetPool = newTweetPool;
 	}
+	
+	@Override
+	public boolean isCrossValidable () {
+		return true;
+	}
 
 }
