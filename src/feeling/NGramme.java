@@ -35,7 +35,7 @@ public class NGramme {
 			throw new IllegalArgumentException( "This n-gramme has to contain " + n + " words" );
 		} else {
 			this.n = n;
-			this.words = new String[ n ];
+			this.words = words;
 		}
 	}
 
@@ -77,6 +77,15 @@ public class NGramme {
 		return true;
 	}
 
+	@Override
+	public String toString () {
+		StringBuffer sb = new StringBuffer();
+		for ( String word : this.words ) {
+			sb.append( word + "    " );
+		}
+		return sb.toString();
+	}
+
 	////////////////////
 	// STATIC METHODS //
 	////////////////////
@@ -92,7 +101,13 @@ public class NGramme {
 			List< NGramme > res = new ArrayList< NGramme >();
 
 			for ( int i = 0; i <= words.length - n; i++ ) {
-				NGramme nGramme = new NGramme( n, Arrays.copyOfRange( words, i, i + n ) );
+				String[] w = new String[ n ];
+				
+				for ( int j = i; j < i + n; j++ ) {
+					w[ j - i ] = words[ j ];
+				}
+				
+				NGramme nGramme = new NGramme( n, w );
 				res.add( nGramme );
 			}
 
