@@ -90,19 +90,51 @@ Pour cela, nous avons utilisé l'écran **Apprentissage** de notre application q
 
 ### Algorithmes de classification
 
-*Hierarchie de classe des Classifiers*
+![DC](DC_Classifier.jpg)
+
+Tous les classifieurs ont été regroupés sous une classe abstraite *Classifier*. On distingue ensuite les classifieurs qui peuvent être évalués par une cross validation. Dans cette catégorie se trouvent le *KNNClassifier* ainsi que les différents classifieurs se basant sur la classification bayesienne.
 
 ##### Mots clefs
 
-*DictionnaryClassifier*
+Le *DictionnaryClassifier* utilise une classification par mots clefs ou par dictionnaire. Ce dernier est basé sur un algorithme simple qui utilise deux dictionnaires, un dictionnaire de mots positifs et un dictionnaire de mots négatifs. L'algorthme vérifie pour chacun des mots du tweet s'il est dans le dictionnaire positif ou négatif, si le tweet contient une majorité de mots positif il est classé comme positif, s'il contient une majorité de mots négatif il est classé comme négatif, sinon il est classé comme neutre.
 
 ##### KNN
 
-*KNNClassifier*
+Pour assigner un sentiment à un tweet, le *KNNClassifier* commence par trouver ses plus proches voisins selon la formule suivante :  
+```
+distance(t1, t2) = nbMots(t1) + nbMots(t2) - (2 * nbMotsCommuns(t1, t2))
+```
+
+Dans l'application, nous avons choisis de travailler avec les 5 plus proches voisins du tweet à classifier.
+
+Le tweet recevra le sentiment le plus représenté par ses voisins les plus proches.
 
 ##### Bayes
 
-*BayesClassifier + toute la sous hierarchie*
+Les classifieurs utilisant la classification bayesienne sont basés sur une classe *NGramme* qui peut représenter des uni-grammes comme des bi-grammes. Les classes *PresenceBayesClassifier* et *FrequencyBayesClassifier* utilise la classe *NGramme*, il suffit donc de leur donner une liste d'entiers représentant les degrés des *n-grammes* à traiter.  
+Ainsi :
+```
+List<Integer> uni = new ArrayList<Integer>();
+uni.add(1);
+
+List<Integer> bi = new ArrayList<Integer>();
+bi.add(2);
+
+List<Integer> uniBi = new ArrayList<Integer>();
+uniBi.add(1);
+uniBi.add(2);
+
+/* p1 ne traitera que les uni-grammes */
+BayesClassifier p1 = new PresenceBayesClassifier(..., ..., uni);
+
+/* p2 ne traitera que les bi-grammes */
+BayesClassifier p2 = new PresenceBayesClassifier(..., ..., bi);
+
+/* p3 traitera les uni-grammes et les bi-grammes */
+BayesClassifier p3 = new PresenceBayesClassifier(..., ..., uniBi);
+```
+
+La classification bayesienne est une classification probabiliste qui selon les cas utilise la fréquence ou la présence des *n-grammes* issus du tweet à classifier.
 
 ### Interface graphique
 
