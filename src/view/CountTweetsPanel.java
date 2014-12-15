@@ -30,7 +30,7 @@ public class CountTweetsPanel extends JPanel {
 		this.controller = controller;
 		this.label = new JLabel( "Nombre de tweets par recherche :" );
 		this.selectField = new JComboBox<Integer>( CountTweetsPanel.COUNT_AVAILABLES );
-		this.selectField.setSelectedIndex( 0 );
+		this.selectField.setSelectedIndex( 1 );
 		
 		this.label.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
 		this.selectField.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
