@@ -55,6 +55,8 @@ public class AssignerSettingsPanel extends JPanel {
 
 		this.buttonGroup = new ButtonGroup();
 
+		this.radios[ this.controller.getCurrentClassifierId() ].setSelected( true );;
+		
 		this.label.setFont( new Font( "Lucida Sans", Font.PLAIN, 18 ) );
 		this.add( this.label );
 

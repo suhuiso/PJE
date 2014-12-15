@@ -65,6 +65,15 @@ public class AppController {
 	}
 
 	/**
+	 * Gives the id of the current classifier
+	 * 
+	 * @return id of the current classifier
+	 */
+	public int getCurrentClassifierId () {
+		return this.prefs.getInt( "CURRENT_ASSIGNER", 0 );
+	}
+	
+	/**
 	 * Sets the current classifier
 	 * 
 	 * @param id
