@@ -3,9 +3,9 @@ Thomas Bernard
 
 # Rapport PJE
 
-## Description générale du projet
+# Description générale du projet
 
-### Description de la problématique
+## Description de la problématique
 
 Le but du projet était de créer une application capable de donner le sentiment général sur Twitter à propos d'un sujet en particulier.  
 Le sentiment d'un tweet peut être représenté par trois classes : positif, négatif, neutre.
@@ -15,7 +15,7 @@ Un certain nombre de tweets à propos du sujet sont ainsi récupérés.
 
 Une fois les tweets récupérés, il faut alors les analyser pour les répartir dans les différentes classes et ainsi en déduire le sentiment dominant à propos du sujet.
 
-### Description générale de l'architecture de notre application
+## Description générale de l'architecture de notre application
 
 Les sources de l'application ont été divisées en plusieurs packages :
 
@@ -35,9 +35,9 @@ Les packages suivants contiennent les différents composants d'une architecture 
 
 * **app** : contient la classe *Main* de l'application.
 
-## Détails des différents travaux réalisés
+# Détails des différents travaux réalisés
 
-### API Twitter
+## API Twitter
 
 Pour pouvoir interroger l'API Twitter, nous avons utilisés la librairie **twitter4j**. Cette librairie donne accès au singleton *TwitterFactory*, qui permet d'accéder à l'API Twitter ainsi qu'aux classes suivantes :
 * *Query* : requête
@@ -58,9 +58,9 @@ query.setLang( "fr" );
 query.setCount( this.tweetsNb );
 ```
 
-### Préparation de la base d'apprentissage
+## Préparation de la base d'apprentissage
 
-##### Nettoyage des données
+### Nettoyage des données
 
 Afin de nettoyer les tweets sauvegardés dans la base d'apprentissage, un singleton *MessageCleaner* est utilisé.  
 Ce dernier est constitué de plusieurs méthodes qui prennent une chaine de caractères et renvoient cette dernière nettoyée. Les chaines de caractères sont nettoyées à l'aide d'expressions régulières et de la méthode *String.replaceAll*.  
@@ -81,24 +81,24 @@ private MessageCleaner () {
 }
 ```
 
-##### Construction de la base
+### Construction de la base
 
 Notre base d'apprentissage est abstraite dans une instance de la classe *TweetPool* qui correspond à un ensemble de tweets. Cette dernière est créée à l'ouverture de l'application et remplie à partir d'un fichier **tweetPool.csv** si ce dernier existe. Une fois la *TweetPool* créée, toutes les manipulations seront faites sur cette abstraction. Le fichier **tweetPool.csv** est réécrit à la fermeture de l'application pour sauvegarder le nouvel état de la base d'apprentissage.
 
 Nous avons décidé de construire la base d'apprentissage "à la main" afin que celle-ci soit la plus précise possible.  
 Pour cela, nous avons utilisé l'écran **Apprentissage** de notre application qui affiche des tweets obtenus depuis une requête et propose de leur associer un sentiment. Une fois ce sentiment indiqué, ces tweets sont sauvegardés dans la *TweetPool* du modèle et servent immédiatement aux classifications demandées par la suite.
 
-### Algorithmes de classification
+## Algorithmes de classification
 
 ![DC](DC_Classifier.jpg)
 
 Tous les classifieurs ont été regroupés sous une classe abstraite *Classifier*. On distingue ensuite les classifieurs qui peuvent être évalués par une cross validation. Dans cette catégorie se trouvent le *KNNClassifier* ainsi que les différents classifieurs se basant sur la classification bayesienne.
 
-##### Mots clefs
+### Mots clefs
 
 Le *DictionnaryClassifier* utilise une classification par mots clefs ou par dictionnaire. Ce dernier est basé sur un algorithme simple qui utilise deux dictionnaires, un dictionnaire de mots positifs et un dictionnaire de mots négatifs. L'algorthme vérifie pour chacun des mots du tweet s'il est dans le dictionnaire positif ou négatif, si le tweet contient une majorité de mots positif il est classé comme positif, s'il contient une majorité de mots négatif il est classé comme négatif, sinon il est classé comme neutre.
 
-##### KNN
+### KNN
 
 Pour assigner un sentiment à un tweet, le *KNNClassifier* commence par trouver ses plus proches voisins selon la formule suivante :  
 
@@ -110,7 +110,7 @@ Dans l'application, nous avons choisis de travailler avec les 5 plus proches voi
 
 Le tweet recevra le sentiment le plus représenté par ses voisins les plus proches.
 
-##### Bayes
+### Bayes
 
 Les classifieurs utilisant la classification bayesienne sont basés sur une classe *NGramme* qui peut représenter des uni-grammes comme des bi-grammes. Les classes *PresenceBayesClassifier* et *FrequencyBayesClassifier* utilisent la classe *NGramme*, il suffit donc de leur donner une liste d'entiers représentant les degrés des *n-grammes* à traiter.  
 Ainsi :
@@ -138,7 +138,7 @@ BayesClassifier p3 = new PresenceBayesClassifier(..., ..., uniBi);
 
 La classification bayesienne est une classification probabiliste qui, selon les cas, utilise la fréquence ou la présence des *n-grammes* issus du tweet à classifier.
 
-### Interface graphique
+## Interface graphique
 
 L'interface de notre application se décompose en deux éléments.  
 A gauche, une barre latérale fait office de menu et permet de naviguer entre les différentes fonctionnalités de l'application. A droite, la partie principale de la fenêtre, représente les différentes fonctionnalités liéss à l'analyse de sentiments sur Twitter.
@@ -163,7 +163,7 @@ Cet écran permet de modifier le comportement de l'application. Trois paramètre
 	- *Nombre de tweets* : Permet de choisir le nombre de tweets à utiliser/analyser dans le reste de l'application
 	- *Proxy Lille 1* : Permet d'activer ou non l'utilisation du proxy Lille 1 pour l'accès à l'API Twitter
 
-##### Copies d'écrans
+### Copies d'écrans
 
 ![Page accueil](screen01.jpg)
 Page d'accueil de l'application
@@ -183,7 +183,7 @@ Evaluation du classifieur actuellement utilisé par l'application, c'est à dire
 ![Page accueil](screen06.jpg)
 Paramètres de l'application, avec choix du classifieur à utiliser, du nombre de tweets à traiter simultanément et de l'utilisation du proxy Lille 1
 
-##### Manuel d'utilisation
+### Manuel d'utilisation
 
 **/!\\ L'application Tweel nécessite Java 7 ou ultérieur**
 
@@ -220,10 +220,10 @@ Finalement, une option permet d'activer ou non l'utilisation du **proxy Lille 1*
 5. La section **Evaluation** de l'application permet d'évaluer la qualité des classifieurs disponibles.  
 L'évaluation s'effectue sur le classifieur actuellement choisi dans les **Réglages**. Le bouton *Evaluer* lance l'évaluation. **Cette opération peut prendre un certain temps et dépend de la taille de la base d'apprentissage.** Une fois le taux d'erreur calculé, celui-ci est affiché sous la forme d'un pourcentage.
 
-## Résultat de la classification avec les différentes méthodes et analyses
+# Résultats de la classification avec les différentes méthodes et analyses
 
 *Tester les différents classifiers ?*
 
-## Conclusion
+# Conclusion
 
 *Bah c'était cool...*
