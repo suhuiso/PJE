@@ -218,7 +218,7 @@ public class AppModel extends Observable {
 	 *            feeling of the tweet
 	 */
 	public void saves ( Tweet tweet, Feeling feeling ) {
-		tweet = this.msgCleaner.cleanTweet( tweet );
+		this.msgCleaner.cleanTweet( tweet );
 		String content = tweet.getMsg();
 
 		// A tweet is saved if it is not only composed of whitespaces
