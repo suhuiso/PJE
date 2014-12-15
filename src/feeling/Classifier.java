@@ -16,4 +16,13 @@ public abstract class Classifier {
 	 */
 	public abstract Feeling classifies ( String msg );
 
+	/**
+	 * Tells if the classifier is cross validable.
+	 * 
+	 * @return true if the classifier is cross validable, false otherwise
+	 */
+	public boolean isCrossValidable () {
+		return false;
+	}
+
 }
