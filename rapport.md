@@ -198,7 +198,7 @@ Ce fichier JAR s'accompagne d'un dossier `resources` et d'un fichier `twitter4j.
 	- `positive.txt` est utilisé par le classifieur Dictionnaire pour identifier les mots à connotation positive.
 	- `tweetPool.csv` est le fichier qui contient la base d'apprentissage. Celui-ci se met à jour automatiquement lorsque vous notez manuellement des tweets dans la section Apprentissage de l'application.
 
-Exécution de l'application :  
+**Exécution de l'application :**  
 ```
 java -jar tweel.jar
 ```
@@ -208,6 +208,17 @@ Entrez le terme recherché dans le champ en haut de l'écran et lancez la recher
 
 2. La section **Tendances** de l'application permet de connaitre le sentiment général pour une recherche donnée.  
 Entrez le terme recherhé dans le champ en haut de l'écran et lancez la recherche à partir du bouton *Rechercher*. Les tweets correspondants sont analysés et sont utilisés pour générer un **diagramme circulaire** indiquant la proportion de tweets jugés **positifs**, **négatifs** et **neutres**.
+
+3. La section **Apprentissage** de l'application permet d'améliorer les résultats globaux de l'application en annotant manuellement des tweets.  
+Entrez le terme recherché dans le champ en haut de l'écran et lancez la recherche à partir du bouton *Rechercher*. Les tweets correspondants s'affichent, avec l'identifiant, le contenu du tweet, et l'évaluation de son sentiment. Ce dernier est une indication sur le sentiement estimé dans l'état actuel de la base d'apprentissage. Vous pouvez, à partir des quatres boutons présents sous le tweet, **définir manuellement le sentiment du tweet**. Il n'est pas obligatoire de noter tous les tweets de la liste. Une notation est immédiatement enregistrée dans la base d'apprentissage de l'application.
+
+4. Le comportement de ces trois sections peut être paramétré dans l'onglet **Réglages** de l'application.  
+Sur cet écran, il est possible de **choisir un classifieur différent pour évaluer les tweets**. Le changement de classifieur prend effet immédiatement. De plus, votre choix est enregistré et conservé entre deux utilisations de l'application.  
+Il est également possible de définir le **nombre de tweets** attendus lors d'une recherche. Ce critère sera notamment utilisé pour calculer le diagramme circulaire de la section **Tendances**.  
+Finalement, une option permet d'activer ou non l'utilisation du **proxy Lille 1** pour interroger l'API Twitter à partir des ordinateurs de l'université.
+
+5. La section **Evaluation** de l'application permet d'évaluer la qualité des classifieurs disponibles.  
+L'évaluation s'effectue sur le classifieur actuellement choisi dans les **Réglages**. Le bouton *Evaluer* lance l'évaluation. **Cette opération peut prendre un certain temps et dépend de la taille de la base d'apprentissage.** Une fois le taux d'erreur calculé, celui-ci est affiché sous la forme d'un pourcentage.
 
 ## Résultat de la classification avec les différentes méthodes et analyses
 
