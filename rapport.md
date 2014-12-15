@@ -1,7 +1,7 @@
-Quentin Baert  
-Thomas Bernard
+**Quentin Baert**  
+**Thomas Bernard**  
 
-# Rapport PJE
+# Rapport PJE : Présentation de l'application Tweel
 
 # Description générale du projet
 
@@ -239,7 +239,7 @@ On pourrait également se pencher sur l'amélioration des dictionnaires du *Dict
 
 La conception de cette application a été une expérience plutôt agréable pour nous. Elle nous a en effet permis de developper une application complète et utile, basée sur des algorithmes complexes et en totale autonomie. Nous avons également mis en place une architecture MVC fonctionnelle.
 
-Cependant, nous avons rencontrés beaucoup de difficultés durant son élaboration : tout d'abord dans la simple réalisation de l'application en essayant de la rendre modulable, cohérente et en refusant de faire des traitement dans la vue. Mais surtout dans l'écritures des différents algorithmes de classification qui restent compliqués à valider et dont les résultats sont difficilement justifiables.
+Cependant, nous avons rencontrés beaucoup de difficultés durant son élaboration : tout d'abord dans la simple réalisation de l'application en essayant de la rendre modulable, cohérente et en refusant de faire des traitement dans la vue. Mais surtout dans l'écriture des différents algorithmes de classification qui restent compliqués à valider et dont les résultats sont difficilement justifiables.
 
-Nous sommes également conscient que l'application est entièrement perfectible dans les détails.  
-Une idée de fonctionnalité à ajouter serait par exemple de pouvoir choisir la base d'apprentissage utilisée par les classifieurs depuis l'écran de réglages.
+Nous sommes également conscients que l'application est entièrement perfectible dans les détails.  
+Une idée de fonctionnalité à ajouter serait par exemple de pouvoir manipuler plusieurs bases d'apprentissages distinctes et de choisir l'une d'entres elles dans les réglages pour tester rapidement les classifieurs sur des échantillons différents.
