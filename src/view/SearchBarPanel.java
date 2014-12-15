@@ -3,10 +3,15 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import controller.AppController;
@@ -16,6 +21,7 @@ public class SearchBarPanel extends JPanel {
 
 	private AppController controller;
 	private SearchBarField searchBarField;
+	private JLabel classifierLabel;
 	private SearchButton searchButton;
 	
 	public SearchBarPanel ( AppController controller, Color color ) {
@@ -30,7 +36,19 @@ public class SearchBarPanel extends JPanel {
 		this.searchBarField = new SearchBarField();
 		this.searchButton = new SearchButton();
 		
+		this.classifierLabel = new JLabel( "avec " + this.controller.getCurrentClassifier().toString(), SwingConstants.RIGHT );
+		this.classifierLabel.setBackground( Color.WHITE );
+		this.classifierLabel.setForeground( new Color( 0x2F3238 ) );
+		this.classifierLabel.setFont( new Font( "Lucida Sans", Font.BOLD, 18 ) );
+		this.classifierLabel.setBorder( new EmptyBorder( 25, 25, 25, 25 ) );
+		this.classifierLabel.setBorder( new CompoundBorder(
+			BorderFactory.createMatteBorder( 0, 0, 0, 20, color ),
+			BorderFactory.createMatteBorder( 0, 0, 0, 20, Color.WHITE )
+		) );
+		this.classifierLabel.setOpaque( true );
+		
 		this.add( this.searchBarField, BorderLayout.WEST );
+		this.add( this.classifierLabel, BorderLayout.CENTER );
 		this.add( this.searchButton, BorderLayout.EAST );
 		
 		this.initListeners();
