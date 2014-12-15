@@ -105,7 +105,7 @@ public class CrossValidation extends ClassifierStatistics {
 	}
 
 	// Evaluates the classifier with the fold number nbFolds as learning base
-	private int evaluatesWithFoldNb ( int nbFold, TweetPool[] folds )
+	private double evaluatesWithFoldNb ( int nbFold, TweetPool[] folds )
 	        throws IllegalArgumentException {
 		if ( nbFold >= folds.length ) {
 			throw new IllegalArgumentException( "Unknown fold number." );
@@ -135,13 +135,13 @@ public class CrossValidation extends ClassifierStatistics {
 			}
 
 			// TODO : Retourner res ou ( res / toClassify.tweets().size() ) ?
-			return res;
+			return ( ( double ) res / ( double ) toClassify.tweets().size() ) * 100;
 		}
 	}
 
 	@Override
-	public float evaluates () {
-		int res = 0;
+	public double evaluates () {
+		double res = 0;
 		TweetPool[] folds = this.generatesFolds();
 
 		for ( int fold = 0; fold < this.nbFolds; fold++ ) {
