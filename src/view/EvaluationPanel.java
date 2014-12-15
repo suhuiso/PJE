@@ -65,11 +65,12 @@ public class EvaluationPanel extends AbstractCardPanel {
 		this.initListeners();
 	}
 
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+	public void update ( Observable o, Object arg ) {
+		Float value = ( Float ) arg;
+		this.evaluationValueLabel.setText( value + " %" );
 	}
 
-	public void clear() {
+	public void clear () {
 		this.evaluationValueLabel.setText( "" );
 	}
 	
@@ -97,7 +98,7 @@ public class EvaluationPanel extends AbstractCardPanel {
 	
 	class EvaluationButtonListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			// TODO
+			EvaluationPanel.this.controller.evaluateCurrentClassifier();
 		}
 	}
 }

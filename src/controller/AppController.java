@@ -184,4 +184,10 @@ public class AppController {
 		this.model.closingWindowSave();
 	}
 
+	/**
+	 * Evaluate the current classifier
+	 */
+	public void evaluateCurrentClassifier () {
+		this.model.evaluateClassifier( this.getCurrentClassifier() );
+	}
 }
