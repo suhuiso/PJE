@@ -101,6 +101,7 @@ Le *DictionnaryClassifier* utilise une classification par mots clefs ou par dict
 ##### KNN
 
 Pour assigner un sentiment à un tweet, le *KNNClassifier* commence par trouver ses plus proches voisins selon la formule suivante :  
+
 ```
 distance(t1, t2) = nbMots(t1) + nbMots(t2) - (2 * nbMotsCommuns(t1, t2))
 ```
@@ -111,8 +112,9 @@ Le tweet recevra le sentiment le plus représenté par ses voisins les plus proc
 
 ##### Bayes
 
-Les classifieurs utilisant la classification bayesienne sont basés sur une classe *NGramme* qui peut représenter des uni-grammes comme des bi-grammes. Les classes *PresenceBayesClassifier* et *FrequencyBayesClassifier* utilise la classe *NGramme*, il suffit donc de leur donner une liste d'entiers représentant les degrés des *n-grammes* à traiter.  
+Les classifieurs utilisant la classification bayesienne sont basés sur une classe *NGramme* qui peut représenter des uni-grammes comme des bi-grammes. Les classes *PresenceBayesClassifier* et *FrequencyBayesClassifier* utilisent la classe *NGramme*, il suffit donc de leur donner une liste d'entiers représentant les degrés des *n-grammes* à traiter.  
 Ainsi :
+
 ```
 List<Integer> uni = new ArrayList<Integer>();
 uni.add(1);
@@ -134,7 +136,7 @@ BayesClassifier p2 = new PresenceBayesClassifier(..., ..., bi);
 BayesClassifier p3 = new PresenceBayesClassifier(..., ..., uniBi);
 ```
 
-La classification bayesienne est une classification probabiliste qui selon les cas utilise la fréquence ou la présence des *n-grammes* issus du tweet à classifier.
+La classification bayesienne est une classification probabiliste qui, selon les cas, utilise la fréquence ou la présence des *n-grammes* issus du tweet à classifier.
 
 ### Interface graphique
 
