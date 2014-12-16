@@ -17,7 +17,7 @@ public class AppView extends JFrame implements Observer {
 	private AppController controller;
 	
 	public AppView ( AppController controller ) {
-		this.setTitle( "AwesomeName" );
+		this.setTitle( "Tweel" );
 		this.setSize( 1000, 600 );
 		this.setResizable( false );		
 		this.setLocationRelativeTo( null );
