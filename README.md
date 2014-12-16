@@ -1,9 +1,20 @@
-BAERT Quentin
-BERNARD Thomas
-
-PJE
+Projet Encadré
 ===
 
-Analyse de comportement avec Twitter
+Auteurs
+-------
 
-Repository sur GitHub : https://github.com/Ath0m/PJE
+*	Quentin BAERT
+*	Thomas BERNARD
+
+Description
+-----------
+
+Analyse de comportements avec Twitter 
+
+Utilisation
+-----------
+
+*	Voir le fichier `PJE2_BAERT_BERNARD.pdf`
+*	La documentation du projet dans le dossier `doc`
+*	Pour utiliser le programme (à partir de **Java7**): <code>java -jar tweel.jar</code>
