@@ -46,7 +46,7 @@ public abstract class BayesClassifier extends CrossValidable {
 	 *            tweet pool used for the Bayesian classification
 	 * @param simplified
 	 *            determines if the Bayesian classification is simplified or not
-	 * @param nGrammes
+	 * @param degrees
 	 *            degrees of the n-grammes used for the classification
 	 */
 	public BayesClassifier ( TweetPool tweetPool, Boolean simplified, List< Integer > degrees ) {

@@ -119,7 +119,8 @@ public class KNNClassifier extends CrossValidable {
 			return Feeling.NEGATIVE;
 		}
 	}
-
+	
+	@Override
 	public String toString () {
 		return "KNN";
 	}

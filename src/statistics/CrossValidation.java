@@ -45,7 +45,7 @@ public class CrossValidation extends ClassifierStatistics {
 	 *            tweet pool to use for the classifier cross validation
 	 * @param classifier
 	 *            classifier to cross validate
-	 * @param folds
+	 * @param nbFolds
 	 *            number of folds used to do the cross validation
 	 */
 	public CrossValidation ( TweetPool tweetPool, CrossValidable classifier, int nbFolds ) {

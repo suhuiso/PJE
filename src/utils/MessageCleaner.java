@@ -159,7 +159,6 @@ public class MessageCleaner {
 	 * 
 	 * @param tweet
 	 *            tweet to clean
-	 * @return cleaning tweet
 	 */
 	public void cleanTweet ( Tweet tweet ) {
 		tweet.setMsg( this.cleanText( tweet.getMsg() ) );
