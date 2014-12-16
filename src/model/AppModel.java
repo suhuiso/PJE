@@ -201,8 +201,9 @@ public class AppModel extends Observable {
 			this.setChanged();
 			this.notifyObservers( res );
 		} catch ( TwitterException e ) {
-			// TODO Auto-generated catch block
+			System.out.println( "Error: Twitter Exception" );
 			e.printStackTrace();
+			System.exit( 0 );
 		}
 	}
 
@@ -237,6 +238,17 @@ public class AppModel extends Observable {
 		}
 	}
 
+	/**
+	 * Gives a pie char image from a classifier and list of tweets.
+	 * 
+	 * @param classifier
+	 *            classifier used for the classification
+	 * @param tweets
+	 *            tweets to classify
+	 * @return pie char image from a classifier and list of tweets
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public Image generatePieChartImage ( Classifier classifier, List< Tweet > tweets )
 	        throws MalformedURLException, IOException {
 		return new PieChartBuilder( classifier, tweets.get( 0 ).getQuery(), tweets )

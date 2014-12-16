@@ -85,7 +85,7 @@ public class AppController {
 		try {
 			this.prefs.flush();
 		} catch ( BackingStoreException e ) {
-			// TODO Auto-generated catch block
+			System.out.println( "Error: using preferences" );
 			e.printStackTrace();
 		}
 	}

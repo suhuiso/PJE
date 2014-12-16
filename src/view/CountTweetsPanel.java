@@ -57,7 +57,8 @@ public class CountTweetsPanel extends JPanel {
 	
 	class SelectFieldListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			JComboBox<Integer> selectField = ( JComboBox<Integer> ) e.getSource();
+			@SuppressWarnings ( "unchecked" )
+            JComboBox<Integer> selectField = ( JComboBox<Integer> ) e.getSource();
 			Integer countTweet = ( Integer ) selectField.getSelectedItem();
 			CountTweetsPanel.this.controller.setCountTweets( countTweet );
 		}

@@ -95,8 +95,7 @@ public class NGramme {
 		String[] words = msg.split( " " );
 
 		if ( words.length < n ) {
-			throw new IllegalArgumentException(
-			        "There is not enough words in the message to build a " + n + "-gramme" );
+			return buildNGrammesFrom( msg, n - 1 );
 		} else {
 			List< NGramme > res = new ArrayList< NGramme >();
 

@@ -35,13 +35,13 @@ public class StatisticsPanel extends JPanel {
 	        /* View have changed and need to be repaint */
 			this.revalidate();
         } catch ( IOException e ) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         }
 	}
 	
 	public void update ( Observable o, Object arg ) {
-		List< Tweet > list = ( List< Tweet > ) arg;
+		@SuppressWarnings ( "unchecked" )
+        List< Tweet > list = ( List< Tweet > ) arg;
 		this.drawPieChart( list );
 	}
 	
