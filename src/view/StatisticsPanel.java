@@ -35,7 +35,6 @@ public class StatisticsPanel extends JPanel {
 	        /* View have changed and need to be repaint */
 			this.revalidate();
         } catch ( IOException e ) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         }
 	}

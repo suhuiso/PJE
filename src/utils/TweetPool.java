@@ -88,13 +88,12 @@ public class TweetPool {
 
 				br.close();
 			} catch ( FileNotFoundException e ) {
-				// TODO Auto-generated catch block
+				System.out.println( "Error: file " + path + " not found" );
 				e.printStackTrace();
 			} catch ( IOException e ) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch ( NumberFormatException e ) {
-				// TODO Auto-generated catch block
+				System.out.println( "Error: Integer cast failed");
 				e.printStackTrace();
 			}
 		}

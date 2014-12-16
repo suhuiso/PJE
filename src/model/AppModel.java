@@ -201,8 +201,9 @@ public class AppModel extends Observable {
 			this.setChanged();
 			this.notifyObservers( res );
 		} catch ( TwitterException e ) {
-			// TODO Auto-generated catch block
+			System.out.println( "Error: Twitter Exception" );
 			e.printStackTrace();
+			System.exit( 0 );
 		}
 	}
 

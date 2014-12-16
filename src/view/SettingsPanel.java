@@ -38,12 +38,10 @@ public class SettingsPanel extends AbstractCardPanel {
 
 	@Override
 	public void update ( Observable o, Object arg ) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void clear () {
-		// TODO Auto-generated method stub
 	}
 	
 	public String toString () {
@@ -52,6 +50,5 @@ public class SettingsPanel extends AbstractCardPanel {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 	}
 }

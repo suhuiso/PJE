@@ -146,7 +146,6 @@ public class MessageCleaner {
 			try {
 				s = ( String ) m.invoke( this, s );
 			} catch ( Exception e ) {
-				// TODO
 				e.printStackTrace();
 			}
 		}

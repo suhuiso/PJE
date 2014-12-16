@@ -134,7 +134,6 @@ public class CrossValidation extends ClassifierStatistics {
 				}
 			}
 
-			// TODO : Retourner res ou ( res / toClassify.tweets().size() ) ?
 			return ( ( double ) res / ( double ) toClassify.tweets().size() ) * 100;
 		}
 	}
