@@ -57,7 +57,8 @@ public class ProxyPanel extends JPanel {
 	
 	class SelectFieldListener implements ActionListener {
 		public void actionPerformed ( ActionEvent e ) {
-			JComboBox<String> selectField = ( JComboBox<String> ) e.getSource();
+			@SuppressWarnings ( "unchecked" )
+            JComboBox<String> selectField = ( JComboBox<String> ) e.getSource();
 			String proxyUse = ( String ) selectField.getSelectedItem();
 			
 			if ( proxyUse.equals( ProxyPanel.PROXY_USE[ 1 ] ) ) {

@@ -41,7 +41,8 @@ public class StatisticsPanel extends JPanel {
 	}
 	
 	public void update ( Observable o, Object arg ) {
-		List< Tweet > list = ( List< Tweet > ) arg;
+		@SuppressWarnings ( "unchecked" )
+        List< Tweet > list = ( List< Tweet > ) arg;
 		this.drawPieChart( list );
 	}
 	
